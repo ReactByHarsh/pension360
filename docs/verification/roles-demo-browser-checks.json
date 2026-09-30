@@ -1,0 +1,33 @@
+{
+  "verifiedOn": "2026-09-25",
+  "type": "Targeted manual browser verification, separate from automated test counts",
+  "browser": "Codex in-app browser",
+  "environment": "Temporary development preview, isolated PostgreSQL 18.6 schema, prepared fictional baseline, AI disabled",
+  "checks": [
+    {"name":"Super administrator login exposes all workspaces and six named development identities","status":"passed"},
+    {"name":"Demo center displays four published models, ten published procedures and ten sample PDFs","status":"passed"},
+    {"name":"Officer sidebar excludes Studio and audit; direct #studio route shows role guidance instead of editor","status":"passed"},
+    {"name":"Choosing appointment sample stages M002, title and PDF without submitting; explicit upload saves queued document","status":"passed"},
+    {"name":"Policy and forecast reference PDFs have download actions but no member-upload selection","status":"passed"},
+    {"name":"Designer navigation focuses on configuration and permits published-payment-model clone","status":"passed"},
+    {"name":"Added senior-review expression through JDM, saved and ran three payment scenarios successfully","status":"passed"},
+    {"name":"M005 simulation retains 300000-baisa finding and returns requiresSeniorReview true","status":"passed"},
+    {"name":"Designer submitted edited version; Reviewer approved and published it through UI","status":"passed"},
+    {"name":"Live assessment with new payment publication saved the expected difference and review flag","status":"passed"},
+    {"name":"Auditor has no live-assessment action and cannot ask Copilot; audit lists separate Designer, Reviewer and Officer actions","status":"passed"},
+    {"name":"Roles and access layout visually inspected at default desktop viewport after transition","status":"passed"},
+    {"name":"Immediate save after final expression character retains complete expression after reopening draft","status":"passed"},
+    {"name":"Immediate save after final decision-table character retains complete cell after reopening draft","status":"passed"},
+    {"name":"Decision-table edit survives immediate switch to Test scenarios, save and reopening draft","status":"passed"}
+  ],
+  "observations": [
+    "The JDM dependency emitted a React 19 development warning about element.ref. The exercised workflow completed.",
+    "A quick-save debounce race was found and fixed. Save now waits for pending editor changes; expression, table-cell and tab-switch browser regressions passed. Disposable draft versions were used; packaged baseline rules were unchanged."
+  ],
+  "notVerified": [
+    "Live OpenAI responses or actual PDF extraction quality",
+    "Customer OIDC and automatic pension/ERP document feeds",
+    "Full drag-and-drop graph construction, all viewports, themes, RTL or accessibility acceptance",
+    "HTML print pagination and Docker execution"
+  ]
+}

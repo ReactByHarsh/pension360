@@ -1,0 +1,25 @@
+{
+  "verifiedOn": "2026-09-25",
+  "type": "targeted manual browser verification, separate from automated test counts",
+  "browser": "Codex in-app browser",
+  "environment": "Development preview with isolated PostgreSQL 18.6 schema, fictional seed and AI disabled",
+  "checks": [
+    { "name": "Officer login and dashboard with 12 fictional members", "status": "passed" },
+    { "name": "Copilot shortcut, question selection, prerequisites and labelled presenter notes", "status": "passed" },
+    { "name": "AI disabled displays an unavailable message without a fabricated answer", "status": "passed" },
+    { "name": "M003 suggestion on selected M002 preserves member and blocks mismatched request", "status": "passed" },
+    { "name": "Matching M002 question selection and Arabic question text", "status": "passed" },
+    { "name": "Unprepared member returns Arabic context-only response, zero evidence and no citations", "status": "passed" },
+    { "name": "Forecast on 2026-09-25, 36 months and +12 month shift returns baseline 3, scenario 2, roster 12", "status": "passed" },
+    { "name": "Copilot forecast settings match the actual forecast form", "status": "passed" },
+    { "name": "Dashboard and Copilot screenshots at default narrow viewport show no obvious clipping", "status": "passed" },
+    { "name": "Inspected browser console has no error entries", "status": "passed" }
+  ],
+  "notVerified": [
+    "Live OpenAI responses, extraction quality, citation accuracy, latency or cost",
+    "Complete JDM drag-and-drop browser acceptance",
+    "Full keyboard, accessibility, RTL, theme and responsive coverage",
+    "HTML print pagination",
+    "Docker deployment"
+  ]
+}

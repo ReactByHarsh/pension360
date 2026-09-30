@@ -1,0 +1,5 @@
+name,memberId,assessmentDate,expectedStatus
+Complete evidence,M001,2026-09-25,READY_FOR_REVIEW
+Conflicting joining dates,M002,2026-09-25,NEEDS_VERIFICATION
+Missing document,M003,2026-09-25,NEEDS_VERIFICATION
+Unavailable source,M004,2026-09-25,UNABLE_TO_EVALUATE

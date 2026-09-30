@@ -1,0 +1,67 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 3085 >>
+stream
+0.07 0.16 0.26 rg 0 738 595 104 re f
+BT /F2 23 Tf 1 1 1 rg 1 0 0 1 42 801 Tm (PENSION360) Tj ET
+BT /F2 10 Tf 0.66 0.86 1 rg 1 0 0 1 42 774 Tm (FICTIONAL DEMONSTRATION DATA) Tj ET
+BT /F2 12 Tf 0.65 0.16 0.13 rg 1 0 0 1 42 713 Tm (DEMONSTRATION ONLY - NOT VALID EVIDENCE) Tj ET
+BT /F2 23 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 679 Tm (Payment reconciliation) Tj ET
+BT /F1 10 Tf 0.30 0.38 0.46 rg 1 0 0 1 42 657 Tm (A zero unexplained difference with a supplied adjustment) Tj ET
+BT /F2 12 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 623 Tm (MEMBER  M006  |  Nasser Al Wahaibi) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 604 Tm (REFERENCE  DEMO-PAY-M006-001  |  DEMO DATE  2026-09-25) Tj ET
+0.91 0.95 0.98 rg 42 429 511 154 re f
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 562 Tm (Proposed payment) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 562 Tm (OMR 700.000 / 700000 baisa) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 535 Tm (Supplied approved amount) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 535 Tm (OMR 650.000 / 650000 baisa) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 508 Tm (Supplied adjustment) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 508 Tm (OMR 50.000 / 50000 baisa) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 481 Tm (Comparison tolerance) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 481 Tm (OMR 0.000 / 0 baisa) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 454 Tm (Unexplained difference) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 454 Tm (OMR 0.000 / 0 baisa) Tj ET
+BT /F2 14 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 402 Tm (Reconciliation evidence) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 380 Tm (For fictional member Nasser Al Wahaibi \(M006\), the demonstration source supplies OMR) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 365 Tm (700.000 proposed, OMR 650.000 approved and an OMR 50.000 adjustment. These labels) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 350 Tm (describe fixture inputs, not an official authorization.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 325 Tm (Calculation: 700000 - 650000 - 50000 = 0 baisa. Compare this result with M005, whose) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 310 Tm (supplied adjustment is zero and whose difference remains unexplained.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 285 Tm (A CLEAR comparison means the configured arithmetic reconciles. It does not authorize,) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 270 Tm (release or issue a payment. Independently verify the actual approval and adjustment) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 255 Tm (records in production.) Tj ET
+0.81 0.87 0.92 RG 42 120 m 553 120 l S
+BT /F2 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 100 Tm (CHECKPOINT: the adjustment reconciles the comparison; no payment is issued.) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 59 Tm (All names and facts are invented. No signature, seal or official authorization is provided.) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 43 Tm (For controlled product demonstrations only. Human verification is required.  |  Page 1 of 1) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3533
+%%EOF

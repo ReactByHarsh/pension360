@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+!.env.production.example
+.local/
+coverage/
+test-results/
+*.log
+*.zip
+uploads/
+deploy/trusted-ingress.conf
+demo-recordings/

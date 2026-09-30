@@ -1,0 +1,140 @@
+.administration-form-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.administration-form-footer > p {
+  flex: 1;
+  min-width: 230px;
+}
+.integration-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+  margin: 22px 0;
+}
+.integration-step {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+}
+.integration-step > span {
+  display: inline-grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: var(--purple-bg);
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 600;
+}
+.integration-step h3 {
+  font-size: 14px;
+  margin: 12px 0 8px;
+}
+.integration-step p {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.integration-result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+.integration-result-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--table-head);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px;
+}
+.integration-result-grid strong {
+  font-size: 24px;
+}
+.integration-result-grid span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.integration-flow-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+.integration-mapping-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+.integration-member-change {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+}
+.integration-member-change > h3 {
+  font-size: 14px;
+}
+.integration-change-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+table[aria-label="Incoming member changes"] { table-layout: fixed; white-space: normal; }
+table[aria-label="Incoming member changes"] > thead > tr > th:last-child { width: 42%; }
+table[aria-label="Incoming member changes"] > tbody > tr > td,
+table[aria-label="Incoming member changes"] > thead > tr > th { padding: 12px 8px; overflow-wrap: anywhere; vertical-align: top; }
+.integration-field-changes table { white-space: normal; table-layout: fixed; font-size: 11px; }
+.integration-field-changes th, .integration-field-changes td { padding: 10px 6px; overflow-wrap: anywhere; }
+.integration-change-table th,
+.integration-change-table td {
+  text-align: start;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+.integration-preview-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.integration-fields-list {
+  padding-inline-start: 18px;
+  line-height: 1.9;
+  font-size: 12px;
+}
+.integration-lineage > div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+.integration-lineage dt {
+  color: var(--muted);
+}
+.integration-lineage dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 650px) {
+  .integration-change-table {
+    font-size: 10px;
+  }
+  .integration-change-table th,
+  .integration-change-table td {
+    padding: 7px;
+  }
+}

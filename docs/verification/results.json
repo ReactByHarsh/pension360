@@ -1,0 +1,1502 @@
+{
+  "verifiedAt": "2026-09-25T11:59:13.622Z",
+  "backend": {
+    "total": 141,
+    "passed": 141,
+    "failed": 0,
+    "skipped": 0,
+    "success": true,
+    "suites": [
+      {
+        "file": "apps/api/tests/access.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Identity directory and verified OIDC authorization reserves directory administration for Super administrator and exposes only active operational assignees",
+            "status": "passed"
+          },
+          {
+            "name": "Identity directory and verified OIDC authorization audits registration and revision-controlled changes without permitting arbitrary scopes or fields",
+            "status": "passed"
+          },
+          {
+            "name": "Identity directory and verified OIDC authorization honours directory role changes and deactivation for already-issued tokens and preserves them on reseed",
+            "status": "passed"
+          },
+          {
+            "name": "Identity directory and verified OIDC authorization blocks self-deactivation and last-active-Super demotion, including concurrent requests",
+            "status": "passed"
+          },
+          {
+            "name": "Identity directory and verified OIDC authorization cryptographically verifies production OIDC tokens and takes the registered role instead of token role claims",
+            "status": "passed"
+          },
+          {
+            "name": "Identity directory and verified OIDC authorization bootstraps only the explicit verified subject once into an empty directory and refuses implicit elevation",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/case-management.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "escapes every HTML-significant character in exported evidence",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports requires authentication and operational permissions for management and report downloads",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports validates assignment, records before-and-after settings and rejects stale or unchanged updates",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports rejects unknown, inactive and non-operational assignees and invalid deadlines without changing the case",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports lets officers manage only their own active deadlines and priorities, with assignment restricted to administrators",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports keeps notifications private to the assignee, including read updates by administrators",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports computes overdue work after the entire UTC due day and excludes resolved or other-assignee cases",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports does not change creator or submitter independence when assignment changes",
+            "status": "passed"
+          },
+          {
+            "name": "Audited case ownership, deadlines, personal notifications and evidence exports exports escaped linked evidence and verified member documents, omitting unrelated or unverified values",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/copilot.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions serves an authenticated catalog with real draft publication counts, absent in production",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions never uses catalog answers or unpublished procedures as member evidence",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions explains saved payment facts without requiring an invented procedure or exposing raw identity",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions uses independently published procedures and preserved joining dates for the selected member",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions preserves unable-to-evaluate outcomes instead of passing or rejecting an unavailable-source member",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions provides actual dashboard aggregates and computed forecast comparison with explicit settings",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions withholds unverified document values while including independently verified evidence",
+            "status": "passed"
+          },
+          {
+            "name": "Contextual Copilot demo with real PostgreSQL and native decisions rejects unknown members, browser-injected evidence and unauthorized model access",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/copilot.unit.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Copilot context boundary keeps recognized mapped facts while excluding raw identity and unrelated input",
+            "status": "passed"
+          },
+          {
+            "name": "Copilot context boundary rejects unsafe numeric coercion and invalid dates without inventing zeros",
+            "status": "passed"
+          },
+          {
+            "name": "Copilot context boundary accepts only server-known context selectors, not browser-authored evidence",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/core.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "real PostgreSQL and HTTP workflow requires authentication, exposes server mode and enforces role permissions",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow validates pagination and reports the complete count",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow rejects signed tokens without expiration and expired tokens",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow fetches date of birth from real REST response and computes mapped age",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow supports POST lookup and remaps a changed REST schema through saved mapping fields",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow runs all thirteen saved scenarios against the REST service and native ZEN",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow rejects stale revision and invalidates passing tests on configuration edits",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow tests, reviews and publishes a specific immutable configuration",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow live execution re-fetches source data and never accepts browser supplied facts",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow automatically opens one case for repeated live findings with separate immutable evidence links",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow case investigation requires independent review and records append-only audit",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow an administrator cannot approve their own rule",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow blocks an administrator who edited someone else’s draft from approving it",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow does not retire the current rule for a future-effective activation",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow production has no development authentication or fictional REST endpoint",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow reports unready when a required migration is missing",
+            "status": "passed"
+          },
+          {
+            "name": "real PostgreSQL and HTTP workflow withdraws a published rule with revision control and blocks subsequent live use",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/core.source.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "bounded registered HTTP connector reads real JSON and captures retrieval evidence",
+            "status": "passed"
+          },
+          {
+            "name": "bounded registered HTTP connector does not follow HTTP redirects",
+            "status": "passed"
+          },
+          {
+            "name": "bounded registered HTTP connector rejects a registered private host without explicit private-network permission",
+            "status": "passed"
+          },
+          {
+            "name": "bounded registered HTTP connector bounds response size and rejects non-JSON content",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/core.unit.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "REST facts and visual mappings calculates complete years using explicit assessment date, including birthday boundary",
+            "status": "passed"
+          },
+          {
+            "name": "REST facts and visual mappings missing required data creates an issue rather than a false value",
+            "status": "passed"
+          },
+          {
+            "name": "REST facts and visual mappings rejects invalid calendar dates and future dates",
+            "status": "passed"
+          },
+          {
+            "name": "REST facts and visual mappings does not coerce false string into truthy boolean",
+            "status": "passed"
+          },
+          {
+            "name": "REST facts and visual mappings supports JSON Pointer escaping and rejects prototype access",
+            "status": "passed"
+          },
+          {
+            "name": "REST facts and visual mappings does not overwrite a scalar with a nested mapping",
+            "status": "passed"
+          },
+          {
+            "name": "source request safety requires an environment-registered origin",
+            "status": "passed"
+          },
+          {
+            "name": "source request safety blocks link-local metadata addresses and classifies private networks",
+            "status": "passed"
+          },
+          {
+            "name": "source request safety prevents an operation from replacing the registered origin",
+            "status": "passed"
+          },
+          {
+            "name": "source request safety URL-encodes lookup values",
+            "status": "passed"
+          },
+          {
+            "name": "source request safety preserves a registered base path and refuses traversal outside it",
+            "status": "passed"
+          },
+          {
+            "name": "immutable decision configuration hash binds mappings, scenarios, effective dates and graph",
+            "status": "passed"
+          },
+          {
+            "name": "immutable decision configuration hash is independent of object property insertion order",
+            "status": "passed"
+          },
+          {
+            "name": "immutable decision configuration rejects JavaScript nodes and graph cycles",
+            "status": "passed"
+          },
+          {
+            "name": "actual native ZEN execution runs readiness graph with passed and conflicting REST facts",
+            "status": "passed"
+          },
+          {
+            "name": "actual native ZEN execution reconciles authorized adjustments using integer baisa",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/demo-exercises.unit.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Functional consultant live rule exercises prioritizes a specific missing-evidence explanation without clearing any readiness finding",
+            "status": "passed"
+          },
+          {
+            "name": "Functional consultant live rule exercises adds the fictional OMR100 senior-review flag while preserving payment differences and outcomes",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/demo-seed.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "fictional Copilot demonstration catalog covers all eleven pages with bounded bilingual questions and explicit prerequisites",
+            "status": "passed"
+          },
+          {
+            "name": "fictional Copilot demonstration catalog labels policies fictional and never portrays AI as the approver or missing evidence as known",
+            "status": "passed"
+          },
+          {
+            "name": "fictional Copilot demonstration catalog blocks both seed entry points in production before any database access",
+            "status": "passed"
+          },
+          {
+            "name": "idempotent demo seeding with real PostgreSQL adds only draft procedures with a real maker and no fabricated live work",
+            "status": "passed"
+          },
+          {
+            "name": "idempotent demo seeding with real PostgreSQL can be run repeatedly without duplicate members, rules, policies or seed audit events",
+            "status": "passed"
+          },
+          {
+            "name": "idempotent demo seeding with real PostgreSQL preserves a business user's draft edits and original membership values on rerun",
+            "status": "passed"
+          },
+          {
+            "name": "idempotent demo seeding with real PostgreSQL keeps the narrative arithmetic, dates, gaps and planning counts aligned with source fixtures",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/domain.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL uploads encrypted evidence and atomically schedules one extraction",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL claims once across concurrent workers and saves unverified extraction",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL requires independent reviewer and resolved uncertainty, and retains immutable before/after",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL preserves source alternatives and requires verified same-member evidence for resolution",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL governs policies independently, then queries only published evidence",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL turns malware rejection into a terminal job and blocks original download",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL recovers expired worker leases and records transient retry without success",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL produces a reproducible count forecast and never fabricates monetary liability",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL withdraws unsafe policy evidence with a reason without modifying its content",
+            "status": "passed"
+          },
+          {
+            "name": "document jobs, policy governance and evidence with real PostgreSQL allows administrators to suspend a connection and refuses origin edits",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/domain.unit.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "AI boundaries and encrypted evidence encrypts nondeterministically and detects content tampering",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence requires a valid key in production",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence rejects spoofed formats and invalid base64",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence preserves PDF data for direct provider input and disables response storage",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence rejects unsupported policy citations and inferred field edits",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence validates actual OpenAI response adapter shape through an explicit HTTP test double",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence does not mask incomplete output or provider rate limits as successful answers",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence switches to compatible text endpoint without accepting unsupported offline vision",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence reports absent credentials or disabled provider honestly",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence rejects malformed completed envelopes with a controlled provider error",
+            "status": "passed"
+          },
+          {
+            "name": "AI boundaries and encrypted evidence rejects truncated offline completions even when their JSON happens to parse",
+            "status": "passed"
+          },
+          {
+            "name": "calendar volume forecast clamps month end across leap years without timezone conversion",
+            "status": "passed"
+          },
+          {
+            "name": "calendar volume forecast uses inclusive start/exclusive horizon and records assumptions",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/integrations.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection restricts sync writes to administrators and keeps review/audit access read-only",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection stores an encrypted preview without changing records and refuses another actor, stale data or expiry",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection commits roster and real PDF jobs atomically, reflects forecast/member counts and remains repeat-safe",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection runs native published rules after sync, preserves earlier findings/cases, and exposes current saved facts to Copilot without calling AI",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection deduplicates the same external document references in a subsequent preview and commit",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection accepts a registered REST intake and detects reused document versions with changed bytes",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection preserves stale-preview checks for prototype-shaped member IDs and bounds leaf previews",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection continues bounded assessment batches without repeating already committed combinations",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection uses the documented least-privilege grants for preview, commit, assessment and immutable lineage",
+            "status": "passed"
+          },
+          {
+            "name": "Reviewed REST sync and end-to-end evidence reflection omits fictional intake routes and demonstration catalogs in production",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/jobs.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "durable document-job concurrency with real PostgreSQL fences a delayed stale worker after another lease has completed",
+            "status": "passed"
+          },
+          {
+            "name": "durable document-job concurrency with real PostgreSQL makes an exhausted crashed lease terminal and permits an explicit recovery",
+            "status": "passed"
+          },
+          {
+            "name": "durable document-job concurrency with real PostgreSQL serializes an extraction retry request with a worker claim using job-before-document locks",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/manual-evidence.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Manual document evidence and honest Copilot context excludes unverified values while showing queue metadata without invoking AI",
+            "status": "passed"
+          },
+          {
+            "name": "Manual document evidence and honest Copilot context blocks unauthorized transcription and an active extraction lease",
+            "status": "passed"
+          },
+          {
+            "name": "Manual document evidence and honest Copilot context records manual origin and fences expired worker completion; stale edits fail",
+            "status": "passed"
+          },
+          {
+            "name": "Manual document evidence and honest Copilot context excludes uploader and transcriber from independent verification",
+            "status": "passed"
+          },
+          {
+            "name": "Manual document evidence and honest Copilot context exposes verified evidence to Copilot, retains manual provenance, and prevents overwrite",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/original-ui.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Restored original screen read models requires authentication and validates explicit date windows and bounds",
+            "status": "passed"
+          },
+          {
+            "name": "Restored original screen read models aggregates all workspace records, ignores simulations, and distinguishes overdue from resolved",
+            "status": "passed"
+          },
+          {
+            "name": "Restored original screen read models paginates the exact retirement window and keeps unassessed members visible",
+            "status": "passed"
+          },
+          {
+            "name": "Restored original screen read models searches beyond the first member batch and handles Arabic and literal wildcard characters",
+            "status": "passed"
+          },
+          {
+            "name": "Restored original screen read models opens old case and policy links directly beyond a loaded page without exposing raw storage",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/registers.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Server-filtered case and audit registers filters assigned active work before pagination and counts the full matching queue",
+            "status": "passed"
+          },
+          {
+            "name": "Server-filtered case and audit registers uses the authenticated reviewer and excludes own creations and submissions",
+            "status": "passed"
+          },
+          {
+            "name": "Server-filtered case and audit registers searches the full case title/member register with literal text",
+            "status": "passed"
+          },
+          {
+            "name": "Server-filtered case and audit registers combines exact audit filters with inclusive UTC dates and accurate pagination",
+            "status": "passed"
+          },
+          {
+            "name": "Server-filtered case and audit registers provides paginated member-specific live assessment evidence without simulations or other members",
+            "status": "passed"
+          },
+          {
+            "name": "Server-filtered case and audit registers retains authentication and audit restrictions and rejects malformed or spoofed filters",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/roles-assets.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "grants super administrators existing administrative capabilities without broadening individual roles",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets authenticates six separate identities and keeps individual role restrictions on the API",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets permits both administrative roles to configure sources while using their own audit identities",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets lets super administrators author and execute rules while denying self-review and self-publication",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets preserves independent policy, source-authority and conflict approvals for super administrators",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets enforces actor independence for case approval and permits independent super administrator approval and reopening",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets allows super administrator document handling but requires another identity to verify their upload",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets serves authenticated fixed-manifest PDFs and rejects arbitrary path or filename selection",
+            "status": "passed"
+          },
+          {
+            "name": "Role permissions and fixed fictional demonstration assets does not register any demo asset route in production",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/api/tests/workspace.integration.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Role workspace focus over shared evidence requires authentication and rejects client-selected roles or user identities",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence provides useful bounded queues and full database totals for all six signed roles without changing records",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence shows officer assigned work rather than every case they created and counts beyond the five-item preview",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence counts only latest live source failures, excluding recovered snapshots, simulations and non-source evidence gaps",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence excludes all reviewer creations, contributions and submissions from independent work",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence shows designer contributions and handovers without suggesting they can approve them",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence keeps auditor work read-only and uses evidence totals instead of service-health claims",
+            "status": "passed"
+          },
+          {
+            "name": "Role workspace focus over shared evidence provides the same honest application oversight to Admin and Super Admin and exposes review authorship metadata",
+            "status": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "frontend": {
+    "total": 54,
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "success": true,
+    "suites": [
+      {
+        "file": "apps/web/src/api.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Demonstration document selection fetches an authenticated PDF from the fixed sample endpoint without uploading it",
+            "status": "passed"
+          },
+          {
+            "name": "Demonstration document selection rejects external paths and traversal before sending a request",
+            "status": "passed"
+          },
+          {
+            "name": "Demonstration document selection does not turn an error or HTML response into upload evidence",
+            "status": "passed"
+          },
+          {
+            "name": "Authenticated API boundary passes the in-memory token and serialized business form to the API",
+            "status": "passed"
+          },
+          {
+            "name": "Authenticated API boundary never retains authorization after logout",
+            "status": "passed"
+          },
+          {
+            "name": "Authenticated API boundary preserves safe server error codes and request references",
+            "status": "passed"
+          },
+          {
+            "name": "Authenticated API boundary does not surface an unexpected proxy HTML response as executable content",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/copilot.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Page Copilot context maps route names to API contexts and excludes unrelated operational pages",
+            "status": "passed"
+          },
+          {
+            "name": "Page Copilot context selects the suggested demo member only when no member was chosen",
+            "status": "passed"
+          },
+          {
+            "name": "Page Copilot context keeps the actual selected page member and flags incompatible sample notes",
+            "status": "passed"
+          },
+          {
+            "name": "Page Copilot context preserves a Copilot member selection while choosing an Arabic question",
+            "status": "passed"
+          },
+          {
+            "name": "Page Copilot context sends references and question only, without presenter notes or sample outcomes",
+            "status": "passed"
+          },
+          {
+            "name": "Page Copilot context uses explicit forecast controls and drops member context for aggregate pages",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/graph-sync.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Decision editor save synchronization queues an immediate Save and persists the final expression characters from the public store",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization waits across both table and graph debounce layers before saving a fast table edit",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization captures a row or drag change before its delayed notification reaches React",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization does not mark unchanged initialization, pointer selection or equal late callbacks dirty",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization does not mark JSONB property order and JDM initialization order as a decision edit",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization ignores only non-persisted symbol metadata while preserving actual node movements",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization retains the first real edit and decision-table row priority despite normalization",
+            "status": "passed"
+          },
+          {
+            "name": "Decision editor save synchronization cancels a queued save on editor disposal and ignores callbacks after a role or page change",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/integration-state.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Integration preview and recorded result boundaries distinguishes missing values from zero, false and exact source dates in before/after comparisons",
+            "status": "passed"
+          },
+          {
+            "name": "Integration preview and recorded result boundaries keeps demonstration selection separate from the registered REST intake request",
+            "status": "passed"
+          },
+          {
+            "name": "Integration preview and recorded result boundaries prevents expired or invalid previews from being committed and accepts a future preview",
+            "status": "passed"
+          },
+          {
+            "name": "Integration preview and recorded result boundaries retains previously saved assessments when an idempotent repeat returns no new results",
+            "status": "passed"
+          },
+          {
+            "name": "Integration preview and recorded result boundaries encodes run references and exact organization subject identifiers as one path segment",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/manual-transcription.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Manual document correction starts unavailable extraction with an explicitly uncertain blank evidence field",
+            "status": "passed"
+          },
+          {
+            "name": "Manual document correction prefills existing evidence for correction without mutating the selected document or its uncertainty",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/register-tools.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Filtered registers and audit extracts encodes literal filters without injecting query parameters",
+            "status": "passed"
+          },
+          {
+            "name": "Filtered registers and audit extracts exports only supplied rows with stable identifiers, quoted text and formula protection",
+            "status": "passed"
+          },
+          {
+            "name": "Filtered registers and audit extracts preserves commas and newlines as quoted fields and neutralizes control-prefix formulas",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/role-workspace.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Role-focused work overview provides four to six real, authorized actions for every role in both modes",
+            "status": "passed"
+          },
+          {
+            "name": "Role-focused work overview prioritizes each role's actual job while keeping the full demonstration out of production",
+            "status": "passed"
+          },
+          {
+            "name": "Role-focused work overview does not reuse another identity's or role's work counts after a session switch",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/roles.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Role navigation and administrator capabilities gives the full-demo identity every administrator capability without granting arbitrary reviewer-only capabilities",
+            "status": "passed"
+          },
+          {
+            "name": "Role navigation and administrator capabilities focuses officer and designer navigation and rejects direct hash navigation to their hidden pages",
+            "status": "passed"
+          },
+          {
+            "name": "Role navigation and administrator capabilities allows the whole navigation for oversight roles but keeps development demo tools out of production routes",
+            "status": "passed"
+          },
+          {
+            "name": "Role navigation and administrator capabilities reserves access management for super administrators and integration visibility for oversight roles",
+            "status": "passed"
+          },
+          {
+            "name": "Role navigation and administrator capabilities does not give auditors write or AI capabilities and keeps identities distinct for reviewer handover",
+            "status": "passed"
+          },
+          {
+            "name": "Role navigation and administrator capabilities blocks every rule contributor and submitter from independent review and publication, including super administrators",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/util.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Business-user field discovery encodes keys into unambiguous JSON Pointers including array indices",
+            "status": "passed"
+          },
+          {
+            "name": "Business-user field discovery preserves actual false and zero preview values",
+            "status": "passed"
+          },
+          {
+            "name": "Scenario CSV imports handles commas, quotes and CRLF without changing business IDs",
+            "status": "passed"
+          },
+          {
+            "name": "Scenario CSV imports rejects malformed quotes, unknown statuses, and missing columns",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/restored/navigation.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Original navigation capability boundaries preserves actionable payment controls while hiding unauthorized review and administration",
+            "status": "passed"
+          },
+          {
+            "name": "Original navigation capability boundaries keeps demonstration switching and generated AI routes out of inappropriate sessions",
+            "status": "passed"
+          },
+          {
+            "name": "Original navigation capability boundaries keeps member selections and original detail IDs when resolving earlier Node links",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/restored/original-shell.test.tsx",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Restored shell identity boundaries uses SSO without rendering demo identities or a legacy password form in production",
+            "status": "passed"
+          },
+          {
+            "name": "Restored shell identity boundaries offers all six identities only for a development sign-in",
+            "status": "passed"
+          },
+          {
+            "name": "Restored shell identity boundaries keeps the account role switch out of production and restricts user access to the super administrator",
+            "status": "passed"
+          },
+          {
+            "name": "Restored shell identity boundaries keeps auditor navigation free of Copilot actions while rendering its authorized content",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "file": "apps/web/src/restored/view-model.test.ts",
+        "status": "passed",
+        "tests": [
+          {
+            "name": "Restored screen data semantics keeps member and evidence IDs when changing to original detail routes",
+            "status": "passed"
+          },
+          {
+            "name": "Restored screen data semantics capacity uses completed calendar months, excluding the incomplete current month",
+            "status": "passed"
+          },
+          {
+            "name": "Restored screen data semantics readiness slices cover the actual assessed population without manufactured empty data",
+            "status": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "compiledSmoke": {
+    "status": "passed",
+    "postgresVersion": "18.6",
+    "node": "v24.21.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "checks": [
+      "compiled API startup with native ZEN",
+      "migration-aware readiness",
+      "HTTP authentication",
+      "REST-backed DOB mapping",
+      "native rule simulation",
+      "upstream outage remains unable-to-evaluate",
+      "built HTML asset references"
+    ],
+    "browserRendering": "not-tested",
+    "liveAi": "not-tested"
+  },
+  "compiledDemoSmoke": {
+    "status": "passed",
+    "postgresVersion": "18.6",
+    "node": "v24.21.0",
+    "architecture": "x64",
+    "preparation": {
+      "published_rules": 4,
+      "published_policies": 10,
+      "live_assessments": 11,
+      "cases": 7,
+      "test_runs": 4,
+      "all_assessments": 11
+    },
+    "repeatedPreparation": "No duplicate tests, assessments or cases",
+    "authenticatedRoles": 6,
+    "exactPdfDownloads": 10,
+    "checks": [
+      "Compiled API and native ZEN",
+      "Real designer/reviewer workflow",
+      "Independent audit identities",
+      "All baseline demo rules and procedures published",
+      "11 real saved assessments and 7 cases",
+      "Repeat-safe preparation",
+      "Six development identities",
+      "Authenticated PDF downloads match shipped originals",
+      "Payment finding retains 300000 baisa difference"
+    ],
+    "liveOpenAI": "not called"
+  },
+  "dependencyAudit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 418,
+      "dev": 286,
+      "optional": 94,
+      "peer": 3,
+      "peerOptional": 0,
+      "total": 717
+    }
+  },
+  "productionBuild": "passed",
+  "visualBrowserChecks": {
+    "copilot": {
+      "verifiedOn": "2026-09-25",
+      "type": "targeted manual browser verification, separate from automated test counts",
+      "browser": "Codex in-app browser",
+      "environment": "Development preview with isolated PostgreSQL 18.6 schema, fictional seed and AI disabled",
+      "checks": [
+        {
+          "name": "Officer login and dashboard with 12 fictional members",
+          "status": "passed"
+        },
+        {
+          "name": "Copilot shortcut, question selection, prerequisites and labelled presenter notes",
+          "status": "passed"
+        },
+        {
+          "name": "AI disabled displays an unavailable message without a fabricated answer",
+          "status": "passed"
+        },
+        {
+          "name": "M003 suggestion on selected M002 preserves member and blocks mismatched request",
+          "status": "passed"
+        },
+        {
+          "name": "Matching M002 question selection and Arabic question text",
+          "status": "passed"
+        },
+        {
+          "name": "Unprepared member returns Arabic context-only response, zero evidence and no citations",
+          "status": "passed"
+        },
+        {
+          "name": "Forecast on 2026-09-25, 36 months and +12 month shift returns baseline 3, scenario 2, roster 12",
+          "status": "passed"
+        },
+        {
+          "name": "Copilot forecast settings match the actual forecast form",
+          "status": "passed"
+        },
+        {
+          "name": "Dashboard and Copilot screenshots at default narrow viewport show no obvious clipping",
+          "status": "passed"
+        },
+        {
+          "name": "Inspected browser console has no error entries",
+          "status": "passed"
+        }
+      ],
+      "notVerified": [
+        "Live OpenAI responses, extraction quality, citation accuracy, latency or cost",
+        "Complete JDM drag-and-drop browser acceptance",
+        "Full keyboard, accessibility, RTL, theme and responsive coverage",
+        "HTML print pagination",
+        "Docker deployment"
+      ]
+    },
+    "rolesAndDemo": {
+      "verifiedOn": "2026-09-25",
+      "type": "Targeted manual browser verification, separate from automated test counts",
+      "browser": "Codex in-app browser",
+      "environment": "Temporary development preview, isolated PostgreSQL 18.6 schema, prepared fictional baseline, AI disabled",
+      "checks": [
+        {
+          "name": "Super administrator login exposes all workspaces and six named development identities",
+          "status": "passed"
+        },
+        {
+          "name": "Demo center displays four published models, ten published procedures and ten sample PDFs",
+          "status": "passed"
+        },
+        {
+          "name": "Officer sidebar excludes Studio and audit; direct #studio route shows role guidance instead of editor",
+          "status": "passed"
+        },
+        {
+          "name": "Choosing appointment sample stages M002, title and PDF without submitting; explicit upload saves queued document",
+          "status": "passed"
+        },
+        {
+          "name": "Policy and forecast reference PDFs have download actions but no member-upload selection",
+          "status": "passed"
+        },
+        {
+          "name": "Designer navigation focuses on configuration and permits published-payment-model clone",
+          "status": "passed"
+        },
+        {
+          "name": "Added senior-review expression through JDM, saved and ran three payment scenarios successfully",
+          "status": "passed"
+        },
+        {
+          "name": "M005 simulation retains 300000-baisa finding and returns requiresSeniorReview true",
+          "status": "passed"
+        },
+        {
+          "name": "Designer submitted edited version; Reviewer approved and published it through UI",
+          "status": "passed"
+        },
+        {
+          "name": "Live assessment with new payment publication saved the expected difference and review flag",
+          "status": "passed"
+        },
+        {
+          "name": "Auditor has no live-assessment action and cannot ask Copilot; audit lists separate Designer, Reviewer and Officer actions",
+          "status": "passed"
+        },
+        {
+          "name": "Roles and access layout visually inspected at default desktop viewport after transition",
+          "status": "passed"
+        },
+        {
+          "name": "Immediate save after final expression character retains complete expression after reopening draft",
+          "status": "passed"
+        },
+        {
+          "name": "Immediate save after final decision-table character retains complete cell after reopening draft",
+          "status": "passed"
+        },
+        {
+          "name": "Decision-table edit survives immediate switch to Test scenarios, save and reopening draft",
+          "status": "passed"
+        }
+      ],
+      "observations": [
+        "The JDM dependency emitted a React 19 development warning about element.ref. The exercised workflow completed.",
+        "A quick-save debounce race was found and fixed. Save now waits for pending editor changes; expression, table-cell and tab-switch browser regressions passed. Disposable draft versions were used; packaged baseline rules were unchanged."
+      ],
+      "notVerified": [
+        "Live OpenAI responses or actual PDF extraction quality",
+        "Customer OIDC and automatic pension/ERP document feeds",
+        "Full drag-and-drop graph construction, all viewports, themes, RTL or accessibility acceptance",
+        "HTML print pagination and Docker execution"
+      ]
+    },
+    "roleWorkspaces": {
+      "verifiedOn": "2026-09-25",
+      "type": "Targeted manual browser verification, separate from automated test totals",
+      "environment": "Codex in-app browser, temporary local development preview, isolated PostgreSQL 18.6 schema, prepared fictional data, AI disabled",
+      "checks": [
+        {
+          "name": "All six authenticated roles display distinct workspace titles and practical quick actions",
+          "status": "passed"
+        },
+        {
+          "name": "Officer has seven assigned active cases, five queue previews, and one latest REST source failure",
+          "status": "passed"
+        },
+        {
+          "name": "Officer case register defaults to assigned active work; member search M005 returns its single payment case",
+          "status": "passed"
+        },
+        {
+          "name": "Officer investigates and submits M005; Reviewer dashboard shows one independently eligible recommendation",
+          "status": "passed"
+        },
+        {
+          "name": "Reviewer default eligible queue contains the handover; independent approval removes it from that filtered queue",
+          "status": "passed"
+        },
+        {
+          "name": "Auditor overview shows live evidence and audit totals with read-only guidance; desktop screenshot inspected without obvious clipping",
+          "status": "passed"
+        },
+        {
+          "name": "Auditor filters by reviewer, CASE_TRANSITIONED and case to obtain one matching event",
+          "status": "passed"
+        },
+        {
+          "name": "Auditor opens M005 saved assessment history and its 300000-baisa payment difference",
+          "status": "passed"
+        },
+        {
+          "name": "Designer clones a published model; role dashboard draft count becomes one",
+          "status": "passed"
+        },
+        {
+          "name": "Administrator operational counts and Super administrator full-demonstration entry point render successfully",
+          "status": "passed"
+        },
+        {
+          "name": "No error-level browser console entries during this targeted role-workspace run",
+          "status": "passed"
+        }
+      ],
+      "limitations": [
+        "CSV export was invoked but the in-app browser did not emit download completion. File saving was not verified. CSV content and formula protection were tested automatically.",
+        "No live OpenAI, customer SSO, customer ERP, all-viewport, complete accessibility, Docker or load testing was performed.",
+        "Queue links open the corresponding register, not a preselected record. Counts are shared or personal as labelled and do not implement row-level entitlements."
+      ]
+    },
+    "syncAndEvidence": {
+      "verifiedOn": "2026-09-25",
+      "scope": "Targeted manual browser checks against the actual React and Express applications with isolated PostgreSQL 18.6 schemas and fictional records. These checks are separate from automated test totals.",
+      "provider": "disabled",
+      "liveAiCalled": false,
+      "checks": [
+        "Preview showed one new member, two updates and two source PDFs without applying changes.",
+        "Expanded before/after comparison showed M002 employer joining date 1992-07-01 to 1992-06-01 and M005 authorized adjustment 0 to 300000 baisa; desktop comparison layout visually checked.",
+        "Commit recorded actor, immutable source lineage, one added member, two updated members and two queued documents.",
+        "Explicit assessment step saved 12 fresh REST-backed rule results with zero failures; M002 readiness became ready for review and M005 payment became clear.",
+        "Dashboard showed 13 members, 7 still-open review cases, readiness totals of 1 needs verification, 4 ready for review and 1 unable to evaluate, plus 2 received documents, 2 awaiting processing or review and 0 independently verified.",
+        "Forecast at 2026-09-25 with a 36-month horizon and 12-month shift showed baseline 4, scenario 3 and roster 13 after synchronization.",
+        "Historical M005 sample PDF was manually transcribed with page and quote by Super administrator, then independently verified by Reviewer. Copilot evidence preview showed its verified citation and saved assessments with no provider call.",
+        "Case priority and due-date edits persisted; the assigned Officer saw assignment/update notifications and an overdue case.",
+        "Super administrator user directory showed six active demo identities and editing controls. Ordinary Administrator could not access the directory route.",
+        "No browser console error entries were recorded in the targeted final synchronization and dashboard run."
+      ],
+      "limits": [
+        "Manual transcription is explicitly attributed human evidence; it is not AI extraction.",
+        "Historical sample PDFs retain their original facts and do not overwrite corrected REST records.",
+        "Clear results preserve active case status; new evidence linkage is also covered by automated database tests.",
+        "Customer ERP, customer SSO, production scanner, live model quality, full accessibility/browser coverage and deployed infrastructure acceptance remain pending."
+      ]
+    },
+    "originalUi": {
+      "date": "2026-09-25",
+      "environment": "Local isolated fictional-data preview; Node.js/Express API, PostgreSQL 18.6 and Vite React frontend; AI disabled",
+      "scope": "Targeted restored-interface checks, not complete browser or Java parity acceptance",
+      "passed": [
+        "Original logo, purple/white login, grouped sidebar, header and dashboard cards visually inspected",
+        "Super administrator signed in and original grouped navigation displayed",
+        "Global search M005 opened Fatma Al Amri's actual Member 360 profile; clearing selection removed the old profile",
+        "Opening an editable cloned decision on Design retained Saved state without a false dirty notification after JSONB/JDM normalization fix",
+        "Moving from Design to Fetch input retained the selected decision version and opened Source & mapping",
+        "Dark desktop dashboard and mirrored right-to-left dashboard visually inspected without obvious clipping in the visible region",
+        "390 by 844 dashboard and mobile navigation drawer visually inspected without obvious clipping; viewport override reset and light/LTR appearance restored",
+        "Restored Integrations navigation opened Data synchronization; preview displayed two updates, one new member and two source PDFs",
+        "Explicit import committed the fictional update and queued two PDFs; all twelve affected-member assessments appeared in the run",
+        "M002 readiness became Ready for review and M005 payment comparison became Clear in saved synchronization results",
+        "Restored dashboard reflected thirteen members, two source documents, seven open cases and six latest readiness results: one needs verification, four ready for review, one unable to evaluate",
+        "Copilot's provider-free evidence preview contained the dashboard aggregate; expanded counts showed thirteen members, seven open cases, two documents awaiting review and four published rules",
+        "Fresh layout/synchronization preview tab had no captured browser error entries"
+      ],
+      "limitations": [
+        "Native unsaved-change confirmation could not be completed in the embedded browser: interaction timed out and no dialog was exposed; cancellation remains a customer-browser acceptance check",
+        "Earlier Node editor interaction and role/evidence rehearsal evidence is retained separately; complete JDM drag/drop, all role journeys and all eighty-five entries were not repeated in this restored interface",
+        "Live OpenAI, customer ERP, customer SSO, malware scanning and Docker deployment were not exercised",
+        "Full keyboard/accessibility, reduced-motion behavior, all themes/viewports and printed document pagination remain acceptance checks",
+        "The original navigation is restored but Java-only backend services listed in UI_RESTORATION.md are not implemented"
+      ]
+    }
+  },
+  "demoPdfChecks": "Ten one-page fictional sample PDFs rendered and visually inspected; no clipping or overlap observed. Eight member-linked upload samples and two general references.",
+  "dockerExecution": "not-executed; Docker unavailable",
+  "liveOpenAI": "not-executed; automated provider tests use explicit doubles; browser preview AI disabled",
+  "operationalTests": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "skipped": 0,
+    "runner": "Node.js test runner",
+    "source": "scripts/readiness.test.mjs"
+  },
+  "totalAutomatedTests": 201,
+  "originalUiDocumentation": {
+    "checkedAt": "2026-09-25T11:58:13.299Z",
+    "documents": 6,
+    "tocAnchors": 73,
+    "localLinks": 45,
+    "crossFileAnchors": 11,
+    "originalRouteCount": 80,
+    "originalOperationCount": 113,
+    "licenseChecks": [
+      {
+        "file": "HORIZON_LICENSE.md",
+        "unchanged": true,
+        "sha256": "07fe65d8e50b8c706b382dde3f1e9a83b28e8017388ada0d7ef43e8b3f0738ae"
+      },
+      {
+        "file": "ORIGINAL_FRONTEND_THIRD_PARTY_NOTICES.txt",
+        "unchanged": true,
+        "sha256": "a5db717be21854721a29dc307f6dccb5efd49cde767f901635bcf54a7fd95fe7"
+      }
+    ],
+    "errors": [],
+    "passed": true
+  },
+  "originalUiScope": {
+    "archive": "Pension360_Fullstack_Project_v6_2.zip",
+    "originalRoutes": 80,
+    "additionalRoutes": 5,
+    "restored": "Original logo, DM Sans font, purple Horizon presentation and grouped navigation adapted to current Node workflows.",
+    "javaBackendParity": "Not complete. See docs/UI_RESTORATION.md for specific unsupported services."
+  },
+  "backupRestore": {
+    "checkedAt": "2026-09-25T08:46:05.901Z",
+    "status": "passed",
+    "database": "PostgreSQL 18.6",
+    "scope": "Disposable generated schema with seeded application records and encrypted evidence; not customer disaster-recovery acceptance",
+    "counts": {
+      "members": 12,
+      "rules": 4,
+      "policies": 10,
+      "users": 6,
+      "migrations": 6
+    },
+    "encryptedEvidenceRestored": true,
+    "durationMs": 1317
+  },
+  "readLoadSmoke": {
+    "checkedAt": "2026-09-25T08:51:53.262Z",
+    "status": "passed",
+    "requests": 50,
+    "concurrency": 5,
+    "failures": [],
+    "p95Ms": 82,
+    "maxMs": 101,
+    "scope": "Fifty read-only member-list requests against a local fictional preview. This is not a production capacity or soak test."
+  },
+  "deploymentPreflight": {
+    "schemaVersion": 1,
+    "kind": "deployment-preflight",
+    "asOf": "2026-09-25T08:55:52.467Z",
+    "mode": "development",
+    "status": "attention_required",
+    "productionAcceptanceComplete": false,
+    "readOnly": true,
+    "failedChecks": 0,
+    "checks": [
+      {
+        "id": "node-runtime",
+        "status": "passed",
+        "version": "24.21.0",
+        "requiredMajor": 24
+      },
+      {
+        "id": "required-environment",
+        "status": "passed",
+        "variables": [
+          {
+            "name": "DATABASE_URL",
+            "present": true
+          }
+        ]
+      },
+      {
+        "id": "application-configuration",
+        "status": "passed"
+      },
+      {
+        "id": "document-encryption",
+        "status": "warning",
+        "configured": false,
+        "valid32ByteKey": false,
+        "note": "Development fallback is for fictional data only."
+      },
+      {
+        "id": "scanner-configuration",
+        "status": "warning",
+        "configured": false,
+        "tokenConfigured": false
+      },
+      {
+        "id": "scanner-functional-acceptance",
+        "status": "not_run",
+        "note": "A URL is not proof of scanning. Validate clean, infected and unavailable scanner responses in the deployment environment."
+      },
+      {
+        "id": "ai-configuration",
+        "status": "warning",
+        "provider": "disabled",
+        "ready": false,
+        "reason": "AI_DISABLED",
+        "required": []
+      },
+      {
+        "id": "ai-live-acceptance",
+        "status": "not_run",
+        "note": "Run npm run test:ai:live separately with an explicitly configured provider and model; preflight sends no documents to AI."
+      },
+      {
+        "id": "database-connection",
+        "status": "passed"
+      },
+      {
+        "id": "postgres-version",
+        "status": "passed",
+        "versionNumber": 180006,
+        "required": "PostgreSQL 18.6 or later 18.x patch"
+      },
+      {
+        "id": "database-migrations",
+        "status": "passed",
+        "expectedCount": 6,
+        "appliedExpectedCount": 6,
+        "missing": []
+      },
+      {
+        "id": "identity-directory",
+        "status": "passed",
+        "registeredCount": 6,
+        "activeSuperAdminCount": 1,
+        "verifiedFirstLoginBootstrapPending": false
+      },
+      {
+        "id": "source-registry-configuration",
+        "status": "passed",
+        "enabledConnections": 1,
+        "invalidOrigins": 0,
+        "unavailableCredentials": 0,
+        "note": "Configuration check only. Verify registered REST reads and intake previews with the source owner; no arbitrary source endpoint is called."
+      },
+      {
+        "id": "health-live",
+        "status": "passed",
+        "httpStatus": 200
+      },
+      {
+        "id": "health-ready",
+        "status": "passed",
+        "httpStatus": 200
+      },
+      {
+        "id": "sso-configuration",
+        "status": "warning",
+        "variables": [
+          {
+            "name": "OIDC_ISSUER",
+            "present": false
+          },
+          {
+            "name": "OIDC_AUDIENCE",
+            "present": false
+          },
+          {
+            "name": "OIDC_JWKS_URI",
+            "present": false
+          }
+        ]
+      },
+      {
+        "id": "sso-jwks-reachable",
+        "status": "not_run"
+      },
+      {
+        "id": "sso-login-acceptance",
+        "status": "not_run",
+        "note": "JWKS reachability does not verify login, issuer/audience claims, role registration or deactivation; exercise these with real IdP accounts."
+      },
+      {
+        "id": "worker-and-recovery-acceptance",
+        "status": "not_run",
+        "note": "Health does not prove a worker is running. Verify extraction job completion and run the documented backup/restore drill separately."
+      }
+    ]
+  },
+  "productionAcceptanceComplete": false,
+  "pendingAcceptance": [
+    "Customer ERP integration",
+    "Customer identity-provider login and authorization",
+    "Production malware scanner",
+    "Live OpenAI extraction and answer quality",
+    "Container deployment",
+    "Production capacity and disaster recovery"
+  ]
+}

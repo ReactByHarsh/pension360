@@ -1,0 +1,23 @@
+{
+  "verifiedOn": "2026-09-25",
+  "type": "Targeted manual browser verification, separate from automated test totals",
+  "environment": "Codex in-app browser, temporary local development preview, isolated PostgreSQL 18.6 schema, prepared fictional data, AI disabled",
+  "checks": [
+    {"name":"All six authenticated roles display distinct workspace titles and practical quick actions","status":"passed"},
+    {"name":"Officer has seven assigned active cases, five queue previews, and one latest REST source failure","status":"passed"},
+    {"name":"Officer case register defaults to assigned active work; member search M005 returns its single payment case","status":"passed"},
+    {"name":"Officer investigates and submits M005; Reviewer dashboard shows one independently eligible recommendation","status":"passed"},
+    {"name":"Reviewer default eligible queue contains the handover; independent approval removes it from that filtered queue","status":"passed"},
+    {"name":"Auditor overview shows live evidence and audit totals with read-only guidance; desktop screenshot inspected without obvious clipping","status":"passed"},
+    {"name":"Auditor filters by reviewer, CASE_TRANSITIONED and case to obtain one matching event","status":"passed"},
+    {"name":"Auditor opens M005 saved assessment history and its 300000-baisa payment difference","status":"passed"},
+    {"name":"Designer clones a published model; role dashboard draft count becomes one","status":"passed"},
+    {"name":"Administrator operational counts and Super administrator full-demonstration entry point render successfully","status":"passed"},
+    {"name":"No error-level browser console entries during this targeted role-workspace run","status":"passed"}
+  ],
+  "limitations": [
+    "CSV export was invoked but the in-app browser did not emit download completion. File saving was not verified. CSV content and formula protection were tested automatically.",
+    "No live OpenAI, customer SSO, customer ERP, all-viewport, complete accessibility, Docker or load testing was performed.",
+    "Queue links open the corresponding register, not a preselected record. Counts are shared or personal as labelled and do not implement row-level entitlements."
+  ]
+}

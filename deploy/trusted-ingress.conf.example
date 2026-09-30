@@ -1,0 +1,9 @@
+# Copy to trusted-ingress.conf and replace this documentation-only address with
+# the exact ingress peer IP as seen by this Nginx container. Never trust every IP.
+# Limit network access to this web port to that ingress. The ingress must replace
+# untrusted X-Forwarded-For headers with the verified client address and enforce TLS.
+set_real_ip_from 192.0.2.10;
+real_ip_header X-Forwarded-For;
+real_ip_recursive on;
+# This deployment-specific include is used only behind the HTTPS ingress.
+set $external_scheme https;

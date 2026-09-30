@@ -1,0 +1,31 @@
+{
+  "name": "@pension360/web",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fontsource/dm-sans": "5.3.0",
+    "@gorules/jdm-editor": "1.52.0",
+    "@monaco-editor/react": "^4.7.0",
+    "antd": "^5.27.0",
+    "lucide-react": "^0.468.0",
+    "monaco-editor": "^0.52.2",
+    "oidc-client-ts": "^3.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "typescript": "^5.8.3",
+    "vite": "^6.4.0",
+    "vitest": "4.1.11"
+  }
+}

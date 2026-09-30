@@ -1,0 +1,40 @@
+# Apply with compose.yml after configuring .env.production and building with OIDC args.
+# Only a single organization is supported per installation. Put HTTPS ingress in front.
+services:
+  postgres:
+    ports: !reset []
+  api:
+    env_file: !override [.env.production]
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL:?Set least-privilege runtime DATABASE_URL}
+      SOURCE_ALLOWED_ORIGINS: ${SOURCE_ALLOWED_ORIGINS:?Set approved source origins}
+      SOURCE_ALLOW_PRIVATE_ORIGINS: ${SOURCE_ALLOW_PRIVATE_ORIGINS:-}
+      SOURCE_ALLOW_HTTP_ORIGINS: ${SOURCE_ALLOW_HTTP_ORIGINS:-}
+    ports: !reset []
+  worker:
+    env_file: !override [.env.production]
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL:?Set least-privilege runtime DATABASE_URL}
+  migrate:
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${MIGRATION_DATABASE_URL:?Use a separate migration owner}
+      OIDC_ISSUER: ${OIDC_ISSUER}
+      OIDC_AUDIENCE: ${OIDC_AUDIENCE}
+      OIDC_JWKS_URI: ${OIDC_JWKS_URI}
+  web:
+    volumes:
+      - type: bind
+        source: ./deploy/trusted-ingress.conf
+        target: /etc/nginx/pension360-ingress/ingress.conf
+        read_only: true
+        bind:
+          create_host_path: false
+    build:
+      args:
+        VITE_OIDC_AUTHORITY: ${VITE_OIDC_AUTHORITY}
+        VITE_OIDC_CLIENT_ID: ${VITE_OIDC_CLIENT_ID}
+        VITE_OIDC_REDIRECT_URI: ${VITE_OIDC_REDIRECT_URI}
+        VITE_OIDC_SCOPE: ${VITE_OIDC_SCOPE:-openid profile pension360}

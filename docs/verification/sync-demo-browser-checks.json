@@ -1,0 +1,24 @@
+{
+  "verifiedOn": "2026-09-25",
+  "scope": "Targeted manual browser checks against the actual React and Express applications with isolated PostgreSQL 18.6 schemas and fictional records. These checks are separate from automated test totals.",
+  "provider": "disabled",
+  "liveAiCalled": false,
+  "checks": [
+    "Preview showed one new member, two updates and two source PDFs without applying changes.",
+    "Expanded before/after comparison showed M002 employer joining date 1992-07-01 to 1992-06-01 and M005 authorized adjustment 0 to 300000 baisa; desktop comparison layout visually checked.",
+    "Commit recorded actor, immutable source lineage, one added member, two updated members and two queued documents.",
+    "Explicit assessment step saved 12 fresh REST-backed rule results with zero failures; M002 readiness became ready for review and M005 payment became clear.",
+    "Dashboard showed 13 members, 7 still-open review cases, readiness totals of 1 needs verification, 4 ready for review and 1 unable to evaluate, plus 2 received documents, 2 awaiting processing or review and 0 independently verified.",
+    "Forecast at 2026-09-25 with a 36-month horizon and 12-month shift showed baseline 4, scenario 3 and roster 13 after synchronization.",
+    "Historical M005 sample PDF was manually transcribed with page and quote by Super administrator, then independently verified by Reviewer. Copilot evidence preview showed its verified citation and saved assessments with no provider call.",
+    "Case priority and due-date edits persisted; the assigned Officer saw assignment/update notifications and an overdue case.",
+    "Super administrator user directory showed six active demo identities and editing controls. Ordinary Administrator could not access the directory route.",
+    "No browser console error entries were recorded in the targeted final synchronization and dashboard run."
+  ],
+  "limits": [
+    "Manual transcription is explicitly attributed human evidence; it is not AI extraction.",
+    "Historical sample PDFs retain their original facts and do not overwrite corrected REST records.",
+    "Clear results preserve active case status; new evidence linkage is also covered by automated database tests.",
+    "Customer ERP, customer SSO, production scanner, live model quality, full accessibility/browser coverage and deployed infrastructure acceptance remain pending."
+  ]
+}

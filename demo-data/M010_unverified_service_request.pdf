@@ -1,0 +1,68 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 3145 >>
+stream
+0.07 0.16 0.26 rg 0 738 595 104 re f
+BT /F2 23 Tf 1 1 1 rg 1 0 0 1 42 801 Tm (PENSION360) Tj ET
+BT /F2 10 Tf 0.66 0.86 1 rg 1 0 0 1 42 774 Tm (FICTIONAL DEMONSTRATION DATA) Tj ET
+BT /F2 12 Tf 0.65 0.16 0.13 rg 1 0 0 1 42 713 Tm (DEMONSTRATION ONLY - NOT VALID EVIDENCE) Tj ET
+BT /F2 23 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 679 Tm (Service verification request) Tj ET
+BT /F1 10 Tf 0.30 0.38 0.46 rg 1 0 0 1 42 657 Tm (Evidence is pending; no invalid-service conclusion is implied) Tj ET
+BT /F2 12 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 623 Tm (MEMBER  M010  |  Hamood Al Saadi) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 604 Tm (REFERENCE  DEMO-SVC-M010-001  |  DEMO DATE  2026-09-25) Tj ET
+0.91 0.95 0.98 rg 42 429 511 154 re f
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 562 Tm (Unverified service) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 562 Tm (6 months) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 535 Tm (Service verified flag) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 535 Tm (false) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 508 Tm (Underlying date periods) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 508 Tm (Not supplied by the fixture) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 481 Tm (Requested follow-up) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 481 Tm (Obtain service evidence for review) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 454 Tm (Document type) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 454 Tm (Request - not proof of service) Tj ET
+BT /F2 14 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 402 Tm (Pending verification) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 380 Tm (For fictional member Hamood Al Saadi \(M010\), six service months are unverified and the) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 365 Tm (service-verified flag is false. These values describe missing verification, not proven) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 350 Tm (invalid or fraudulent service.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 325 Tm (Obtain source service records and supporting evidence, then arrange independent review.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 310 Tm (This request is not a certificate and does not identify the underlying dates or) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 295 Tm (organizations.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 270 Tm (Suggested extraction: memberId = M010; unverifiedMonths = 6; serviceVerified = false.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 255 Tm (Uploading or verifying this request does not change the upstream service flag or clear a) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 240 Tm (previous finding.) Tj ET
+0.81 0.87 0.92 RG 42 120 m 553 120 l S
+BT /F2 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 100 Tm (CHECKPOINT: six months need verification; a request is not completion evidence.) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 59 Tm (All names and facts are invented. No signature, seal or official authorization is provided.) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 43 Tm (For controlled product demonstrations only. Human verification is required.  |  Page 1 of 1) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3593
+%%EOF

@@ -1,0 +1,411 @@
+{
+  "businessModules": [
+    "01 · Retirement Readiness & Forecasting",
+    "02 · AI Case & Document Intelligence",
+    "03 · Policy & Decision Intelligence",
+    "04 · Contribution & Service Assurance",
+    "05 · Payment & Entitlement Assurance"
+  ],
+  "screens": [
+    {
+      "group": "Dashboard",
+      "id": "executive",
+      "title": "Executive dashboard"
+    },
+    {
+      "group": "Dashboard",
+      "id": "operations",
+      "title": "Operations dashboard"
+    },
+    {
+      "group": "Dashboard",
+      "id": "finance",
+      "title": "Finance assurance dashboard"
+    },
+    {
+      "group": "Dashboard",
+      "id": "forecast",
+      "title": "Forecast dashboard"
+    },
+    {
+      "group": "Dashboard",
+      "id": "insight-center",
+      "title": "AI insights"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "retirements",
+      "title": "Upcoming retirements"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "assessments",
+      "title": "Readiness assessments"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "readiness",
+      "title": "Member readiness"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "preparation",
+      "title": "Member preparation"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "scenarios",
+      "title": "Readiness scenarios"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "individual",
+      "title": "Member scenario"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "population",
+      "title": "Group impact simulation"
+    },
+    {
+      "group": "01 · Retirement Readiness & Forecasting",
+      "id": "comparison",
+      "title": "Scenario comparison"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "cases",
+      "title": "Case register"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "case",
+      "title": "Case investigation"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "documents",
+      "title": "Document library"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "document",
+      "title": "Document evidence viewer"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "extraction",
+      "title": "Extraction review"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "timeline",
+      "title": "Historical timeline"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "conflicts",
+      "title": "Document conflicts"
+    },
+    {
+      "group": "02 · AI Case & Document Intelligence",
+      "id": "evidence",
+      "title": "Decision evidence"
+    },
+    {
+      "group": "03 · Policy & Decision Intelligence",
+      "id": "policies",
+      "title": "Policy library"
+    },
+    {
+      "group": "03 · Policy & Decision Intelligence",
+      "id": "policy",
+      "title": "Policy detail"
+    },
+    {
+      "group": "03 · Policy & Decision Intelligence",
+      "id": "policy-compare",
+      "title": "Circular comparison"
+    },
+    {
+      "group": "03 · Policy & Decision Intelligence",
+      "id": "impact",
+      "title": "Policy rule drafting"
+    },
+    {
+      "group": "03 · Policy & Decision Intelligence",
+      "id": "policy-review",
+      "title": "Policy approval queue"
+    },
+    {
+      "group": "04 · Contribution & Service Assurance",
+      "id": "service",
+      "title": "Service reconciliation"
+    },
+    {
+      "group": "04 · Contribution & Service Assurance",
+      "id": "service-detail",
+      "title": "Service comparison"
+    },
+    {
+      "group": "04 · Contribution & Service Assurance",
+      "id": "contributions",
+      "title": "Contribution reconciliation"
+    },
+    {
+      "group": "04 · Contribution & Service Assurance",
+      "id": "contribution-detail",
+      "title": "Contribution investigation"
+    },
+    {
+      "group": "04 · Contribution & Service Assurance",
+      "id": "employers",
+      "title": "Employer contribution records"
+    },
+    {
+      "group": "05 · Payment & Entitlement Assurance",
+      "id": "payment-runs",
+      "title": "Payment records"
+    },
+    {
+      "group": "05 · Payment & Entitlement Assurance",
+      "id": "payment-run",
+      "title": "Payment record review"
+    },
+    {
+      "group": "05 · Payment & Entitlement Assurance",
+      "id": "payment-exceptions",
+      "title": "Payment exceptions"
+    },
+    {
+      "group": "05 · Payment & Entitlement Assurance",
+      "id": "payment-detail",
+      "title": "Payment investigation"
+    },
+    {
+      "group": "05 · Payment & Entitlement Assurance",
+      "id": "controls",
+      "title": "Control catalogue"
+    },
+    {
+      "group": "05 · Payment & Entitlement Assurance",
+      "id": "corrections",
+      "title": "Verified outcomes"
+    },
+    {
+      "group": "Shared · Analytics",
+      "id": "analytics-overview",
+      "title": "Analytics overview"
+    },
+    {
+      "group": "Shared · Analytics",
+      "id": "analytics-demand",
+      "title": "Application forecast"
+    },
+    {
+      "group": "Shared · Analytics",
+      "id": "analytics-capacity",
+      "title": "Capacity scenarios"
+    },
+    {
+      "group": "Shared · Analytics",
+      "id": "analytics-models",
+      "title": "Forecast method"
+    },
+    {
+      "group": "Shared · AI & Member 360",
+      "id": "members",
+      "title": "Member directory"
+    },
+    {
+      "group": "Shared · AI & Member 360",
+      "id": "member",
+      "title": "Member 360"
+    },
+    {
+      "group": "Shared · AI & Member 360",
+      "id": "provenance",
+      "title": "Source provenance"
+    },
+    {
+      "group": "Shared · AI & Member 360",
+      "id": "copilot",
+      "title": "AI copilot"
+    },
+    {
+      "group": "Shared · AI & Member 360",
+      "id": "questions",
+      "title": "Ask a policy or member question"
+    },
+    {
+      "group": "Shared · AI & Member 360",
+      "id": "conversations",
+      "title": "Conversation history"
+    },
+    {
+      "group": "Shared · Work & Reports",
+      "id": "my-work",
+      "title": "My work queue"
+    },
+    {
+      "group": "Shared · Work & Reports",
+      "id": "team",
+      "title": "Team workload"
+    },
+    {
+      "group": "Shared · Work & Reports",
+      "id": "approvals",
+      "title": "Review approvals"
+    },
+    {
+      "group": "Shared · Work & Reports",
+      "id": "sla",
+      "title": "Overdue follow-up"
+    },
+    {
+      "group": "Shared · Work & Reports",
+      "id": "reports",
+      "title": "Report centre"
+    },
+    {
+      "group": "Shared · Work & Reports",
+      "id": "value",
+      "title": "Value tracker"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "studio-home",
+      "title": "Studio overview"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "studio-sources",
+      "title": "Data sources"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "studio-mapping",
+      "title": "Input field mapping"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "rule-designer",
+      "title": "Design"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "rule-input",
+      "title": "Fetch input"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "rule-test",
+      "title": "Test & explain"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "rule-impact",
+      "title": "Impact"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "rule-versions",
+      "title": "Publish & versions"
+    },
+    {
+      "group": "Shared · Rules & Data Studio",
+      "id": "rule-ai",
+      "title": "AI rule drafting"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "connectors",
+      "title": "Connections"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "connector-new",
+      "title": "Connection setup"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "discovery",
+      "title": "Source configuration"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "mapping",
+      "title": "Field mapping"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "validation",
+      "title": "Validation & transformations"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "sync",
+      "title": "Fetch & run history"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "publish",
+      "title": "Review & apply source facts"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "health",
+      "title": "Integration health"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "replay",
+      "title": "Retry source fetch"
+    },
+    {
+      "group": "Shared · Integrations",
+      "id": "odoo",
+      "title": "Odoo connection"
+    },
+    {
+      "group": "Shared · Administration",
+      "id": "knowledge",
+      "title": "Knowledge publishing"
+    },
+    {
+      "group": "Shared · Administration",
+      "id": "access",
+      "title": "Users & roles"
+    },
+    {
+      "group": "Shared · Administration",
+      "id": "ai-settings",
+      "title": "AI configuration"
+    },
+    {
+      "group": "Shared · Administration",
+      "id": "audit",
+      "title": "Audit trail"
+    },
+    {
+      "group": "Shared · Administration",
+      "id": "settings",
+      "title": "Workspace settings"
+    },
+    {
+      "group": "Shared · Administration",
+      "id": "screen-map",
+      "title": "Screen & flow index"
+    },
+    {
+      "group": "Demo & Handoff",
+      "id": "demo-guide",
+      "title": "Guided demonstration"
+    },
+    {
+      "group": "Demo & Handoff",
+      "id": "prototype-scope",
+      "title": "Connected POC scope"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 3132 >>
+stream
+0.07 0.16 0.26 rg 0 738 595 104 re f
+BT /F2 23 Tf 1 1 1 rg 1 0 0 1 42 801 Tm (PENSION360) Tj ET
+BT /F2 10 Tf 0.66 0.86 1 rg 1 0 0 1 42 774 Tm (FICTIONAL DEMONSTRATION DATA) Tj ET
+BT /F2 12 Tf 0.65 0.16 0.13 rg 1 0 0 1 42 713 Tm (DEMONSTRATION ONLY - NOT VALID EVIDENCE) Tj ET
+BT /F2 23 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 679 Tm (Workforce count scenario) Tj ET
+BT /F1 10 Tf 0.30 0.38 0.46 rg 1 0 0 1 42 657 Tm (Static rehearsal checkpoint alongside the live forecast) Tj ET
+BT /F2 12 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 623 Tm (MEMBER  GENERAL  |  Fictional roster only) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 604 Tm (REFERENCE  DEMO-FRC-001  |  DEMO DATE  2026-09-25) Tj ET
+0.91 0.95 0.98 rg 42 429 511 154 re f
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 562 Tm (As-of date) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 562 Tm (2026-09-25) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 535 Tm (Horizon / date shift) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 535 Tm (36 months / +12 months) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 508 Tm (Roster count) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 508 Tm (12 fictional members) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 481 Tm (Baseline / scenario count) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 481 Tm (3 / 2 members in the window) Tj ET
+BT /F2 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 54 454 Tm (Measure) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 236 454 Tm (Headcount only - no monetary liability) Tj ET
+BT /F2 14 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 402 Tm (How to present the comparison) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 380 Tm (Run the live forecast with as-of date 2026-09-25, horizon 36 months and a positive) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 365 Tm (12-month shift. The untouched seeded roster produces baseline count 3 and scenario count) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 350 Tm (2, from a total roster of 12.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 325 Tm (The shift can move an expected retirement date outside the selected window. It does not) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 310 Tm (remove a member from the roster, approve a policy change or establish statutory) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 295 Tm (entitlement.) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 270 Tm (This static page is a presenter aid. Use the live server-calculated result and visible) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 255 Tm (settings as the current evidence. It is not an actuarial model, pension-cost estimate or) Tj ET
+BT /F1 10 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 240 Tm (liability forecast.) Tj ET
+0.81 0.87 0.92 RG 42 120 m 553 120 l S
+BT /F2 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 100 Tm (CHECKPOINT: show the live settings and counts; do not infer pension costs.) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 59 Tm (All names and facts are invented. No signature, seal or official authorization is provided.) Tj ET
+BT /F1 9 Tf 0.12 0.20 0.28 rg 1 0 0 1 42 43 Tm (For controlled product demonstrations only. Human verification is required.  |  Page 1 of 1) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3580
+%%EOF

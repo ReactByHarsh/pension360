@@ -1,0 +1,54 @@
+{
+  "name": "pension360-node",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB \"npm run dev -w apps/api\" \"npm run dev -w apps/web\"",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm run test --workspaces --if-present",
+    "test:integration": "node scripts/integration.mjs",
+    "test:smoke": "node scripts/smoke.mjs",
+    "test:demo": "node scripts/demo-smoke.mjs",
+    "preflight": "node --env-file-if-exists=.env scripts/preflight.mjs",
+    "test:ai:live": "node --env-file-if-exists=.env scripts/live-ai-acceptance.mjs",
+    "test:operations": "node --test scripts/readiness.test.mjs",
+    "test:backup-restore": "node scripts/backup-restore-test.mjs",
+    "test:read-load": "node scripts/read-load-smoke.mjs",
+    "db:migrate": "npm run migrate -w apps/api",
+    "db:seed": "npm run seed -w apps/api",
+    "demo:prepare": "node scripts/demo-prepare.mjs",
+    "demo:playwright": "node scripts/full-demo.playwright.mjs",
+    "start": "npm run start -w apps/api",
+    "worker": "npm run worker -w apps/api",
+    "package": "node scripts/package.mjs",
+    "format": "prettier --write apps scripts '*.json' '*.yml' docs/*.md"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "concurrently": "^9.2.1",
+    "playwright": "1.63.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "uuid": "11.1.1",
+    "vitest": "4.1.11"
+  },
+  "overrides": {
+    "exceljs": {
+      "uuid": "11.1.1"
+    }
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "date": "2026-09-25",
+  "environment": "Local isolated fictional-data preview; Node.js/Express API, PostgreSQL 18.6 and Vite React frontend; AI disabled",
+  "scope": "Targeted restored-interface checks, not complete browser or Java parity acceptance",
+  "passed": [
+    "Original logo, purple/white login, grouped sidebar, header and dashboard cards visually inspected",
+    "Super administrator signed in and original grouped navigation displayed",
+    "Global search M005 opened Fatma Al Amri's actual Member 360 profile; clearing selection removed the old profile",
+    "Opening an editable cloned decision on Design retained Saved state without a false dirty notification after JSONB/JDM normalization fix",
+    "Moving from Design to Fetch input retained the selected decision version and opened Source & mapping",
+    "Dark desktop dashboard and mirrored right-to-left dashboard visually inspected without obvious clipping in the visible region",
+    "390 by 844 dashboard and mobile navigation drawer visually inspected without obvious clipping; viewport override reset and light/LTR appearance restored",
+    "Restored Integrations navigation opened Data synchronization; preview displayed two updates, one new member and two source PDFs",
+    "Explicit import committed the fictional update and queued two PDFs; all twelve affected-member assessments appeared in the run",
+    "M002 readiness became Ready for review and M005 payment comparison became Clear in saved synchronization results",
+    "Restored dashboard reflected thirteen members, two source documents, seven open cases and six latest readiness results: one needs verification, four ready for review, one unable to evaluate",
+    "Copilot's provider-free evidence preview contained the dashboard aggregate; expanded counts showed thirteen members, seven open cases, two documents awaiting review and four published rules",
+    "Fresh layout/synchronization preview tab had no captured browser error entries"
+  ],
+  "limitations": [
+    "Native unsaved-change confirmation could not be completed in the embedded browser: interaction timed out and no dialog was exposed; cancellation remains a customer-browser acceptance check",
+    "Earlier Node editor interaction and role/evidence rehearsal evidence is retained separately; complete JDM drag/drop, all role journeys and all eighty-five entries were not repeated in this restored interface",
+    "Live OpenAI, customer ERP, customer SSO, malware scanning and Docker deployment were not exercised",
+    "Full keyboard/accessibility, reduced-motion behavior, all themes/viewports and printed document pagination remain acceptance checks",
+    "The original navigation is restored but Java-only backend services listed in UI_RESTORATION.md are not implemented"
+  ]
+}
