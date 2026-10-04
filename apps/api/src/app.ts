@@ -1,7 +1,7 @@
 import express, { type Router } from "express";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import { randomUUID } from "node:crypto";
+import { createHash, randomUUID, timingSafeEqual } from "node:crypto";
 import { readdirSync } from "node:fs";
 import { z } from "zod";
 import type { Pool } from "pg";
@@ -80,6 +80,15 @@ export function createApp(
   const expectedMigrations = readdirSync(
     new URL("../migrations/", import.meta.url),
   ).filter((name) => name.endsWith(".sql"));
+  const demoLogin =
+    config.env !== "production" &&
+    process.env.DEMO_LOGIN_ID &&
+    process.env.DEMO_LOGIN_PASSWORD
+      ? {
+          id: process.env.DEMO_LOGIN_ID,
+          password: process.env.DEMO_LOGIN_PASSWORD,
+        }
+      : null;
   app.disable("x-powered-by");
   if (config.trustProxy) app.set("trust proxy", 1);
   app.use((req, res, next) => {
@@ -178,14 +187,34 @@ export function createApp(
       standardHeaders: "draft-8",
       legacyHeaders: false,
     }),
-    async (req, res) =>
-      res.json(
-        await devToken(
-          config,
-          z.object({ userId: z.string() }).strict().parse(req.body).userId,
-          pool,
-        ),
-      ),
+    async (req, res) => {
+      const body = z
+        .object({
+          userId: z.string(),
+          loginId: z.string().max(200).optional(),
+          password: z.string().max(200).optional(),
+        })
+        .strict()
+        .parse(req.body);
+      // Optional shared login for the demo: set DEMO_LOGIN_ID and DEMO_LOGIN_PASSWORD.
+      if (demoLogin) {
+        const same = (a: string, b: string) => {
+          const x = createHash("sha256").update(a).digest();
+          const y = createHash("sha256").update(b).digest();
+          return timingSafeEqual(x, y);
+        };
+        if (
+          !same(body.loginId ?? "", demoLogin.id) ||
+          !same(body.password ?? "", demoLogin.password)
+        )
+          throw new ApiError(
+            401,
+            "INVALID_LOGIN",
+            "Incorrect login ID or password",
+          );
+      }
+      res.json(await devToken(config, body.userId, pool));
+    },
   );
   // One authenticator instance keeps the remote OIDC key set cached across requests.
   // Creating it per request would download the JWKS on every session check.
@@ -197,6 +226,7 @@ export function createApp(
         res.json({
           mode: config.env === "production" ? "oidc" : "dev",
           user: null,
+          loginRequired: Boolean(demoLogin),
         });
         return;
       }

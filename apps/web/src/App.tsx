@@ -17,7 +17,12 @@ import type { User } from "./types";
 import { ErrorBox, ToastHost } from "./ui";
 import { Copilot, CopilotProvider } from "./Copilot";
 
-type Session = { user: User | null; mode: "dev" | "oidc" };
+type Session = {
+  user: User | null;
+  mode: "dev" | "oidc";
+  loginRequired?: boolean;
+};
+type Credentials = { loginId: string; password: string };
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
   const [error, setError] = useState<Error | null>(null);
@@ -34,6 +39,8 @@ export default function App() {
   const [rtl, setRtl] = useState(false);
   const [hasUnsaved, setHasUnsaved] = useState(false);
   const routeRef=useRef(requestedPath),dirtyRef=useRef(false);
+  // Kept in memory only, so switching demo roles after sign-in does not ask again.
+  const credsRef = useRef<Credentials | undefined>(undefined);
   useEffect(() => {
     document.documentElement.dataset.theme = dark ? "dark" : "light";
     localStorage.setItem("p360-theme", dark ? "dark" : "light");
@@ -128,7 +135,7 @@ export default function App() {
     setPath(next);
     window.scrollTo({ top: 0, behavior: "instant" });
   }
-  async function devLogin(userId: string) {
+  async function devLogin(userId: string, credentials?: Credentials) {
     if (busy) return;
     if (
       hasUnsaved &&
@@ -140,8 +147,9 @@ export default function App() {
     try {
       const result = await api<{ accessToken: string; user: User }>(
         "/auth/dev",
-        { userId },
+        { userId, ...(credentials ?? credsRef.current) },
       );
+      if (credentials) credsRef.current = credentials;
       setAccessToken(result.accessToken);
       const current = await api<Session>("/session");
       setSession(current);
@@ -179,7 +187,7 @@ export default function App() {
     setSession((s) => (s ? { ...s, user: null } : s));
   }
   if (!session?.user)
-    return <OriginalLogin mode={session?.mode} busy={busy} error={error} dark={dark} onToggleTheme={()=>setDark(!dark)} onDevLogin={devLogin} onSignIn={signIn}/>;
+    return <OriginalLogin mode={session?.mode} busy={busy} error={error} dark={dark} onToggleTheme={()=>setDark(!dark)} onDevLogin={devLogin} onSignIn={signIn} loginRequired={Boolean(session?.loginRequired)}/>;
   const user=session.user;
   const navigateLegacy=(target:string)=>navigate(legacyTarget(target));
   return <><ToastHost/><OriginalShell user={user} mode={session.mode} dark={dark} onToggleTheme={()=>setDark(!dark)} rtl={rtl} onToggleRtl={()=>setRtl(!rtl)} currentPage={path} navigate={navigate} onDevLogin={devLogin} onLogout={logout} busy={busy} hasUnsaved={hasUnsaved}>

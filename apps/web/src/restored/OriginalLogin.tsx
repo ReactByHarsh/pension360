@@ -9,17 +9,20 @@ type Props = {
   error: Error | null;
   dark: boolean;
   onToggleTheme: () => void;
-  onDevLogin: (id: string) => void | Promise<void>;
+  onDevLogin: (id: string, credentials?: { loginId: string; password: string }) => void | Promise<void>;
+  loginRequired?: boolean;
   onSignIn: () => void | Promise<void>;
 };
 
 /** Restored v6.2 login layout, using the Node application's real identity flow. */
-export function OriginalLogin({ mode, busy, error, dark, onToggleTheme, onDevLogin, onSignIn }: Props) {
+export function OriginalLogin({ mode, busy, error, dark, onToggleTheme, onDevLogin, onSignIn, loginRequired }: Props) {
   const [selected, setSelected] = useState("superadmin");
+  const [loginId, setLoginId] = useState("");
+  const [password, setPassword] = useState("");
   function submit(event: FormEvent) {
     event.preventDefault();
     if (busy) return;
-    if (mode === "dev") void onDevLogin(selected);
+    if (mode === "dev") void onDevLogin(selected, loginRequired ? { loginId, password } : undefined);
     else if (mode === "oidc") void onSignIn();
     else window.location.reload();
   }
@@ -43,6 +46,14 @@ export function OriginalLogin({ mode, busy, error, dark, onToggleTheme, onDevLog
         <h1>Sign in</h1>
         <p className="muted">Use the account provided by your administrator.</p>
         {error && <div className="notice warning" role="alert">{error.message}</div>}
+        {mode === "dev" && loginRequired && <>
+          <label className="field">Login ID
+            <input value={loginId} autoComplete="username" autoFocus required disabled={busy} onChange={(event) => setLoginId(event.target.value)} />
+          </label>
+          <label className="field">Password
+            <input type="password" value={password} autoComplete="current-password" required disabled={busy} onChange={(event) => setPassword(event.target.value)} />
+          </label>
+        </>}
         {mode === "dev" && <>
           <div className="notice warning">Demonstration environment · fictional member data</div>
           <label className="field">Development role
