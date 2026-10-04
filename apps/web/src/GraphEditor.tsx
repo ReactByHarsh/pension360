@@ -18,6 +18,7 @@ import {
 import { Play } from "lucide-react";
 import { api } from "./api";
 import { RuleAssistant } from "./RuleAssistant";
+import { NodeDrawer } from "./NodeDrawer";
 import { ConfigProvider, theme } from "antd";
 import { loader } from "@monaco-editor/react";
 import * as monaco from "monaco-editor";
@@ -60,6 +61,8 @@ export default forwardRef<
   const [simulate, setSimulate] = useState<Simulation | undefined>();
   const [running, setRunning] = useState(false);
   const [guide, setGuide] = useState("");
+  const [drawerNode, setDrawerNode] = useState<string | null>(null);
+  const pressed = useRef<{ x: number; y: number } | null>(null);
   const sampleRequest = useMemo(() => {
     const context: Record<string, unknown> = {};
     for (const m of mappings) {
@@ -256,9 +259,39 @@ export default forwardRef<
             data-testid="jdm-editor"
             onInputCapture={captureActivity}
             onChangeCapture={captureActivity}
+            onPointerDownCapture={(event) => {
+              pressed.current = { x: event.clientX, y: event.clientY };
+            }}
+            onClickCapture={(event) => {
+              const target = event.target as HTMLElement;
+              const block = target.closest<HTMLElement>(".react-flow__node");
+              if (!block) {
+                if (target.closest(".react-flow__pane")) setDrawerNode(null);
+                return;
+              }
+              // The block's own "Edit Table" / "Configure" links would open the grid tab;
+              // the drawer replaces them. The block menu keeps working.
+              if (target.closest(".ant-dropdown-trigger, [aria-haspopup]")) return;
+              const start = pressed.current;
+              const moved =
+                start &&
+                Math.hypot(event.clientX - start.x, event.clientY - start.y) > 5;
+              event.stopPropagation();
+              event.preventDefault();
+              if (!moved && block.dataset.id) setDrawerNode(block.dataset.id);
+            }}
             onPointerUpCapture={captureActivity}
             onDropCapture={captureActivity}
           >
+            {drawerNode && (
+              <NodeDrawer
+                editor={editor.current}
+                nodeId={drawerNode}
+                disabled={disabled}
+                mappings={mappings}
+                onClose={() => setDrawerNode(null)}
+              />
+            )}
             <DecisionGraph
               ref={editor}
               value={value as ComponentProps<typeof DecisionGraph>["value"]}
