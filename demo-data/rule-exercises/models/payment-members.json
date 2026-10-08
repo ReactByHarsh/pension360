@@ -1,0 +1,150 @@
+{
+  "source": {
+    "connectionId": "11111111-1111-4111-8111-111111111111",
+    "path": "/demo-source/members/{memberId}",
+    "method": "GET",
+    "bindings": [
+      {
+        "location": "path",
+        "key": "memberId",
+        "valueFrom": "memberId"
+      }
+    ]
+  },
+  "effectiveFrom": "2026-01-01",
+  "effectiveTo": null,
+  "name": "Payment evidence comparison · baisa",
+  "module": "payment",
+  "mappings": [
+    {
+      "id": "proposedBaisa",
+      "sourcePath": "/payment/proposedBaisa",
+      "targetPath": "proposedBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "approvedBaisa",
+      "sourcePath": "/payment/approvedBaisa",
+      "targetPath": "approvedBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "adjustmentBaisa",
+      "sourcePath": "/payment/authorizedAdjustmentBaisa",
+      "targetPath": "adjustmentBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "toleranceBaisa",
+      "sourcePath": "/payment/toleranceBaisa",
+      "targetPath": "toleranceBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "input",
+        "name": "REST facts",
+        "type": "inputNode",
+        "position": {
+          "x": 100,
+          "y": 200
+        }
+      },
+      {
+        "id": "decision",
+        "name": "Approved demonstration checks",
+        "type": "expressionNode",
+        "position": {
+          "x": 380,
+          "y": 200
+        },
+        "content": {
+          "expressions": [
+            {
+              "id": "expr-0",
+              "key": "differenceBaisa",
+              "value": "proposedBaisa - approvedBaisa - adjustmentBaisa"
+            },
+            {
+              "id": "expr-1",
+              "key": "status",
+              "value": "abs(proposedBaisa - approvedBaisa - adjustmentBaisa) > toleranceBaisa ? \"FINDING\" : \"CLEAR\""
+            },
+            {
+              "id": "expr-2",
+              "key": "reason",
+              "value": "abs(proposedBaisa - approvedBaisa - adjustmentBaisa) > toleranceBaisa ? \"Unexplained payment difference requires evidence review\" : \"Payment matches the supplied approval\""
+            }
+          ],
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single"
+        }
+      },
+      {
+        "id": "output",
+        "name": "Assessment",
+        "type": "outputNode",
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-input",
+        "sourceId": "input",
+        "targetId": "decision",
+        "type": "edge"
+      },
+      {
+        "id": "edge-output",
+        "sourceId": "decision",
+        "targetId": "output",
+        "type": "edge"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "clear",
+      "name": "Approved amount matches",
+      "memberId": "M001",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "CLEAR"
+    },
+    {
+      "id": "difference",
+      "name": "OMR 950 proposed, OMR 650 approved",
+      "memberId": "M005",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "adjustment",
+      "name": "Authorized adjustment reconciles",
+      "memberId": "M006",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "CLEAR"
+    },
+    {
+      "id": "outage",
+      "name": "Unavailable employer source",
+      "memberId": "M004",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    }
+  ]
+}

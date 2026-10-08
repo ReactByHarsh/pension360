@@ -10,6 +10,11 @@ export const screens: Screen[] = [...manifest.screens,
   {id:'background-jobs',title:'Background jobs',group:'Shared · Administration'},
   {id:'roles',title:'Roles & responsibilities',group:'Shared · Administration'},
   {id:'demo-center',title:'Demo center & sample PDFs',group:'Demo & Handoff'},
+  {id:'guided-demo',title:'Guided demo & data entry',group:'Demo & Handoff'},
+  {id:'rule-use-cases',title:'Runnable rule use cases',group:'Demo & Handoff'},
+  {id:'workflow-designer',title:'BPMN workflow designer',group:'Shared · Workflows'},
+  {id:'workflow-runs',title:'Workflow runs & evidence',group:'Shared · Workflows'},
+  {id:'workflow-tasks',title:'Workflow review tasks',group:'Shared · Workflows'},
 ];
 const names: Record<string,string> = {
   '01 · Retirement Readiness & Forecasting':'Retirement readiness',
@@ -20,6 +25,7 @@ const names: Record<string,string> = {
   'Shared · Analytics':'Analytics','Shared · AI & Member 360':'AI & Member 360',
   'Shared · Work & Reports':'Work & reports','Shared · Rules & Data Studio':'Rules & Data Studio',
   'Shared · Integrations':'Integrations','Shared · Administration':'Administration','Demo & Handoff':'Demo & handoff',
+  'Shared · Workflows':'Workflows',
 };
 export const groups = [...new Set(screens.map(s=>s.group))].map((group,index)=>({id:group,label:names[group]||group,index,items:screens.filter(s=>s.group===group)}));
 export const descriptions: Record<string,string> = {
@@ -36,12 +42,18 @@ export const descriptions: Record<string,string> = {
   copilot:'Ask about member evidence or published policies and inspect the cited answer.',
   'data-integrations':'Preview source changes, commit the import and follow its effects across the workspace.',
   'demo-center':'Walk through prepared scenarios and upload the supplied fictional PDF evidence.',
+  'guided-demo':'Enter or upload source data, run the relevant checks and ask questions about the records you created.',
+  'rule-use-cases':'Run sample API data through native decision models and open a new draft in the rule designer.',
+  'workflow-designer':'Design and publish versioned BPMN workflows with rule and human review steps.',
+  'workflow-runs':'Start a published workflow and inspect its saved decisions and event history.',
+  'workflow-tasks':'Complete eligible human tasks and continue the saved workflow.',
   roles:'Understand each role and hand work to an independent reviewer.',
 };
 export function screenCapability(id:string): Page {
   if (id==='access') return 'access';
   if (['roles','settings','screen-map','prototype-scope','demo-guide'].includes(id)) return 'roles';
-  if(id==='demo-center') return 'demo';
+  if(id==='demo-center'||id==='rule-use-cases'||id==='guided-demo') return 'demo';
+  if(id.startsWith('workflow-')) return 'workflows';
   if(id==='background-jobs'||id==='replay'||id==='health'||id==='ai-settings') return 'jobs';
   if(id==='audit') return 'audit';
   if(['source-governance','conflicts','provenance'].includes(id)) return 'governance';
@@ -61,6 +73,7 @@ export function screenCapability(id:string): Page {
   return 'roles';
 }
 export function allowedScreen(id:string,role:Role,mode:'dev'|'oidc') {
+  if(id==='rule-use-cases' && !['SUPER_ADMIN','ADMIN','DESIGNER','REVIEWER'].includes(role)) return false;
   if(id==='approvals' && !['SUPER_ADMIN','ADMIN','REVIEWER'].includes(role)) return false;
   if(role==='AUDITOR' && ['copilot','questions','conversations','insight-center','rule-ai'].includes(id)) return false;
   return screens.some(s=>s.id===id) && canNavigate(role,screenCapability(id),mode);
@@ -77,11 +90,12 @@ export function normalizeTarget(target:string) {
   return (legacyAliases[id]||id)+(query?'?'+query:'');
 }
 export function screenCopilot(id:string):CopilotPage|null {
+  if(id==='guided-demo') return 'members';
   if(['forecast','population','comparison'].includes(id)) return 'forecast';
   if(id.startsWith('analytics-')) return 'dashboard';
   if(['copilot','questions','conversations'].includes(id)) return 'members';
   const capability=screenCapability(id);
-  const mapping:Partial<Record<Page,CopilotPage>>={dashboard:'dashboard',members:'members',readiness:'readiness',documents:'documents',policy:'policy',contribution:'contributions',payment:'payments',cases:'cases',studio:'studio',governance:'governance'};
+  const mapping:Partial<Record<Page,CopilotPage>>={dashboard:'dashboard',members:'members',readiness:'readiness',documents:'documents',policy:'policy',contribution:'contributions',payment:'payments',cases:'cases',studio:'studio',governance:'governance',workflows:'workflows',integrations:'integrations'};
   return mapping[capability]||null;
 }
 export const studioPages = screens.filter(s=>s.group==='Shared · Rules & Data Studio').map(s=>s.id);

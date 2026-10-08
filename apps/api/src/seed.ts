@@ -7,6 +7,7 @@ import { loadConfig } from "./config.js";
 import type { RuleConfig, Mapping } from "./types.js";
 import { seedDemoPolicies } from "./demo.js";
 import { seedDemoUsers } from "./access.js";
+import { seedWorkflows } from "./workflow-seed.js";
 
 export const CONNECTION_ID = "11111111-1111-4111-8111-111111111111";
 export function expressionGraph(
@@ -541,6 +542,7 @@ export async function seed(
     }
     await seedDemoPolicies(db);
   });
+  await seedWorkflows(pool);
 }
 if (
   process.argv[1] &&

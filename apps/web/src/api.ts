@@ -40,7 +40,35 @@ export async function api<T>(
       data?.error?.requestId,
     );
   }
+  const verb = method || (body === undefined ? "GET" : "POST");
+  if (
+    !["GET", "HEAD"].includes(verb.toUpperCase()) &&
+    !/^\/(assistant(?:\/|$)|auth(?:\/|$)|session(?:\/|$))/.test(path) &&
+    typeof window !== "undefined"
+  ) {
+    window.dispatchEvent(new CustomEvent("p360-data-changed", { detail: { path, method: verb } }));
+  }
   return data as T;
+}
+
+/** Download a member-matched demonstration document using the same signed-in API session. */
+export async function getGuidedSampleDocument(
+  batchId: string,
+  memberId: string,
+  kind: "profile" | "payment" | "contribution" | "service",
+): Promise<File> {
+  const response = await fetch(`/api/v1/guided-demo/batches/${encodeURIComponent(batchId)}/members/${encodeURIComponent(memberId)}/sample-document?kind=${kind}`, {
+    headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+    credentials: "same-origin",
+  });
+  if (!response.ok) {
+    const data = await response.json().catch(() => null);
+    throw new ApiError(data?.error?.message || "The matching sample document could not be downloaded.", response.status);
+  }
+  const blob = await response.blob();
+  if (!blob.type.startsWith("application/pdf") || blob.size > 5 * 1024 * 1024)
+    throw new Error("The sample response is not a supported PDF.");
+  return new File([blob], `Pension360_${memberId.replace(/[^A-Za-z0-9_-]/g, "_")}_${kind}_sample.pdf`, { type: "application/pdf" });
 }
 export async function downloadDocument(id: string, title: string) {
   const response = await fetch(

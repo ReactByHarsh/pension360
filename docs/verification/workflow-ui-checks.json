@@ -1,0 +1,39 @@
+{
+  "scope": "Real Chromium UI + real BPMN modeler/parser; mocked HTTP state (not a database/runtime integration test)",
+  "passed": true,
+  "checks": [
+    "real seed diagram rendered",
+    "published rule assignment and save request",
+    "gateway condition form",
+    "independent author publication restriction",
+    "reviewer publication request",
+    "configuration export",
+    "start request member/date",
+    "current node highlight",
+    "reviewer completion request and progress",
+    "read-only auditor",
+    "430px viewport without horizontal overflow"
+  ],
+  "mutationRequests": [
+    {
+      "method": "PATCH",
+      "endpoint": "/workflows/definitions/f3600000-0000-4000-8000-000000008101"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/workflows/validate"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/workflows/definitions/f3600000-0000-4000-8000-000000008101/publish"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/workflows/instances"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/workflows/tasks/d3600000-0000-4000-8000-000000000222/complete"
+    }
+  ]
+}

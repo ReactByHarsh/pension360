@@ -1076,7 +1076,8 @@ function CopilotIntro({ page, memberId }: { page: string; memberId: string }) {
           </div>
         </div>
         <p className="muted">
-          The demo question picker below fills supported examples. Preview
+          Choose a module and member below. Suggested questions use their saved
+          records and show which evidence is available or still missing. Preview
           evidence works even when an AI provider is not configured.
         </p>
       </Card>

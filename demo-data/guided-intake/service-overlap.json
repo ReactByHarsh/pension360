@@ -1,0 +1,29 @@
+{
+  "name": "Service overlap and unverified months",
+  "sourceSystem": "Pension / ERP (demonstration)",
+  "importMethod": "JSON",
+  "isSample": true,
+  "rows": [
+    {
+      "externalReference": "FICTIONAL-PEN-1005",
+      "name": "Nasser Al Wahaibi",
+      "nameAr": "ناصر الوهيبي",
+      "organization": "Fictional Pension Demonstration Organization",
+      "dateOfBirth": "1966-03-10",
+      "dateOfJoining": "1991-06-01",
+      "expectedRetirementDate": "2026-11-20",
+      "pensionJoiningDate": "1991-06-01",
+      "employerJoiningDate": "1991-06-01",
+      "serviceVerified": false,
+      "missingDocuments": 0,
+      "proposedBaisa": 650000,
+      "approvedBaisa": 650000,
+      "adjustmentBaisa": 0,
+      "toleranceBaisa": 0,
+      "expectedBaisa": 120000,
+      "receivedBaisa": 120000,
+      "overlapMonths": 3,
+      "unverifiedMonths": 6
+    }
+  ]
+}

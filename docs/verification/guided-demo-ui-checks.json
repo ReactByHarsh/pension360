@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "scope": "Real Chromium components with mocked HTTP and real source-input validation; not PostgreSQL persistence, live AI or OCR.",
+  "checks": [
+    "All 16 relevant business/shared module guides render",
+    "Sample populates editable form and real server validator receives typed modified facts",
+    "Editing a checked fact invalidates the saved preview",
+    "Fresh saved member ID flows into real batch assessment request; saved response displayed",
+    "Member-matched PDF explicitly prepared then uploaded; actual QUEUED status is not treated as verified",
+    "Published workflow receives selected saved member and assessment date",
+    "Copilot question scope follows actual saved member and selected module",
+    "CSV upload rejects invalid types and preserves false/whole-number facts",
+    "Bounded per-member requests display partial completion and refresh saved results after error",
+    "Changing the selected member clears prepared document and title",
+    "Late response from previous batch does not replace selected batch records",
+    "Theme tokens and narrow viewport have no page overflow",
+    "Auditor UI exposes saved evidence and prevents intake, assessment, upload and workflow mutation"
+  ],
+  "mutationRequests": [
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/preview"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/preview"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/commit"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/batches/batch-1/assess"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/documents"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/workflows/instances"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/preview"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/commit"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/guided-demo/batches/batch-2/assess"
+    },
+    {
+      "endpoint": "/guided-demo/batches/batch-2/assess"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "endpoint": "/assistant/suggestions"
+    }
+  ]
+}

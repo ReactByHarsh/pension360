@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "runtime": "PGlite PostgreSQL WASM supplemental sequential SQL/HTTP/native-ZEN check; NOT native PostgreSQL 18.6 or concurrency verification",
+  "concurrencyTested": false,
+  "provider": "explicit-acceptance-provider-double",
+  "liveAiTested": false,
+  "liveOcrTested": false,
+  "checks": [
+    "Catalog requires authentication and provides read-only access for an auditor",
+    "Existing four native ZEN models pass scenarios and independent publication",
+    "Invalid dates cannot create records and preview is non-mutating",
+    "Reviewer and auditor cannot commit source data",
+    "Stale preview cannot commit edited values",
+    "Commit creates a separate batch and repeated request does not duplicate it",
+    "Uploaded source provenance is retained and records appear in normal member APIs",
+    "Four English document downloads use the actual batch member and retain unverified-copy provenance",
+    "Questions use the selected imported amounts and disable unavailable rule/document evidence",
+    "All four modules use the imported REST facts, persist native results, and create real findings",
+    "Repeated batch assessments reuse evidence and do not inflate dashboards",
+    "Live assessment permissions and source-connection validation cannot be bypassed by guided intake",
+    "Forecast reads imported expected retirement dates",
+    "Copilot provider receives real saved assessment evidence and only known citation IDs",
+    "Document upload and manual transcription retain origin without exposing unverified values to Copilot",
+    "Independent verification exposes cited evidence and does not rewrite source facts",
+    "All 13 Copilot modules expose questions with real references or explicit prerequisites",
+    "Draft policy text is excluded and independently published guidance becomes available",
+    "Governance questions refer to recorded conflicts instead of inventing authority",
+    "Saved workflow/task context follows the imported member through independent review",
+    "Missing optional imported values remain missing and cannot produce a false clear result"
+  ],
+  "importedMemberId": "DEMO_b3dea802f3c7455fa5db96a40c013a1e_1",
+  "batchId": "b3dea802-f3c7-455f-a5db-96a40c013a1e"
+}

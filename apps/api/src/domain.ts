@@ -9,6 +9,7 @@ import { memberIdSchema, uuidSchema, dateSchema } from "./validation.js";
 import { listPage } from "./pagination.js";
 import { ruleDto } from "./rules.js";
 import { copilotInputSchema, prepareCopilotContext } from "./copilot.js";
+import { registerCopilotSuggestionRoutes } from "./copilot-suggestions.js";
 import { demoCatalog } from "./demo.js";
 import { registerDemoAssetRoutes } from "./demo-assets.js";
 import { scanContent } from "./jobs.js";
@@ -117,6 +118,7 @@ export function registerDomainRoutes(
 ) {
   const { pool } = deps;
   registerDemoAssetRoutes(router, deps);
+  registerCopilotSuggestionRoutes(router, deps, forecastCounts);
   if (deps.config.env !== "production")
     router.get("/demo/copilot", async (_req, res) => {
       const states = (

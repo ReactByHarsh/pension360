@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "scope": "Real Chromium and actual JDM canvas; mocked HTTP/repository state with native graph results for UI fixtures. Not PostgreSQL persistence.",
+  "checks": [
+    "9 use cases load",
+    "12 scenario results and evidence export",
+    "single sample sends selected scenario ID",
+    "expected error/no-trace explanation",
+    "regression mismatch visible",
+    "503 request failure feedback and retry enabled",
+    "valid separate draft POST",
+    "real JDM switch graph opens",
+    "reviewer has no create action",
+    "dark mode follows application tokens"
+  ],
+  "mutationRequests": [
+    {
+      "method": "POST",
+      "endpoint": "/rule-exercises/payment-routing/run"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/rule-exercises/payment-routing/run"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/rule-exercises/payment-routing/run"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/rule-exercises/payment-routing/run"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/rules"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/assistant/suggestions"
+    },
+    {
+      "method": "POST",
+      "endpoint": "/assistant/suggestions"
+    }
+  ]
+}

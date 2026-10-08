@@ -20,6 +20,10 @@ import { validateOrigin } from "./source.js";
 import { registerRuleRoutes, evaluationDto } from "./rules.js";
 import { registerDemoApiPublic, registerDemoApiRoutes } from "./demo-apis.js";
 import { registerRuleAiRoutes } from "./rule-ai.js";
+import { registerWorkflowRoutes } from "./workflows.js";
+import { registerGuidedDemoRoutes } from "./guided-demo.js";
+import { registerGuidedDocumentRoutes } from "./guided-demo-documents.js";
+import { registerRuleExercisePublic, registerRuleExerciseRoutes } from "./rule-exercises.js";
 import { memberIdSchema, uuidSchema } from "./validation.js";
 import { listPage, pagination } from "./pagination.js";
 import { registerWorkspaceRoutes } from "./workspace.js";
@@ -115,6 +119,7 @@ export function createApp(
   app.use(helmet());
   app.use(express.json({ limit: "15mb" }));
   registerDemoIntake(app, deps);
+  registerRuleExercisePublic(app, deps);
   app.get("/health/live", (_req, res) => res.json({ status: "ok" }));
   app.get("/health/ready", async (_req, res) => {
     try {
@@ -244,6 +249,10 @@ export function createApp(
   registerWorkspaceRoutes(router, deps);
   registerOriginalUiRoutes(router, pool);
   registerCaseManagementRoutes(router, deps);
+  registerWorkflowRoutes(router, deps);
+  registerGuidedDemoRoutes(router, deps);
+  registerGuidedDocumentRoutes(router, deps);
+  registerRuleExerciseRoutes(router, deps);
   router.get("/connections", async (req, res) =>
     res.json(
       await listPage(

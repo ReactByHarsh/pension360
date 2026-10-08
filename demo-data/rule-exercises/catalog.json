@@ -1,0 +1,2779 @@
+[
+  {
+    "id": "readiness-members",
+    "title": "Retirement file readiness · demonstration",
+    "summary": "Run the existing readiness demonstration model against current stored fictional member records. Changes to those records can legitimately change these results.",
+    "sourceKind": "stored-members",
+    "learning": [
+      "Fetch actual configured REST response",
+      "Inspect mapped facts and native engine trace",
+      "Compare expectations without changing published rules or member facts"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/members/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Retirement file readiness · demonstration",
+      "module": "readiness",
+      "mappings": [
+        {
+          "id": "dateOfBirth",
+          "sourcePath": "/person/dateOfBirth",
+          "targetPath": "dateOfBirth",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "ageYears",
+          "sourcePath": "/person/dateOfBirth",
+          "targetPath": "ageYears",
+          "type": "number",
+          "required": true,
+          "transform": "ageYears"
+        },
+        {
+          "id": "pensionJoiningDate",
+          "sourcePath": "/pension/joiningDate",
+          "targetPath": "pensionJoiningDate",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "employerJoiningDate",
+          "sourcePath": "/employer/joiningDate",
+          "targetPath": "employerJoiningDate",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "serviceVerified",
+          "sourcePath": "/pension/serviceVerified",
+          "targetPath": "serviceVerified",
+          "type": "boolean",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "missingDocuments",
+          "sourcePath": "/documents/missingCount",
+          "targetPath": "missingDocuments",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "Mapped REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 80,
+              "y": 220
+            }
+          },
+          {
+            "id": "compare",
+            "name": "Compare source joining dates",
+            "type": "expressionNode",
+            "position": {
+              "x": 350,
+              "y": 220
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "matching-dates",
+                  "key": "datesMatch",
+                  "value": "pensionJoiningDate == employerJoiningDate"
+                }
+              ],
+              "passThrough": true,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Readiness decision table",
+            "type": "decisionTableNode",
+            "position": {
+              "x": 640,
+              "y": 220
+            },
+            "content": {
+              "hitPolicy": "first",
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "inputs": [
+                {
+                  "id": "verified",
+                  "name": "Service verified",
+                  "field": "serviceVerified",
+                  "fieldType": {
+                    "type": "boolean"
+                  }
+                },
+                {
+                  "id": "missing",
+                  "name": "Missing mandatory documents",
+                  "field": "missingDocuments",
+                  "fieldType": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "id": "dates",
+                  "name": "Joining dates match",
+                  "field": "datesMatch",
+                  "fieldType": {
+                    "type": "boolean"
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "status",
+                  "name": "Review outcome",
+                  "field": "status",
+                  "outputFieldType": {
+                    "type": "string",
+                    "enum": {
+                      "type": "inline",
+                      "values": [
+                        {
+                          "label": "Ready for review",
+                          "value": "READY_FOR_REVIEW"
+                        },
+                        {
+                          "label": "Needs verification",
+                          "value": "NEEDS_VERIFICATION"
+                        },
+                        {
+                          "label": "Unable to evaluate",
+                          "value": "UNABLE_TO_EVALUATE"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "reason",
+                  "name": "Explanation for officer",
+                  "field": "reason",
+                  "outputFieldType": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "_id": "dates-differ",
+                  "verified": "",
+                  "missing": "",
+                  "dates": "false",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Joining dates differ between sources\""
+                },
+                {
+                  "_id": "documents-missing",
+                  "verified": "",
+                  "missing": "> 0",
+                  "dates": "",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Mandatory evidence is missing\""
+                },
+                {
+                  "_id": "service-unverified",
+                  "verified": "false",
+                  "missing": "",
+                  "dates": "",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Service needs verification\""
+                },
+                {
+                  "_id": "ready",
+                  "verified": "true",
+                  "missing": "0",
+                  "dates": "true",
+                  "status": "\"READY_FOR_REVIEW\"",
+                  "reason": "\"All configured checks passed\""
+                },
+                {
+                  "_id": "otherwise",
+                  "verified": "",
+                  "missing": "",
+                  "dates": "",
+                  "status": "\"UNABLE_TO_EVALUATE\"",
+                  "reason": "\"No approved readiness condition matched\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "output",
+            "name": "Evidence-linked review outcome",
+            "type": "outputNode",
+            "position": {
+              "x": 970,
+              "y": 220
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "input-compare",
+            "sourceId": "input",
+            "targetId": "compare",
+            "type": "edge"
+          },
+          {
+            "id": "compare-table",
+            "sourceId": "compare",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "table-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "ready",
+          "name": "Ahmed complete record",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "READY_FOR_REVIEW"
+        },
+        {
+          "id": "conflict",
+          "name": "Salim conflicting joining dates",
+          "memberId": "M002",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "missing",
+          "name": "Maryam missing confirmation",
+          "memberId": "M003",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "unavailable",
+          "name": "Khalid source unavailable",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "ready",
+        "name": "Ahmed complete record",
+        "memberId": "M001",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "READY_FOR_REVIEW",
+        "explanation": "Ahmed complete record"
+      },
+      {
+        "id": "conflict",
+        "name": "Salim conflicting joining dates",
+        "memberId": "M002",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "explanation": "Salim conflicting joining dates"
+      },
+      {
+        "id": "missing",
+        "name": "Maryam missing confirmation",
+        "memberId": "M003",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "explanation": "Maryam missing confirmation"
+      },
+      {
+        "id": "unavailable",
+        "name": "Khalid source unavailable",
+        "memberId": "M004",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "explanation": "Khalid source unavailable",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "payment-members",
+    "title": "Payment evidence comparison · baisa",
+    "summary": "Run the existing payment demonstration model against current stored fictional member records. Changes to those records can legitimately change these results.",
+    "sourceKind": "stored-members",
+    "learning": [
+      "Fetch actual configured REST response",
+      "Inspect mapped facts and native engine trace",
+      "Compare expectations without changing published rules or member facts"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/members/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Payment evidence comparison · baisa",
+      "module": "payment",
+      "mappings": [
+        {
+          "id": "proposedBaisa",
+          "sourcePath": "/payment/proposedBaisa",
+          "targetPath": "proposedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "approvedBaisa",
+          "sourcePath": "/payment/approvedBaisa",
+          "targetPath": "approvedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "adjustmentBaisa",
+          "sourcePath": "/payment/authorizedAdjustmentBaisa",
+          "targetPath": "adjustmentBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "toleranceBaisa",
+          "sourcePath": "/payment/toleranceBaisa",
+          "targetPath": "toleranceBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 100,
+              "y": 200
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Approved demonstration checks",
+            "type": "expressionNode",
+            "position": {
+              "x": 380,
+              "y": 200
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "expr-0",
+                  "key": "differenceBaisa",
+                  "value": "proposedBaisa - approvedBaisa - adjustmentBaisa"
+                },
+                {
+                  "id": "expr-1",
+                  "key": "status",
+                  "value": "abs(proposedBaisa - approvedBaisa - adjustmentBaisa) > toleranceBaisa ? \"FINDING\" : \"CLEAR\""
+                },
+                {
+                  "id": "expr-2",
+                  "key": "reason",
+                  "value": "abs(proposedBaisa - approvedBaisa - adjustmentBaisa) > toleranceBaisa ? \"Unexplained payment difference requires evidence review\" : \"Payment matches the supplied approval\""
+                }
+              ],
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "output",
+            "name": "Assessment",
+            "type": "outputNode",
+            "position": {
+              "x": 700,
+              "y": 200
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-input",
+            "sourceId": "input",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "edge-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "clear",
+          "name": "Approved amount matches",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "difference",
+          "name": "OMR 950 proposed, OMR 650 approved",
+          "memberId": "M005",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "adjustment",
+          "name": "Authorized adjustment reconciles",
+          "memberId": "M006",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "outage",
+          "name": "Unavailable employer source",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "clear",
+        "name": "Approved amount matches",
+        "memberId": "M001",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "CLEAR",
+        "explanation": "Approved amount matches",
+        "expectedOutput": {
+          "differenceBaisa": 0
+        }
+      },
+      {
+        "id": "difference",
+        "name": "OMR 950 proposed, OMR 650 approved",
+        "memberId": "M005",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "FINDING",
+        "explanation": "OMR 950 proposed, OMR 650 approved",
+        "expectedOutput": {
+          "differenceBaisa": 300000
+        }
+      },
+      {
+        "id": "adjustment",
+        "name": "Authorized adjustment reconciles",
+        "memberId": "M006",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "CLEAR",
+        "explanation": "Authorized adjustment reconciles",
+        "expectedOutput": {
+          "differenceBaisa": 0
+        }
+      },
+      {
+        "id": "outage",
+        "name": "Unavailable employer source",
+        "memberId": "M004",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Source HTTP 503 must remain an evidence failure, never a business pass.",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "contribution-members",
+    "title": "Contribution reconciliation · baisa",
+    "summary": "Run the existing contribution demonstration model against current stored fictional member records. Changes to those records can legitimately change these results.",
+    "sourceKind": "stored-members",
+    "learning": [
+      "Fetch actual configured REST response",
+      "Inspect mapped facts and native engine trace",
+      "Compare expectations without changing published rules or member facts"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/members/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Contribution reconciliation · baisa",
+      "module": "contribution",
+      "mappings": [
+        {
+          "id": "expectedBaisa",
+          "sourcePath": "/contribution/expectedBaisa",
+          "targetPath": "expectedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "receivedBaisa",
+          "sourcePath": "/contribution/receivedBaisa",
+          "targetPath": "receivedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 100,
+              "y": 200
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Approved demonstration checks",
+            "type": "expressionNode",
+            "position": {
+              "x": 380,
+              "y": 200
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "expr-0",
+                  "key": "differenceBaisa",
+                  "value": "expectedBaisa - receivedBaisa"
+                },
+                {
+                  "id": "expr-1",
+                  "key": "status",
+                  "value": "expectedBaisa == receivedBaisa ? \"CLEAR\" : \"FINDING\""
+                },
+                {
+                  "id": "expr-2",
+                  "key": "reason",
+                  "value": "expectedBaisa == receivedBaisa ? \"Contributions reconcile\" : \"Contribution difference requires reconciliation\""
+                }
+              ],
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "output",
+            "name": "Assessment",
+            "type": "outputNode",
+            "position": {
+              "x": 700,
+              "y": 200
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-input",
+            "sourceId": "input",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "edge-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "clear",
+          "name": "Matching receipt",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "gap",
+          "name": "Unmatched contribution",
+          "memberId": "M007",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "second-clear",
+          "name": "Second matching receipt",
+          "memberId": "M008",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "outage",
+          "name": "Unavailable employer source",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "clear",
+        "name": "Matching receipt",
+        "memberId": "M001",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "CLEAR",
+        "explanation": "Matching receipt",
+        "expectedOutput": {
+          "differenceBaisa": 0
+        }
+      },
+      {
+        "id": "gap",
+        "name": "Unmatched contribution",
+        "memberId": "M007",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "FINDING",
+        "explanation": "Unmatched contribution",
+        "expectedOutput": {
+          "differenceBaisa": 30000
+        }
+      },
+      {
+        "id": "second-clear",
+        "name": "Second matching receipt",
+        "memberId": "M008",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "CLEAR",
+        "explanation": "Second matching receipt",
+        "expectedOutput": {
+          "differenceBaisa": 0
+        }
+      },
+      {
+        "id": "outage",
+        "name": "Unavailable employer source",
+        "memberId": "M004",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Source HTTP 503 must remain an evidence failure, never a business pass.",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "service-members",
+    "title": "Service evidence consistency",
+    "summary": "Run the existing service demonstration model against current stored fictional member records. Changes to those records can legitimately change these results.",
+    "sourceKind": "stored-members",
+    "learning": [
+      "Fetch actual configured REST response",
+      "Inspect mapped facts and native engine trace",
+      "Compare expectations without changing published rules or member facts"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/members/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Service evidence consistency",
+      "module": "service",
+      "mappings": [
+        {
+          "id": "overlapMonths",
+          "sourcePath": "/service/overlapMonths",
+          "targetPath": "overlapMonths",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "unverifiedMonths",
+          "sourcePath": "/service/unverifiedMonths",
+          "targetPath": "unverifiedMonths",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 100,
+              "y": 200
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Approved demonstration checks",
+            "type": "expressionNode",
+            "position": {
+              "x": 380,
+              "y": 200
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "expr-0",
+                  "key": "status",
+                  "value": "overlapMonths > 0 or unverifiedMonths > 0 ? \"FINDING\" : \"CLEAR\""
+                },
+                {
+                  "id": "expr-1",
+                  "key": "reason",
+                  "value": "overlapMonths > 0 ? \"Overlapping service periods require investigation\" : (unverifiedMonths > 0 ? \"Service months await verification\" : \"Configured service checks passed\")"
+                }
+              ],
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "output",
+            "name": "Assessment",
+            "type": "outputNode",
+            "position": {
+              "x": 700,
+              "y": 200
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-input",
+            "sourceId": "input",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "edge-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "clear",
+          "name": "Verified continuous service",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "overlap",
+          "name": "Overlapping service",
+          "memberId": "M009",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "unverified",
+          "name": "Unverified service",
+          "memberId": "M010",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "outage",
+          "name": "Unavailable employer source",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "clear",
+        "name": "Verified continuous service",
+        "memberId": "M001",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "CLEAR",
+        "explanation": "Verified continuous service"
+      },
+      {
+        "id": "overlap",
+        "name": "Overlapping service",
+        "memberId": "M009",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "FINDING",
+        "explanation": "Overlapping service"
+      },
+      {
+        "id": "unverified",
+        "name": "Unverified service",
+        "memberId": "M010",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "FINDING",
+        "explanation": "Unverified service"
+      },
+      {
+        "id": "outage",
+        "name": "Unavailable employer source",
+        "memberId": "M004",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Source HTTP 503 must remain an evidence failure, never a business pass.",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "payment-routing",
+    "title": "Payment tolerance and senior-review branches",
+    "summary": "A real switch graph routes reconciled, officer-review, senior-review and invalid-data outcomes. The OMR 100 threshold is fictional.",
+    "sourceKind": "isolated-fixture",
+    "learning": [
+      "Change branches in the visual switch grid",
+      "Use source-bound baisa amounts",
+      "Test equality boundaries, shortfalls, invalid types and outages"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/exercises/payment-routing/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Payment tolerance and senior-review branches",
+      "module": "payment",
+      "mappings": [
+        {
+          "id": "proposedBaisa",
+          "sourcePath": "/payment/proposedBaisa",
+          "targetPath": "proposedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "approvedBaisa",
+          "sourcePath": "/payment/approvedBaisa",
+          "targetPath": "approvedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "adjustmentBaisa",
+          "sourcePath": "/payment/authorizedAdjustmentBaisa",
+          "targetPath": "adjustmentBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "toleranceBaisa",
+          "sourcePath": "/payment/toleranceBaisa",
+          "targetPath": "toleranceBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "Mapped payment facts",
+            "type": "inputNode",
+            "position": {
+              "x": 40,
+              "y": 240
+            }
+          },
+          {
+            "id": "difference",
+            "name": "Compute difference in baisa",
+            "type": "expressionNode",
+            "position": {
+              "x": 300,
+              "y": 240
+            },
+            "content": {
+              "passThrough": true,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "expressions": [
+                {
+                  "id": "difference-0",
+                  "key": "differenceBaisa",
+                  "value": "proposedBaisa - approvedBaisa - adjustmentBaisa"
+                }
+              ]
+            }
+          },
+          {
+            "id": "route",
+            "name": "Payment review branches",
+            "type": "switchNode",
+            "position": {
+              "x": 590,
+              "y": 240
+            },
+            "content": {
+              "hitPolicy": "first",
+              "statements": [
+                {
+                  "id": "invalid",
+                  "condition": "proposedBaisa < 0 or approvedBaisa < 0 or toleranceBaisa < 0 or floor(proposedBaisa) != proposedBaisa or floor(approvedBaisa) != approvedBaisa or floor(adjustmentBaisa) != adjustmentBaisa or floor(toleranceBaisa) != toleranceBaisa",
+                  "isDefault": false
+                },
+                {
+                  "id": "clear",
+                  "condition": "abs(differenceBaisa) <= toleranceBaisa",
+                  "isDefault": false
+                },
+                {
+                  "id": "senior",
+                  "condition": "abs(differenceBaisa) >= 100000",
+                  "isDefault": false
+                },
+                {
+                  "id": "review",
+                  "condition": "",
+                  "isDefault": true
+                }
+              ]
+            }
+          },
+          {
+            "id": "invalid-result",
+            "name": "SOURCE CORRECTION",
+            "type": "expressionNode",
+            "position": {
+              "x": 870,
+              "y": 0
+            },
+            "content": {
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "expressions": [
+                {
+                  "id": "invalid-result-0",
+                  "key": "status",
+                  "value": "\"UNABLE_TO_EVALUATE\""
+                },
+                {
+                  "id": "invalid-result-1",
+                  "key": "route",
+                  "value": "\"SOURCE_CORRECTION\""
+                },
+                {
+                  "id": "invalid-result-2",
+                  "key": "differenceBaisa",
+                  "value": "differenceBaisa"
+                },
+                {
+                  "id": "invalid-result-3",
+                  "key": "requiresSeniorReview",
+                  "value": "false"
+                },
+                {
+                  "id": "invalid-result-4",
+                  "key": "reason",
+                  "value": "\"Amounts must be whole baisa; proposed, approved and tolerance amounts cannot be negative\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "clear-result",
+            "name": "RECONCILED",
+            "type": "expressionNode",
+            "position": {
+              "x": 870,
+              "y": 180
+            },
+            "content": {
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "expressions": [
+                {
+                  "id": "clear-result-0",
+                  "key": "status",
+                  "value": "\"CLEAR\""
+                },
+                {
+                  "id": "clear-result-1",
+                  "key": "route",
+                  "value": "\"RECONCILED\""
+                },
+                {
+                  "id": "clear-result-2",
+                  "key": "differenceBaisa",
+                  "value": "differenceBaisa"
+                },
+                {
+                  "id": "clear-result-3",
+                  "key": "requiresSeniorReview",
+                  "value": "false"
+                },
+                {
+                  "id": "clear-result-4",
+                  "key": "reason",
+                  "value": "\"Difference is within the configured tolerance\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "senior-result",
+            "name": "SENIOR REVIEW",
+            "type": "expressionNode",
+            "position": {
+              "x": 870,
+              "y": 360
+            },
+            "content": {
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "expressions": [
+                {
+                  "id": "senior-result-0",
+                  "key": "status",
+                  "value": "\"FINDING\""
+                },
+                {
+                  "id": "senior-result-1",
+                  "key": "route",
+                  "value": "\"SENIOR_REVIEW\""
+                },
+                {
+                  "id": "senior-result-2",
+                  "key": "differenceBaisa",
+                  "value": "differenceBaisa"
+                },
+                {
+                  "id": "senior-result-3",
+                  "key": "requiresSeniorReview",
+                  "value": "true"
+                },
+                {
+                  "id": "senior-result-4",
+                  "key": "reason",
+                  "value": "\"Difference of at least OMR 100 requires senior review in this fictional exercise\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "review-result",
+            "name": "OFFICER REVIEW",
+            "type": "expressionNode",
+            "position": {
+              "x": 870,
+              "y": 540
+            },
+            "content": {
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "expressions": [
+                {
+                  "id": "review-result-0",
+                  "key": "status",
+                  "value": "\"FINDING\""
+                },
+                {
+                  "id": "review-result-1",
+                  "key": "route",
+                  "value": "\"OFFICER_REVIEW\""
+                },
+                {
+                  "id": "review-result-2",
+                  "key": "differenceBaisa",
+                  "value": "differenceBaisa"
+                },
+                {
+                  "id": "review-result-3",
+                  "key": "requiresSeniorReview",
+                  "value": "false"
+                },
+                {
+                  "id": "review-result-4",
+                  "key": "reason",
+                  "value": "\"Difference exceeds tolerance and needs evidence review\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "output",
+            "name": "Traceable review outcome",
+            "type": "outputNode",
+            "position": {
+              "x": 1180,
+              "y": 240
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "input-difference",
+            "sourceId": "input",
+            "targetId": "difference",
+            "type": "edge"
+          },
+          {
+            "id": "difference-route",
+            "sourceId": "difference",
+            "targetId": "route",
+            "type": "edge"
+          },
+          {
+            "id": "invalid-branch",
+            "sourceId": "route",
+            "sourceHandle": "invalid",
+            "targetId": "invalid-result",
+            "type": "edge"
+          },
+          {
+            "id": "invalid-output",
+            "sourceId": "invalid-result",
+            "targetId": "output",
+            "type": "edge"
+          },
+          {
+            "id": "clear-branch",
+            "sourceId": "route",
+            "sourceHandle": "clear",
+            "targetId": "clear-result",
+            "type": "edge"
+          },
+          {
+            "id": "clear-output",
+            "sourceId": "clear-result",
+            "targetId": "output",
+            "type": "edge"
+          },
+          {
+            "id": "senior-branch",
+            "sourceId": "route",
+            "sourceHandle": "senior",
+            "targetId": "senior-result",
+            "type": "edge"
+          },
+          {
+            "id": "senior-output",
+            "sourceId": "senior-result",
+            "targetId": "output",
+            "type": "edge"
+          },
+          {
+            "id": "review-branch",
+            "sourceId": "route",
+            "sourceHandle": "review",
+            "targetId": "review-result",
+            "type": "edge"
+          },
+          {
+            "id": "review-output",
+            "sourceId": "review-result",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "large",
+          "name": "OMR 300 unexplained difference",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "at-senior",
+          "name": "Exactly OMR 100",
+          "memberId": "M002",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "below-senior",
+          "name": "One baisa below OMR 100",
+          "memberId": "M003",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "at-tolerance",
+          "name": "Exactly 100-baisa tolerance",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "over-tolerance",
+          "name": "One baisa over tolerance",
+          "memberId": "M005",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "adjusted",
+          "name": "Authorized adjustment",
+          "memberId": "M006",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "negative-difference",
+          "name": "Proposed below approved",
+          "memberId": "M007",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "negative-tolerance",
+          "name": "Invalid negative tolerance",
+          "memberId": "M008",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "missing-approval",
+          "name": "Missing approved amount",
+          "memberId": "M009",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "fractional-baisa",
+          "name": "Fractional baisa",
+          "memberId": "M010",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "source-outage",
+          "name": "HTTP source unavailable",
+          "memberId": "M011",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "invalid-number",
+          "name": "Nonnumeric proposed amount",
+          "memberId": "M012",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "large",
+        "name": "OMR 300 unexplained difference",
+        "memberId": "M001",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "300,000 baisa follows senior review.",
+        "expectedOutput": {
+          "differenceBaisa": 300000,
+          "route": "SENIOR_REVIEW",
+          "requiresSeniorReview": true
+        }
+      },
+      {
+        "id": "at-senior",
+        "name": "Exactly OMR 100",
+        "memberId": "M002",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Inclusive senior boundary.",
+        "expectedOutput": {
+          "differenceBaisa": 100000,
+          "route": "SENIOR_REVIEW",
+          "requiresSeniorReview": true
+        }
+      },
+      {
+        "id": "below-senior",
+        "name": "One baisa below OMR 100",
+        "memberId": "M003",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "99,999 baisa follows officer review.",
+        "expectedOutput": {
+          "differenceBaisa": 99999,
+          "route": "OFFICER_REVIEW",
+          "requiresSeniorReview": false
+        }
+      },
+      {
+        "id": "at-tolerance",
+        "name": "Exactly 100-baisa tolerance",
+        "memberId": "M004",
+        "expectedStatus": "CLEAR",
+        "assessmentDate": "2026-10-06",
+        "explanation": "At the tolerance is reconciled.",
+        "expectedOutput": {
+          "differenceBaisa": 100,
+          "route": "RECONCILED"
+        }
+      },
+      {
+        "id": "over-tolerance",
+        "name": "One baisa over tolerance",
+        "memberId": "M005",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "101 exceeds the 100-baisa tolerance.",
+        "expectedOutput": {
+          "differenceBaisa": 101,
+          "route": "OFFICER_REVIEW"
+        }
+      },
+      {
+        "id": "adjusted",
+        "name": "Authorized adjustment",
+        "memberId": "M006",
+        "expectedStatus": "CLEAR",
+        "assessmentDate": "2026-10-06",
+        "explanation": "700,000 − 650,000 − 50,000 = 0.",
+        "expectedOutput": {
+          "differenceBaisa": 0,
+          "route": "RECONCILED"
+        }
+      },
+      {
+        "id": "negative-difference",
+        "name": "Proposed below approved",
+        "memberId": "M007",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Absolute difference routes a shortfall too.",
+        "expectedOutput": {
+          "differenceBaisa": -100000,
+          "route": "SENIOR_REVIEW"
+        }
+      },
+      {
+        "id": "negative-tolerance",
+        "name": "Invalid negative tolerance",
+        "memberId": "M008",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Bad financial input cannot be treated as a confirmed discrepancy.",
+        "expectedOutput": {
+          "route": "SOURCE_CORRECTION"
+        }
+      },
+      {
+        "id": "missing-approval",
+        "name": "Missing approved amount",
+        "memberId": "M009",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Required mapping stops execution.",
+        "expectedIssueCodes": [
+          "MISSING_REQUIRED_FIELD"
+        ]
+      },
+      {
+        "id": "fractional-baisa",
+        "name": "Fractional baisa",
+        "memberId": "M010",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Amounts must use whole baisa.",
+        "expectedOutput": {
+          "route": "SOURCE_CORRECTION"
+        }
+      },
+      {
+        "id": "source-outage",
+        "name": "HTTP source unavailable",
+        "memberId": "M011",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Fetch fails before graph execution.",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      },
+      {
+        "id": "invalid-number",
+        "name": "Nonnumeric proposed amount",
+        "memberId": "M012",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Invalid source type must not become zero.",
+        "expectedIssueCodes": [
+          "INVALID_MAPPING_VALUE"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "readiness-boundaries",
+    "title": "Readiness data contracts and birthday boundaries",
+    "summary": "Checks evidence readiness plus required fields, real dates, boolean types and age transformation. Readiness never means pension entitlement.",
+    "sourceKind": "isolated-fixture",
+    "learning": [
+      "Read age from mapped DOB at the assessment date",
+      "Inspect actual mapping issues",
+      "Separate data validity from business readiness"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/exercises/readiness-boundaries/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Readiness data contracts and birthday boundaries",
+      "module": "readiness",
+      "mappings": [
+        {
+          "id": "dateOfBirth",
+          "sourcePath": "/person/dateOfBirth",
+          "targetPath": "dateOfBirth",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "ageYears",
+          "sourcePath": "/person/dateOfBirth",
+          "targetPath": "ageYears",
+          "type": "number",
+          "required": true,
+          "transform": "ageYears"
+        },
+        {
+          "id": "pensionJoiningDate",
+          "sourcePath": "/pension/joiningDate",
+          "targetPath": "pensionJoiningDate",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "employerJoiningDate",
+          "sourcePath": "/employer/joiningDate",
+          "targetPath": "employerJoiningDate",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "serviceVerified",
+          "sourcePath": "/pension/serviceVerified",
+          "targetPath": "serviceVerified",
+          "type": "boolean",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "missingDocuments",
+          "sourcePath": "/documents/missingCount",
+          "targetPath": "missingDocuments",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "Mapped REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 80,
+              "y": 220
+            }
+          },
+          {
+            "id": "compare",
+            "name": "Compare source joining dates",
+            "type": "expressionNode",
+            "position": {
+              "x": 350,
+              "y": 220
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "matching-dates",
+                  "key": "datesMatch",
+                  "value": "pensionJoiningDate == employerJoiningDate"
+                }
+              ],
+              "passThrough": true,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Readiness decision table",
+            "type": "decisionTableNode",
+            "position": {
+              "x": 640,
+              "y": 220
+            },
+            "content": {
+              "hitPolicy": "first",
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "inputs": [
+                {
+                  "id": "verified",
+                  "name": "Service verified",
+                  "field": "serviceVerified",
+                  "fieldType": {
+                    "type": "boolean"
+                  }
+                },
+                {
+                  "id": "missing",
+                  "name": "Missing mandatory documents",
+                  "field": "missingDocuments",
+                  "fieldType": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "id": "dates",
+                  "name": "Joining dates match",
+                  "field": "datesMatch",
+                  "fieldType": {
+                    "type": "boolean"
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "status",
+                  "name": "Review outcome",
+                  "field": "status",
+                  "outputFieldType": {
+                    "type": "string",
+                    "enum": {
+                      "type": "inline",
+                      "values": [
+                        {
+                          "label": "Ready for review",
+                          "value": "READY_FOR_REVIEW"
+                        },
+                        {
+                          "label": "Needs verification",
+                          "value": "NEEDS_VERIFICATION"
+                        },
+                        {
+                          "label": "Unable to evaluate",
+                          "value": "UNABLE_TO_EVALUATE"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "reason",
+                  "name": "Explanation for officer",
+                  "field": "reason",
+                  "outputFieldType": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "_id": "invalid-count",
+                  "verified": "",
+                  "missing": "< 0 or floor($) != $",
+                  "dates": "",
+                  "status": "\"UNABLE_TO_EVALUATE\"",
+                  "reason": "\"Missing-document count must be a nonnegative whole number\""
+                },
+                {
+                  "_id": "dates-differ",
+                  "verified": "",
+                  "missing": "",
+                  "dates": "false",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Joining dates differ between sources\""
+                },
+                {
+                  "_id": "documents-missing",
+                  "verified": "",
+                  "missing": "> 0",
+                  "dates": "",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Mandatory evidence is missing\""
+                },
+                {
+                  "_id": "service-unverified",
+                  "verified": "false",
+                  "missing": "",
+                  "dates": "",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Service needs verification\""
+                },
+                {
+                  "_id": "ready",
+                  "verified": "true",
+                  "missing": "0",
+                  "dates": "true",
+                  "status": "\"READY_FOR_REVIEW\"",
+                  "reason": "\"All configured checks passed\""
+                },
+                {
+                  "_id": "otherwise",
+                  "verified": "",
+                  "missing": "",
+                  "dates": "",
+                  "status": "\"UNABLE_TO_EVALUATE\"",
+                  "reason": "\"No approved readiness condition matched\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "output",
+            "name": "Evidence-linked review outcome",
+            "type": "outputNode",
+            "position": {
+              "x": 970,
+              "y": 220
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "input-compare",
+            "sourceId": "input",
+            "targetId": "compare",
+            "type": "edge"
+          },
+          {
+            "id": "compare-table",
+            "sourceId": "compare",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "table-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "birthday",
+          "name": "Complete on 60th birthday",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "READY_FOR_REVIEW"
+        },
+        {
+          "id": "dates",
+          "name": "Joining dates disagree",
+          "memberId": "M002",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "missing",
+          "name": "One mandatory document missing",
+          "memberId": "M003",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "unverified",
+          "name": "Service unverified",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "missing-dob",
+          "name": "DOB missing",
+          "memberId": "M005",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "invalid-date",
+          "name": "Impossible calendar date",
+          "memberId": "M006",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "future-dob",
+          "name": "DOB is tomorrow",
+          "memberId": "M007",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "negative-count",
+          "name": "Negative missing count",
+          "memberId": "M008",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "before-birthday",
+          "name": "Day before 60th birthday",
+          "memberId": "M009",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "READY_FOR_REVIEW"
+        },
+        {
+          "id": "string-boolean",
+          "name": "String instead of boolean",
+          "memberId": "M010",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "birthday",
+        "name": "Complete on 60th birthday",
+        "memberId": "M001",
+        "expectedStatus": "READY_FOR_REVIEW",
+        "assessmentDate": "2026-10-06",
+        "explanation": "DOB maps to age 60; readiness uses evidence checks."
+      },
+      {
+        "id": "dates",
+        "name": "Joining dates disagree",
+        "memberId": "M002",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Keep both source dates and request evidence.",
+        "expectedOutput": {
+          "reason": "Joining dates differ between sources"
+        }
+      },
+      {
+        "id": "missing",
+        "name": "One mandatory document missing",
+        "memberId": "M003",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Do not proceed with incomplete evidence."
+      },
+      {
+        "id": "unverified",
+        "name": "Service unverified",
+        "memberId": "M004",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Do not treat unverified months as verified."
+      },
+      {
+        "id": "missing-dob",
+        "name": "DOB missing",
+        "memberId": "M005",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Required source data must be present.",
+        "expectedIssueCodes": [
+          "MISSING_REQUIRED_FIELD"
+        ]
+      },
+      {
+        "id": "invalid-date",
+        "name": "Impossible calendar date",
+        "memberId": "M006",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "February 30 is rejected.",
+        "expectedIssueCodes": [
+          "INVALID_MAPPING_VALUE"
+        ]
+      },
+      {
+        "id": "future-dob",
+        "name": "DOB is tomorrow",
+        "memberId": "M007",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Age transform rejects future DOB.",
+        "expectedIssueCodes": [
+          "INVALID_MAPPING_VALUE"
+        ]
+      },
+      {
+        "id": "negative-count",
+        "name": "Negative missing count",
+        "memberId": "M008",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "A negative evidence count is invalid."
+      },
+      {
+        "id": "before-birthday",
+        "name": "Day before 60th birthday",
+        "memberId": "M009",
+        "expectedStatus": "READY_FOR_REVIEW",
+        "assessmentDate": "2026-10-06",
+        "explanation": "DOB maps to age 59. No statutory age rule is implied."
+      },
+      {
+        "id": "string-boolean",
+        "name": "String instead of boolean",
+        "memberId": "M010",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Literal true text cannot silently become boolean true.",
+        "expectedIssueCodes": [
+          "INVALID_MAPPING_VALUE"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "contribution-boundaries",
+    "title": "Contribution receipt boundaries",
+    "summary": "Whole-baisa reconciliation catches underpayments, excess receipts and invalid source amounts.",
+    "sourceKind": "isolated-fixture",
+    "learning": [
+      "Compare the sign as well as status",
+      "Keep exact integer money units",
+      "Handle missing facts and unavailable sources"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/exercises/contribution-boundaries/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Contribution receipt boundaries",
+      "module": "contribution",
+      "mappings": [
+        {
+          "id": "expectedBaisa",
+          "sourcePath": "/contribution/expectedBaisa",
+          "targetPath": "expectedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "receivedBaisa",
+          "sourcePath": "/contribution/receivedBaisa",
+          "targetPath": "receivedBaisa",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 100,
+              "y": 200
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Approved demonstration checks",
+            "type": "expressionNode",
+            "position": {
+              "x": 380,
+              "y": 200
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "expr-0",
+                  "key": "differenceBaisa",
+                  "value": "expectedBaisa - receivedBaisa"
+                },
+                {
+                  "id": "expr-1",
+                  "key": "status",
+                  "value": "not (expectedBaisa >= 0 and receivedBaisa >= 0 and floor(expectedBaisa) == expectedBaisa and floor(receivedBaisa) == receivedBaisa) ? \"UNABLE_TO_EVALUATE\" : (expectedBaisa == receivedBaisa ? \"CLEAR\" : \"FINDING\")"
+                },
+                {
+                  "id": "expr-2",
+                  "key": "reason",
+                  "value": "not (expectedBaisa >= 0 and receivedBaisa >= 0 and floor(expectedBaisa) == expectedBaisa and floor(receivedBaisa) == receivedBaisa) ? \"Source amounts must be nonnegative whole baisa\" : (expectedBaisa == receivedBaisa ? \"Contributions reconcile\" : \"Contribution difference requires reconciliation\")"
+                }
+              ],
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "output",
+            "name": "Assessment",
+            "type": "outputNode",
+            "position": {
+              "x": 700,
+              "y": 200
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-input",
+            "sourceId": "input",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "edge-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "matched",
+          "name": "Matching receipt",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "under",
+          "name": "OMR 30 shortfall",
+          "memberId": "M002",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "over",
+          "name": "OMR 30 excess receipt",
+          "memberId": "M003",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "zero",
+          "name": "Both supplied amounts zero",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "negative",
+          "name": "Negative receipt",
+          "memberId": "M005",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "missing",
+          "name": "Expected amount missing",
+          "memberId": "M006",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "fractional",
+          "name": "Fractional baisa",
+          "memberId": "M007",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "outage",
+          "name": "Source unavailable",
+          "memberId": "M008",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "matched",
+        "name": "Matching receipt",
+        "memberId": "M001",
+        "expectedStatus": "CLEAR",
+        "assessmentDate": "2026-10-06",
+        "explanation": "120,000 expected equals 120,000 received.",
+        "expectedOutput": {
+          "differenceBaisa": 0
+        }
+      },
+      {
+        "id": "under",
+        "name": "OMR 30 shortfall",
+        "memberId": "M002",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Expected less received is +30,000 baisa.",
+        "expectedOutput": {
+          "differenceBaisa": 30000
+        }
+      },
+      {
+        "id": "over",
+        "name": "OMR 30 excess receipt",
+        "memberId": "M003",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Expected less received is −30,000 baisa.",
+        "expectedOutput": {
+          "differenceBaisa": -30000
+        }
+      },
+      {
+        "id": "zero",
+        "name": "Both supplied amounts zero",
+        "memberId": "M004",
+        "expectedStatus": "CLEAR",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Compares supplied amounts; this is not proof a period was due.",
+        "expectedOutput": {
+          "differenceBaisa": 0
+        }
+      },
+      {
+        "id": "negative",
+        "name": "Negative receipt",
+        "memberId": "M005",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Reject invalid input before a business finding."
+      },
+      {
+        "id": "missing",
+        "name": "Expected amount missing",
+        "memberId": "M006",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Required value cannot be guessed.",
+        "expectedIssueCodes": [
+          "MISSING_REQUIRED_FIELD"
+        ]
+      },
+      {
+        "id": "fractional",
+        "name": "Fractional baisa",
+        "memberId": "M007",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Use integer minor currency units."
+      },
+      {
+        "id": "outage",
+        "name": "Source unavailable",
+        "memberId": "M008",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "No fabricated amount after HTTP failure.",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "service-boundaries",
+    "title": "Service evidence boundaries",
+    "summary": "Investigate supplied overlap/unverified months, including both together. Invalid counts remain a source correction.",
+    "sourceKind": "isolated-fixture",
+    "learning": [
+      "Explain two concurrent exception reasons",
+      "Reject negative/missing counts",
+      "Keep assessment and case approvals separate"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/exercises/service-boundaries/{memberId}",
+        "method": "GET",
+        "bindings": [
+          {
+            "location": "path",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "Service evidence boundaries",
+      "module": "service",
+      "mappings": [
+        {
+          "id": "overlapMonths",
+          "sourcePath": "/service/overlapMonths",
+          "targetPath": "overlapMonths",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "unverifiedMonths",
+          "sourcePath": "/service/unverifiedMonths",
+          "targetPath": "unverifiedMonths",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 100,
+              "y": 200
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Approved demonstration checks",
+            "type": "expressionNode",
+            "position": {
+              "x": 380,
+              "y": 200
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "expr-0",
+                  "key": "status",
+                  "value": "not (overlapMonths >= 0 and unverifiedMonths >= 0 and floor(overlapMonths) == overlapMonths and floor(unverifiedMonths) == unverifiedMonths) ? \"UNABLE_TO_EVALUATE\" : (overlapMonths > 0 or unverifiedMonths > 0 ? \"FINDING\" : \"CLEAR\")"
+                },
+                {
+                  "id": "expr-1",
+                  "key": "reason",
+                  "value": "not (overlapMonths >= 0 and unverifiedMonths >= 0 and floor(overlapMonths) == overlapMonths and floor(unverifiedMonths) == unverifiedMonths) ? \"Source month counts must be nonnegative whole numbers\" : (overlapMonths > 0 and unverifiedMonths > 0 ? \"Overlap and unverified months both require investigation\" : (overlapMonths > 0 ? \"Overlapping service periods require investigation\" : (unverifiedMonths > 0 ? \"Service months await verification\" : \"Configured service checks passed\")))"
+                }
+              ],
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "output",
+            "name": "Assessment",
+            "type": "outputNode",
+            "position": {
+              "x": 700,
+              "y": 200
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "edge-input",
+            "sourceId": "input",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "edge-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "clear",
+          "name": "No supplied exception",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "CLEAR"
+        },
+        {
+          "id": "overlap",
+          "name": "Three overlap months",
+          "memberId": "M002",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "unverified",
+          "name": "Six unverified months",
+          "memberId": "M003",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "both",
+          "name": "Overlap and unverified months",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "FINDING"
+        },
+        {
+          "id": "negative",
+          "name": "Negative overlap count",
+          "memberId": "M005",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "missing",
+          "name": "Verification count missing",
+          "memberId": "M006",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "fractional",
+          "name": "Fractional month count",
+          "memberId": "M007",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        },
+        {
+          "id": "outage",
+          "name": "Source unavailable",
+          "memberId": "M008",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "clear",
+        "name": "No supplied exception",
+        "memberId": "M001",
+        "expectedStatus": "CLEAR",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Zero overlap and unverified months; not statutory certification."
+      },
+      {
+        "id": "overlap",
+        "name": "Three overlap months",
+        "memberId": "M002",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Request employment-period evidence."
+      },
+      {
+        "id": "unverified",
+        "name": "Six unverified months",
+        "memberId": "M003",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Request service confirmation."
+      },
+      {
+        "id": "both",
+        "name": "Overlap and unverified months",
+        "memberId": "M004",
+        "expectedStatus": "FINDING",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Both investigation reasons should be visible.",
+        "expectedOutput": {
+          "reason": "Overlap and unverified months both require investigation"
+        }
+      },
+      {
+        "id": "negative",
+        "name": "Negative overlap count",
+        "memberId": "M005",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Bad data must not appear clear."
+      },
+      {
+        "id": "missing",
+        "name": "Verification count missing",
+        "memberId": "M006",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "An empty service source is not a clean record.",
+        "expectedIssueCodes": [
+          "MISSING_REQUIRED_FIELD"
+        ]
+      },
+      {
+        "id": "fractional",
+        "name": "Fractional month count",
+        "memberId": "M007",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "This particular configured contract requires whole months."
+      },
+      {
+        "id": "outage",
+        "name": "Source unavailable",
+        "memberId": "M008",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "assessmentDate": "2026-10-06",
+        "explanation": "Retrieve fresh facts after source recovery.",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "readiness-post-v2",
+    "title": "POST lookup with a changed API envelope",
+    "summary": "Run the same readiness model through the real v2 POST endpoint, using body bindings and /data field mappings.",
+    "sourceKind": "stored-members",
+    "learning": [
+      "Preview an actual POST response",
+      "Map /data/... visually",
+      "Rerun the same scenarios after an API contract change"
+    ],
+    "config": {
+      "source": {
+        "connectionId": "11111111-1111-4111-8111-111111111111",
+        "path": "/demo-source/v2/lookup",
+        "method": "POST",
+        "bindings": [
+          {
+            "location": "body",
+            "key": "memberId",
+            "valueFrom": "memberId"
+          }
+        ]
+      },
+      "effectiveFrom": "2026-01-01",
+      "effectiveTo": null,
+      "name": "POST lookup with a changed API envelope",
+      "module": "readiness",
+      "mappings": [
+        {
+          "id": "dateOfBirth",
+          "sourcePath": "/data/person/dateOfBirth",
+          "targetPath": "dateOfBirth",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "ageYears",
+          "sourcePath": "/data/person/dateOfBirth",
+          "targetPath": "ageYears",
+          "type": "number",
+          "required": true,
+          "transform": "ageYears"
+        },
+        {
+          "id": "pensionJoiningDate",
+          "sourcePath": "/data/pension/joiningDate",
+          "targetPath": "pensionJoiningDate",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "employerJoiningDate",
+          "sourcePath": "/data/employer/joiningDate",
+          "targetPath": "employerJoiningDate",
+          "type": "date",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "serviceVerified",
+          "sourcePath": "/data/pension/serviceVerified",
+          "targetPath": "serviceVerified",
+          "type": "boolean",
+          "required": true,
+          "transform": "identity"
+        },
+        {
+          "id": "missingDocuments",
+          "sourcePath": "/data/documents/missingCount",
+          "targetPath": "missingDocuments",
+          "type": "number",
+          "required": true,
+          "transform": "identity"
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "input",
+            "name": "Mapped REST facts",
+            "type": "inputNode",
+            "position": {
+              "x": 80,
+              "y": 220
+            }
+          },
+          {
+            "id": "compare",
+            "name": "Compare source joining dates",
+            "type": "expressionNode",
+            "position": {
+              "x": 350,
+              "y": 220
+            },
+            "content": {
+              "expressions": [
+                {
+                  "id": "matching-dates",
+                  "key": "datesMatch",
+                  "value": "pensionJoiningDate == employerJoiningDate"
+                }
+              ],
+              "passThrough": true,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single"
+            }
+          },
+          {
+            "id": "decision",
+            "name": "Readiness decision table",
+            "type": "decisionTableNode",
+            "position": {
+              "x": 640,
+              "y": 220
+            },
+            "content": {
+              "hitPolicy": "first",
+              "passThrough": false,
+              "inputField": null,
+              "outputPath": null,
+              "executionMode": "single",
+              "inputs": [
+                {
+                  "id": "verified",
+                  "name": "Service verified",
+                  "field": "serviceVerified",
+                  "fieldType": {
+                    "type": "boolean"
+                  }
+                },
+                {
+                  "id": "missing",
+                  "name": "Missing mandatory documents",
+                  "field": "missingDocuments",
+                  "fieldType": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "id": "dates",
+                  "name": "Joining dates match",
+                  "field": "datesMatch",
+                  "fieldType": {
+                    "type": "boolean"
+                  }
+                }
+              ],
+              "outputs": [
+                {
+                  "id": "status",
+                  "name": "Review outcome",
+                  "field": "status",
+                  "outputFieldType": {
+                    "type": "string",
+                    "enum": {
+                      "type": "inline",
+                      "values": [
+                        {
+                          "label": "Ready for review",
+                          "value": "READY_FOR_REVIEW"
+                        },
+                        {
+                          "label": "Needs verification",
+                          "value": "NEEDS_VERIFICATION"
+                        },
+                        {
+                          "label": "Unable to evaluate",
+                          "value": "UNABLE_TO_EVALUATE"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "id": "reason",
+                  "name": "Explanation for officer",
+                  "field": "reason",
+                  "outputFieldType": {
+                    "type": "string"
+                  }
+                }
+              ],
+              "rules": [
+                {
+                  "_id": "dates-differ",
+                  "verified": "",
+                  "missing": "",
+                  "dates": "false",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Joining dates differ between sources\""
+                },
+                {
+                  "_id": "documents-missing",
+                  "verified": "",
+                  "missing": "> 0",
+                  "dates": "",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Mandatory evidence is missing\""
+                },
+                {
+                  "_id": "service-unverified",
+                  "verified": "false",
+                  "missing": "",
+                  "dates": "",
+                  "status": "\"NEEDS_VERIFICATION\"",
+                  "reason": "\"Service needs verification\""
+                },
+                {
+                  "_id": "ready",
+                  "verified": "true",
+                  "missing": "0",
+                  "dates": "true",
+                  "status": "\"READY_FOR_REVIEW\"",
+                  "reason": "\"All configured checks passed\""
+                },
+                {
+                  "_id": "otherwise",
+                  "verified": "",
+                  "missing": "",
+                  "dates": "",
+                  "status": "\"UNABLE_TO_EVALUATE\"",
+                  "reason": "\"No approved readiness condition matched\""
+                }
+              ]
+            }
+          },
+          {
+            "id": "output",
+            "name": "Evidence-linked review outcome",
+            "type": "outputNode",
+            "position": {
+              "x": 970,
+              "y": 220
+            }
+          }
+        ],
+        "edges": [
+          {
+            "id": "input-compare",
+            "sourceId": "input",
+            "targetId": "compare",
+            "type": "edge"
+          },
+          {
+            "id": "compare-table",
+            "sourceId": "compare",
+            "targetId": "decision",
+            "type": "edge"
+          },
+          {
+            "id": "table-output",
+            "sourceId": "decision",
+            "targetId": "output",
+            "type": "edge"
+          }
+        ]
+      },
+      "scenarios": [
+        {
+          "id": "ready",
+          "name": "Ahmed complete record",
+          "memberId": "M001",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "READY_FOR_REVIEW"
+        },
+        {
+          "id": "conflict",
+          "name": "Salim conflicting joining dates",
+          "memberId": "M002",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "missing",
+          "name": "Maryam missing confirmation",
+          "memberId": "M003",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "NEEDS_VERIFICATION"
+        },
+        {
+          "id": "unavailable",
+          "name": "Khalid source unavailable",
+          "memberId": "M004",
+          "assessmentDate": "2026-10-06",
+          "expectedStatus": "UNABLE_TO_EVALUATE"
+        }
+      ]
+    },
+    "scenarios": [
+      {
+        "id": "ready",
+        "name": "Ahmed complete record",
+        "memberId": "M001",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "READY_FOR_REVIEW",
+        "explanation": "Ahmed complete record"
+      },
+      {
+        "id": "conflict",
+        "name": "Salim conflicting joining dates",
+        "memberId": "M002",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "explanation": "Salim conflicting joining dates"
+      },
+      {
+        "id": "missing",
+        "name": "Maryam missing confirmation",
+        "memberId": "M003",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "NEEDS_VERIFICATION",
+        "explanation": "Maryam missing confirmation"
+      },
+      {
+        "id": "unavailable",
+        "name": "Khalid source unavailable",
+        "memberId": "M004",
+        "assessmentDate": "2026-10-06",
+        "expectedStatus": "UNABLE_TO_EVALUATE",
+        "explanation": "Khalid source unavailable",
+        "expectedIssueCodes": [
+          "SOURCE_HTTP_ERROR"
+        ]
+      }
+    ]
+  }
+]

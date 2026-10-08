@@ -1,0 +1,450 @@
+{
+  "source": {
+    "connectionId": "11111111-1111-4111-8111-111111111111",
+    "path": "/demo-source/exercises/payment-routing/{memberId}",
+    "method": "GET",
+    "bindings": [
+      {
+        "location": "path",
+        "key": "memberId",
+        "valueFrom": "memberId"
+      }
+    ]
+  },
+  "effectiveFrom": "2026-01-01",
+  "effectiveTo": null,
+  "name": "Payment tolerance and senior-review branches",
+  "module": "payment",
+  "mappings": [
+    {
+      "id": "proposedBaisa",
+      "sourcePath": "/payment/proposedBaisa",
+      "targetPath": "proposedBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "approvedBaisa",
+      "sourcePath": "/payment/approvedBaisa",
+      "targetPath": "approvedBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "adjustmentBaisa",
+      "sourcePath": "/payment/authorizedAdjustmentBaisa",
+      "targetPath": "adjustmentBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "toleranceBaisa",
+      "sourcePath": "/payment/toleranceBaisa",
+      "targetPath": "toleranceBaisa",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "input",
+        "name": "Mapped payment facts",
+        "type": "inputNode",
+        "position": {
+          "x": 40,
+          "y": 240
+        }
+      },
+      {
+        "id": "difference",
+        "name": "Compute difference in baisa",
+        "type": "expressionNode",
+        "position": {
+          "x": 300,
+          "y": 240
+        },
+        "content": {
+          "passThrough": true,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single",
+          "expressions": [
+            {
+              "id": "difference-0",
+              "key": "differenceBaisa",
+              "value": "proposedBaisa - approvedBaisa - adjustmentBaisa"
+            }
+          ]
+        }
+      },
+      {
+        "id": "route",
+        "name": "Payment review branches",
+        "type": "switchNode",
+        "position": {
+          "x": 590,
+          "y": 240
+        },
+        "content": {
+          "hitPolicy": "first",
+          "statements": [
+            {
+              "id": "invalid",
+              "condition": "proposedBaisa < 0 or approvedBaisa < 0 or toleranceBaisa < 0 or floor(proposedBaisa) != proposedBaisa or floor(approvedBaisa) != approvedBaisa or floor(adjustmentBaisa) != adjustmentBaisa or floor(toleranceBaisa) != toleranceBaisa",
+              "isDefault": false
+            },
+            {
+              "id": "clear",
+              "condition": "abs(differenceBaisa) <= toleranceBaisa",
+              "isDefault": false
+            },
+            {
+              "id": "senior",
+              "condition": "abs(differenceBaisa) >= 100000",
+              "isDefault": false
+            },
+            {
+              "id": "review",
+              "condition": "",
+              "isDefault": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "invalid-result",
+        "name": "SOURCE CORRECTION",
+        "type": "expressionNode",
+        "position": {
+          "x": 870,
+          "y": 0
+        },
+        "content": {
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single",
+          "expressions": [
+            {
+              "id": "invalid-result-0",
+              "key": "status",
+              "value": "\"UNABLE_TO_EVALUATE\""
+            },
+            {
+              "id": "invalid-result-1",
+              "key": "route",
+              "value": "\"SOURCE_CORRECTION\""
+            },
+            {
+              "id": "invalid-result-2",
+              "key": "differenceBaisa",
+              "value": "differenceBaisa"
+            },
+            {
+              "id": "invalid-result-3",
+              "key": "requiresSeniorReview",
+              "value": "false"
+            },
+            {
+              "id": "invalid-result-4",
+              "key": "reason",
+              "value": "\"Amounts must be whole baisa; proposed, approved and tolerance amounts cannot be negative\""
+            }
+          ]
+        }
+      },
+      {
+        "id": "clear-result",
+        "name": "RECONCILED",
+        "type": "expressionNode",
+        "position": {
+          "x": 870,
+          "y": 180
+        },
+        "content": {
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single",
+          "expressions": [
+            {
+              "id": "clear-result-0",
+              "key": "status",
+              "value": "\"CLEAR\""
+            },
+            {
+              "id": "clear-result-1",
+              "key": "route",
+              "value": "\"RECONCILED\""
+            },
+            {
+              "id": "clear-result-2",
+              "key": "differenceBaisa",
+              "value": "differenceBaisa"
+            },
+            {
+              "id": "clear-result-3",
+              "key": "requiresSeniorReview",
+              "value": "false"
+            },
+            {
+              "id": "clear-result-4",
+              "key": "reason",
+              "value": "\"Difference is within the configured tolerance\""
+            }
+          ]
+        }
+      },
+      {
+        "id": "senior-result",
+        "name": "SENIOR REVIEW",
+        "type": "expressionNode",
+        "position": {
+          "x": 870,
+          "y": 360
+        },
+        "content": {
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single",
+          "expressions": [
+            {
+              "id": "senior-result-0",
+              "key": "status",
+              "value": "\"FINDING\""
+            },
+            {
+              "id": "senior-result-1",
+              "key": "route",
+              "value": "\"SENIOR_REVIEW\""
+            },
+            {
+              "id": "senior-result-2",
+              "key": "differenceBaisa",
+              "value": "differenceBaisa"
+            },
+            {
+              "id": "senior-result-3",
+              "key": "requiresSeniorReview",
+              "value": "true"
+            },
+            {
+              "id": "senior-result-4",
+              "key": "reason",
+              "value": "\"Difference of at least OMR 100 requires senior review in this fictional exercise\""
+            }
+          ]
+        }
+      },
+      {
+        "id": "review-result",
+        "name": "OFFICER REVIEW",
+        "type": "expressionNode",
+        "position": {
+          "x": 870,
+          "y": 540
+        },
+        "content": {
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single",
+          "expressions": [
+            {
+              "id": "review-result-0",
+              "key": "status",
+              "value": "\"FINDING\""
+            },
+            {
+              "id": "review-result-1",
+              "key": "route",
+              "value": "\"OFFICER_REVIEW\""
+            },
+            {
+              "id": "review-result-2",
+              "key": "differenceBaisa",
+              "value": "differenceBaisa"
+            },
+            {
+              "id": "review-result-3",
+              "key": "requiresSeniorReview",
+              "value": "false"
+            },
+            {
+              "id": "review-result-4",
+              "key": "reason",
+              "value": "\"Difference exceeds tolerance and needs evidence review\""
+            }
+          ]
+        }
+      },
+      {
+        "id": "output",
+        "name": "Traceable review outcome",
+        "type": "outputNode",
+        "position": {
+          "x": 1180,
+          "y": 240
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "input-difference",
+        "sourceId": "input",
+        "targetId": "difference",
+        "type": "edge"
+      },
+      {
+        "id": "difference-route",
+        "sourceId": "difference",
+        "targetId": "route",
+        "type": "edge"
+      },
+      {
+        "id": "invalid-branch",
+        "sourceId": "route",
+        "sourceHandle": "invalid",
+        "targetId": "invalid-result",
+        "type": "edge"
+      },
+      {
+        "id": "invalid-output",
+        "sourceId": "invalid-result",
+        "targetId": "output",
+        "type": "edge"
+      },
+      {
+        "id": "clear-branch",
+        "sourceId": "route",
+        "sourceHandle": "clear",
+        "targetId": "clear-result",
+        "type": "edge"
+      },
+      {
+        "id": "clear-output",
+        "sourceId": "clear-result",
+        "targetId": "output",
+        "type": "edge"
+      },
+      {
+        "id": "senior-branch",
+        "sourceId": "route",
+        "sourceHandle": "senior",
+        "targetId": "senior-result",
+        "type": "edge"
+      },
+      {
+        "id": "senior-output",
+        "sourceId": "senior-result",
+        "targetId": "output",
+        "type": "edge"
+      },
+      {
+        "id": "review-branch",
+        "sourceId": "route",
+        "sourceHandle": "review",
+        "targetId": "review-result",
+        "type": "edge"
+      },
+      {
+        "id": "review-output",
+        "sourceId": "review-result",
+        "targetId": "output",
+        "type": "edge"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "large",
+      "name": "OMR 300 unexplained difference",
+      "memberId": "M001",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "at-senior",
+      "name": "Exactly OMR 100",
+      "memberId": "M002",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "below-senior",
+      "name": "One baisa below OMR 100",
+      "memberId": "M003",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "at-tolerance",
+      "name": "Exactly 100-baisa tolerance",
+      "memberId": "M004",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "CLEAR"
+    },
+    {
+      "id": "over-tolerance",
+      "name": "One baisa over tolerance",
+      "memberId": "M005",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "adjusted",
+      "name": "Authorized adjustment",
+      "memberId": "M006",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "CLEAR"
+    },
+    {
+      "id": "negative-difference",
+      "name": "Proposed below approved",
+      "memberId": "M007",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "negative-tolerance",
+      "name": "Invalid negative tolerance",
+      "memberId": "M008",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "missing-approval",
+      "name": "Missing approved amount",
+      "memberId": "M009",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "fractional-baisa",
+      "name": "Fractional baisa",
+      "memberId": "M010",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "source-outage",
+      "name": "HTTP source unavailable",
+      "memberId": "M011",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "invalid-number",
+      "name": "Nonnumeric proposed amount",
+      "memberId": "M012",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    }
+  ]
+}

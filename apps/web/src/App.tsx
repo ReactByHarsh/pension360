@@ -16,6 +16,9 @@ import { oidc } from "./auth";
 import type { User } from "./types";
 import { ErrorBox, ToastHost } from "./ui";
 import { Copilot, CopilotProvider } from "./Copilot";
+import WorkflowStudio from "./WorkflowStudio";
+import { RuleUseCases } from "./RuleUseCases";
+import GuidedDemo from "./GuidedDemo";
 
 type Session = {
   user: User | null;
@@ -195,8 +198,11 @@ export default function App() {
     {requestedPath.split('?')[0]!==path && <div className="notice warning" role="status">That page is not available for your current role. Your permitted workspaces and responsibilities are shown below.</div>}
     <AppErrorBoundary key={requestedPath+'-'+user.id+'-'+user.role}>
       <CopilotProvider>
-        {isAdministrationPage(path)? <AdministrationPages page={path} user={user} mode={session.mode} navigate={navigate} dark={dark} switchUser={devLogin} refreshSession={refreshSession}/>:<OriginalPages page={path} user={user} mode={session.mode} navigate={navigate} dark={dark}/>}
-        {screenCopilot(path) && <Copilot page={screenCopilot(path)!} mode={session.mode} user={user} navigate={navigateLegacy}/>}
+        {path==='guided-demo' ? <GuidedDemo user={user} navigate={navigate} initialModule={new URLSearchParams(requestedPath.split('?')[1]||'').get('module')||undefined}/>
+          : path==='rule-use-cases' ? <RuleUseCases user={user} onOpenRule={id=>navigate(`rule-designer?rule=${id}`)}/>
+          : path.startsWith('workflow-') ? <WorkflowStudio user={user} initialTab={path==='workflow-runs'?'runs':path==='workflow-tasks'?'tasks':'designer'}/>
+          : isAdministrationPage(path)? <AdministrationPages page={path} user={user} mode={session.mode} navigate={navigate} dark={dark} switchUser={devLogin} refreshSession={refreshSession}/>:<OriginalPages page={path} user={user} mode={session.mode} navigate={navigate} dark={dark}/>}
+        {screenCopilot(path) && <Copilot page={screenCopilot(path)!} mode={session.mode} user={user} navigate={navigateLegacy} combined={['copilot','questions','conversations','guided-demo'].includes(path)}/>}
       </CopilotProvider>
     </AppErrorBoundary>
   </OriginalShell></>;

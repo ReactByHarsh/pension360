@@ -8,7 +8,9 @@ const root = process.cwd(),
 await mkdir(outputDir, { recursive: true });
 const target = path.join(
   outputDir,
-  process.argv.includes("--original-ui")
+  process.argv.includes("--workflows")
+    ? "Pension360_Node_Workflows_2026-10-06.zip"
+    : process.argv.includes("--original-ui")
     ? "Pension360_Node_Express_PostgreSQL18_6_Original_UI.zip"
     : process.argv.includes("--sync-demo")
     ? "Pension360_Node_Express_PostgreSQL18_6_Sync_Demo.zip"
@@ -43,6 +45,7 @@ archive.glob(
       "**/*.zip",
       "**/dist/**",
       "test-results/**",
+      "verification/**",
       "**/test-results/**",
       "uploads/**",
       "coverage/**",

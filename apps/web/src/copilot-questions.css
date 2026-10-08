@@ -1,0 +1,52 @@
+.copilot-question-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 12px;
+  margin: 14px 0;
+}
+.copilot-question-card {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+.copilot-question-card .copilot-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  line-height: 1.5;
+}
+.copilot-question-card .copilot-chip span {
+  font-weight: 400;
+}
+.copilot-question-unavailable .copilot-chip:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+.copilot-question-sources {
+  margin-top: 10px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.copilot-question-sources summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+.copilot-question-sources ul {
+  padding-inline-start: 20px;
+  margin: 8px 0 0;
+}
+.copilot-question-sources li {
+  padding-block: 3px;
+}
+.copilot-question-sources small {
+  color: var(--muted);
+}
+.copilot-current-questions .copilot-demo-heading {
+  flex-wrap: wrap;
+}
+.copilot-current-questions .notice {
+  margin-top: 12px;
+}

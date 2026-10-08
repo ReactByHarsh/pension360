@@ -1,0 +1,141 @@
+[
+  {
+    "key": "externalReference",
+    "label": "Pension / ERP reference",
+    "type": "text",
+    "required": false,
+    "section": "Member profile",
+    "help": "Retained as a reference. A separate demonstration member ID is created."
+  },
+  {
+    "key": "name",
+    "label": "Member name",
+    "type": "text",
+    "required": true,
+    "section": "Member profile"
+  },
+  {
+    "key": "nameAr",
+    "label": "Arabic name (optional)",
+    "type": "text",
+    "required": false,
+    "section": "Member profile"
+  },
+  {
+    "key": "organization",
+    "label": "Organization",
+    "type": "text",
+    "required": true,
+    "section": "Member profile"
+  },
+  {
+    "key": "dateOfBirth",
+    "label": "Date of birth",
+    "type": "date",
+    "required": true,
+    "section": "Member profile"
+  },
+  {
+    "key": "dateOfJoining",
+    "label": "Profile joining date",
+    "type": "date",
+    "required": true,
+    "section": "Member profile",
+    "help": "Profile display date; pension and employer evidence below remain separate."
+  },
+  {
+    "key": "expectedRetirementDate",
+    "label": "Expected retirement date",
+    "type": "date",
+    "required": true,
+    "section": "Member profile",
+    "help": "Supplied planning date; not calculated entitlement or an approved retirement."
+  },
+  {
+    "key": "pensionJoiningDate",
+    "label": "Pension record joining date",
+    "type": "date",
+    "required": false,
+    "section": "Readiness and documents"
+  },
+  {
+    "key": "employerJoiningDate",
+    "label": "Employer record joining date",
+    "type": "date",
+    "required": false,
+    "section": "Readiness and documents"
+  },
+  {
+    "key": "serviceVerified",
+    "label": "Source says service is verified",
+    "type": "boolean",
+    "required": false,
+    "section": "Readiness and documents",
+    "help": "A supplied source fact, not an application approval or document verification."
+  },
+  {
+    "key": "missingDocuments",
+    "label": "Source missing-document count",
+    "type": "number",
+    "required": false,
+    "section": "Readiness and documents",
+    "help": "Source checklist count; uploaded document statuses are shown separately."
+  },
+  {
+    "key": "proposedBaisa",
+    "label": "Proposed payment (baisa)",
+    "type": "number",
+    "required": false,
+    "section": "Payment assurance"
+  },
+  {
+    "key": "approvedBaisa",
+    "label": "Approved entitlement from source (baisa)",
+    "type": "number",
+    "required": false,
+    "section": "Payment assurance",
+    "help": "Entered source value, not an approval in Pension 360."
+  },
+  {
+    "key": "adjustmentBaisa",
+    "label": "Authorized adjustment from source (baisa)",
+    "type": "number",
+    "required": false,
+    "section": "Payment assurance"
+  },
+  {
+    "key": "toleranceBaisa",
+    "label": "Payment tolerance (baisa)",
+    "type": "number",
+    "required": false,
+    "section": "Payment assurance"
+  },
+  {
+    "key": "expectedBaisa",
+    "label": "Expected contribution (baisa)",
+    "type": "number",
+    "required": false,
+    "section": "Contribution assurance"
+  },
+  {
+    "key": "receivedBaisa",
+    "label": "Received contribution (baisa)",
+    "type": "number",
+    "required": false,
+    "section": "Contribution assurance"
+  },
+  {
+    "key": "overlapMonths",
+    "label": "Overlapping service months",
+    "type": "number",
+    "required": false,
+    "section": "Service assurance"
+  },
+  {
+    "key": "unverifiedMonths",
+    "label": "Unverified service months",
+    "type": "number",
+    "required": false,
+    "section": "Service assurance"
+  }
+]

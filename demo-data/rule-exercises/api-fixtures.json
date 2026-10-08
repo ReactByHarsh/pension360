@@ -1,0 +1,1521 @@
+[
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "large",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M001",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M001",
+      "person": {
+        "name": "Fictional exercise M001",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 950000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "at-senior",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M002",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M002",
+      "person": {
+        "name": "Fictional exercise M002",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 750000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "below-senior",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M003",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M003",
+      "person": {
+        "name": "Fictional exercise M003",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 749999,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "at-tolerance",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M004",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M004",
+      "person": {
+        "name": "Fictional exercise M004",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650100,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 100
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "over-tolerance",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M005",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M005",
+      "person": {
+        "name": "Fictional exercise M005",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650101,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 100
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "adjusted",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M006",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M006",
+      "person": {
+        "name": "Fictional exercise M006",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 700000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 50000,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "negative-difference",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M007",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M007",
+      "person": {
+        "name": "Fictional exercise M007",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 550000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "negative-tolerance",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M008",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M008",
+      "person": {
+        "name": "Fictional exercise M008",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": -1
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "missing-approval",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M009",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M009",
+      "person": {
+        "name": "Fictional exercise M009",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "fractional-baisa",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M010",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M010",
+      "person": {
+        "name": "Fictional exercise M010",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000.5,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "source-outage",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M011",
+    "statusCode": 503,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M011",
+      "person": {
+        "name": "Fictional exercise M011",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      },
+      "error": "Fictional payment source unavailable"
+    }
+  },
+  {
+    "exerciseId": "payment-routing",
+    "scenarioId": "invalid-number",
+    "method": "GET",
+    "path": "/demo-source/exercises/payment-routing/M012",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M012",
+      "person": {
+        "name": "Fictional exercise M012",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": "unknown",
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "birthday",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M001",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M001",
+      "person": {
+        "name": "Fictional exercise M001",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "dates",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M002",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M002",
+      "person": {
+        "name": "Fictional exercise M002",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-02-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "missing",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M003",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M003",
+      "person": {
+        "name": "Fictional exercise M003",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 1
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "unverified",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M004",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M004",
+      "person": {
+        "name": "Fictional exercise M004",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": false
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "missing-dob",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M005",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M005",
+      "person": {
+        "name": "Fictional exercise M005"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "invalid-date",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M006",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M006",
+      "person": {
+        "name": "Fictional exercise M006",
+        "dateOfBirth": "1966-02-30"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "future-dob",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M007",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M007",
+      "person": {
+        "name": "Fictional exercise M007",
+        "dateOfBirth": "2026-10-07"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "negative-count",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M008",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M008",
+      "person": {
+        "name": "Fictional exercise M008",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": -1
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "before-birthday",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M009",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M009",
+      "person": {
+        "name": "Fictional exercise M009",
+        "dateOfBirth": "1966-10-07"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "readiness-boundaries",
+    "scenarioId": "string-boolean",
+    "method": "GET",
+    "path": "/demo-source/exercises/readiness-boundaries/M010",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M010",
+      "person": {
+        "name": "Fictional exercise M010",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": "true"
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "matched",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M001",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M001",
+      "person": {
+        "name": "Fictional exercise M001",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "under",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M002",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M002",
+      "person": {
+        "name": "Fictional exercise M002",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 90000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "over",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M003",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M003",
+      "person": {
+        "name": "Fictional exercise M003",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 150000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "zero",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M004",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M004",
+      "person": {
+        "name": "Fictional exercise M004",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 0,
+        "receivedBaisa": 0
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "negative",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M005",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M005",
+      "person": {
+        "name": "Fictional exercise M005",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": -1
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "missing",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M006",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M006",
+      "person": {
+        "name": "Fictional exercise M006",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "fractional",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M007",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M007",
+      "person": {
+        "name": "Fictional exercise M007",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000.5
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "contribution-boundaries",
+    "scenarioId": "outage",
+    "method": "GET",
+    "path": "/demo-source/exercises/contribution-boundaries/M008",
+    "statusCode": 503,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M008",
+      "person": {
+        "name": "Fictional exercise M008",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      },
+      "error": "Fictional contribution source unavailable"
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "clear",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M001",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M001",
+      "person": {
+        "name": "Fictional exercise M001",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "overlap",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M002",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M002",
+      "person": {
+        "name": "Fictional exercise M002",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 3,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "unverified",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M003",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M003",
+      "person": {
+        "name": "Fictional exercise M003",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 6
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "both",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M004",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M004",
+      "person": {
+        "name": "Fictional exercise M004",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 3,
+        "unverifiedMonths": 6
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "negative",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M005",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M005",
+      "person": {
+        "name": "Fictional exercise M005",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": -1,
+        "unverifiedMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "missing",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M006",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M006",
+      "person": {
+        "name": "Fictional exercise M006",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "fractional",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M007",
+    "statusCode": 200,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M007",
+      "person": {
+        "name": "Fictional exercise M007",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0.5
+      }
+    }
+  },
+  {
+    "exerciseId": "service-boundaries",
+    "scenarioId": "outage",
+    "method": "GET",
+    "path": "/demo-source/exercises/service-boundaries/M008",
+    "statusCode": 503,
+    "body": {
+      "fictional": true,
+      "isolatedExercise": true,
+      "memberId": "M008",
+      "person": {
+        "name": "Fictional exercise M008",
+        "dateOfBirth": "1966-10-06"
+      },
+      "pension": {
+        "joiningDate": "1990-01-01",
+        "serviceVerified": true
+      },
+      "employer": {
+        "joiningDate": "1990-01-01"
+      },
+      "documents": {
+        "missingCount": 0
+      },
+      "payment": {
+        "proposedBaisa": 650000,
+        "approvedBaisa": 650000,
+        "authorizedAdjustmentBaisa": 0,
+        "toleranceBaisa": 0
+      },
+      "contribution": {
+        "expectedBaisa": 120000,
+        "receivedBaisa": 120000
+      },
+      "service": {
+        "overlapMonths": 0,
+        "unverifiedMonths": 0
+      },
+      "error": "Fictional service source unavailable"
+    }
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "name": "Conflicting joining dates and missing evidence",
+  "sourceSystem": "Pension / ERP (demonstration)",
+  "importMethod": "JSON",
+  "isSample": true,
+  "rows": [
+    {
+      "externalReference": "FICTIONAL-PEN-1002",
+      "name": "Maryam Al Balushi",
+      "nameAr": "مريم البلوشية",
+      "organization": "Fictional Pension Demonstration Organization",
+      "dateOfBirth": "1966-03-10",
+      "dateOfJoining": "1991-06-01",
+      "expectedRetirementDate": "2026-11-20",
+      "pensionJoiningDate": "1991-06-01",
+      "employerJoiningDate": "1991-07-01",
+      "serviceVerified": true,
+      "missingDocuments": 1,
+      "proposedBaisa": 650000,
+      "approvedBaisa": 650000,
+      "adjustmentBaisa": 0,
+      "toleranceBaisa": 0,
+      "expectedBaisa": 120000,
+      "receivedBaisa": 120000,
+      "overlapMonths": 0,
+      "unverifiedMonths": 0
+    }
+  ]
+}

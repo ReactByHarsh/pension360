@@ -9,7 +9,9 @@ export type CopilotPage =
   | "payments"
   | "cases"
   | "studio"
-  | "governance";
+  | "governance"
+  | "workflows"
+  | "integrations";
 export type CopilotForecast = {
   asOfDate: string;
   horizonMonths: 12 | 36 | 60;
@@ -32,17 +34,75 @@ export type DemoCatalog = {
   policies: Array<{ id: string; title: string }>;
   policyStatus: { draft: number; published: number; retired: number };
 };
-/** Resolve a single explicitly mentioned fictional member ID against loaded choices. */
+export type CopilotSuggestion = {
+  id: string;
+  label: string;
+  question: string;
+  questionAr: string;
+  available: boolean;
+  reason?: string;
+  evidenceRefs: Array<{ id: string; title: string }>;
+  nextPage?: string;
+};
+export type CopilotSuggestions = {
+  page: CopilotPage;
+  memberId: string | null;
+  capturedAt: string;
+  questions: CopilotSuggestion[];
+  coverage: Record<string, unknown>;
+};
+export const copilotPageLabels: Record<CopilotPage, string> = {
+  dashboard: "Dashboard",
+  members: "Member overview",
+  readiness: "Retirement readiness",
+  forecast: "Retirement forecast",
+  documents: "Document intelligence",
+  policy: "Policy intelligence",
+  contributions: "Contributions and service",
+  payments: "Payment assurance",
+  cases: "Cases",
+  studio: "Rules and decision models",
+  governance: "Source governance",
+  workflows: "Workflows and tasks",
+  integrations: "Integrations and incoming data",
+};
+/** Match one exact known ID, including imported IDs, without matching a substring of another ID. */
 export function mentionedMemberId(
   question: string,
   availableMemberIds: readonly string[],
 ): string | undefined {
-  const mentions = [
-    ...new Set(question.toLocaleUpperCase().match(/\bM\d{3}\b/g) ?? []),
-  ];
-  if (mentions.length !== 1 || !availableMemberIds.includes(mentions[0]))
-    return undefined;
-  return mentions[0];
+  const escape = (value: string) =>
+    value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const matches = [...new Set(availableMemberIds)].filter(
+    (id) =>
+      id &&
+      new RegExp(
+        `(^|[^\\p{L}\\p{N}_./-])${escape(id)}(?=$|[^\\p{L}\\p{N}_./-]|\\.(?=$|\\s|[?!,;:]))`,
+        "iu",
+      ).test(question),
+  );
+  return matches.length === 1 ? matches[0] : undefined;
+}
+export function suggestionQuestion(
+  item: CopilotSuggestion,
+  language: "en" | "ar",
+) {
+  return language === "ar" ? item.questionAr : item.question;
+}
+export function suggestionsRequest(
+  page: CopilotPage,
+  language: "en" | "ar",
+  memberId: string,
+  forecast?: CopilotForecast,
+) {
+  const { question: _, ...scope } = assistantRequest(
+    page,
+    "",
+    language,
+    memberId,
+    forecast,
+  );
+  return scope;
 }
 export function copilotPage(path: string): CopilotPage | null {
   if (path === "contribution") return "contributions";
@@ -56,6 +116,8 @@ export function copilotPage(path: string): CopilotPage | null {
     "cases",
     "studio",
     "governance",
+    "workflows",
+    "integrations",
   ].includes(path)
     ? (path as CopilotPage)
     : null;

@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "kind": "Real Chromium, real Copilot component, mocked HTTP responses; no live AI/DB execution",
+  "checks": [
+    "arbitrary imported member IDs",
+    "questions backed by current record references",
+    "disabled prerequisites and correct next screen",
+    "question chip sends no AI request",
+    "selected scope on assistant requests",
+    "explicit member cannot be silently changed",
+    "refresh and mutation events clear stale answers/evidence",
+    "combined module switch and guided context hook",
+    "late suggestions and answers ignored",
+    "Arabic question uses selected language",
+    "forecast controls use aggregate scope",
+    "typed member detection retains question"
+  ],
+  "requests": 22
+}

@@ -1,0 +1,157 @@
+{
+  "source": {
+    "connectionId": "11111111-1111-4111-8111-111111111111",
+    "path": "/demo-source/exercises/service-boundaries/{memberId}",
+    "method": "GET",
+    "bindings": [
+      {
+        "location": "path",
+        "key": "memberId",
+        "valueFrom": "memberId"
+      }
+    ]
+  },
+  "effectiveFrom": "2026-01-01",
+  "effectiveTo": null,
+  "name": "Service evidence boundaries",
+  "module": "service",
+  "mappings": [
+    {
+      "id": "overlapMonths",
+      "sourcePath": "/service/overlapMonths",
+      "targetPath": "overlapMonths",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "unverifiedMonths",
+      "sourcePath": "/service/unverifiedMonths",
+      "targetPath": "unverifiedMonths",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "input",
+        "name": "REST facts",
+        "type": "inputNode",
+        "position": {
+          "x": 100,
+          "y": 200
+        }
+      },
+      {
+        "id": "decision",
+        "name": "Approved demonstration checks",
+        "type": "expressionNode",
+        "position": {
+          "x": 380,
+          "y": 200
+        },
+        "content": {
+          "expressions": [
+            {
+              "id": "expr-0",
+              "key": "status",
+              "value": "not (overlapMonths >= 0 and unverifiedMonths >= 0 and floor(overlapMonths) == overlapMonths and floor(unverifiedMonths) == unverifiedMonths) ? \"UNABLE_TO_EVALUATE\" : (overlapMonths > 0 or unverifiedMonths > 0 ? \"FINDING\" : \"CLEAR\")"
+            },
+            {
+              "id": "expr-1",
+              "key": "reason",
+              "value": "not (overlapMonths >= 0 and unverifiedMonths >= 0 and floor(overlapMonths) == overlapMonths and floor(unverifiedMonths) == unverifiedMonths) ? \"Source month counts must be nonnegative whole numbers\" : (overlapMonths > 0 and unverifiedMonths > 0 ? \"Overlap and unverified months both require investigation\" : (overlapMonths > 0 ? \"Overlapping service periods require investigation\" : (unverifiedMonths > 0 ? \"Service months await verification\" : \"Configured service checks passed\")))"
+            }
+          ],
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single"
+        }
+      },
+      {
+        "id": "output",
+        "name": "Assessment",
+        "type": "outputNode",
+        "position": {
+          "x": 700,
+          "y": 200
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-input",
+        "sourceId": "input",
+        "targetId": "decision",
+        "type": "edge"
+      },
+      {
+        "id": "edge-output",
+        "sourceId": "decision",
+        "targetId": "output",
+        "type": "edge"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "clear",
+      "name": "No supplied exception",
+      "memberId": "M001",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "CLEAR"
+    },
+    {
+      "id": "overlap",
+      "name": "Three overlap months",
+      "memberId": "M002",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "unverified",
+      "name": "Six unverified months",
+      "memberId": "M003",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "both",
+      "name": "Overlap and unverified months",
+      "memberId": "M004",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "FINDING"
+    },
+    {
+      "id": "negative",
+      "name": "Negative overlap count",
+      "memberId": "M005",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "missing",
+      "name": "Verification count missing",
+      "memberId": "M006",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "fractional",
+      "name": "Fractional month count",
+      "memberId": "M007",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    },
+    {
+      "id": "outage",
+      "name": "Source unavailable",
+      "memberId": "M008",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    }
+  ]
+}

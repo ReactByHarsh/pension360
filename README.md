@@ -1,5 +1,11 @@
 # Pension360 Node edition
 
+**Current guided data and Copilot handoff:** start with [GUIDED_DEVELOPER_HANDOFF.md](docs/GUIDED_DEVELOPER_HANDOFF.md) for setup, the 16 module cards, 13 shared Copilot contexts, input/document flows, APIs, roles and remaining integration work. The [guided demonstration guide](docs/GUIDED_DEMO_AND_DATA_COPILOT.md) covers the presenter flow. Open **Demo & handoff → Guided demo & data entry** to create fresh demonstration records and follow their real assessments, documents, cases and workflows. Migration 009 is additive; the Node backend and existing records remain in place.
+
+The earlier [RUN_WORKFLOWS.md](RUN_WORKFLOWS.md), [workflow/rule developer guide](docs/WORKFLOWS_AND_RULE_USE_CASES.md) and [workflow verification report](docs/verification/WORKFLOW_UPDATE_VALIDATION.md) remain available for the previous rule/BPMN update and its recorded test scope.
+
+See the [current verification report](docs/verification/GUIDED_UPDATE_VALIDATION.md) for the guided import, all-module Copilot, browser checks and target-environment tests still required.
+
 Pension360 supports pension officers with retirement preparation, evidence review, policy assistance, contribution/service reconciliation and payment assurance. Existing pension systems remain the official records. This edition uses **Node.js 24, Express 5, React, PostgreSQL 18.6, the real GoRules JDM editor and the native ZEN engine**. There are no Java or Python application services.
 
 The interface has been restored from the user-supplied `Pension360_Fullstack_Project_v6_2.zip`: the original Pension360 logo, grouped navigation, screen names and visual design now frame the current Node workflows. The archive contains 80 named routes and 113 Java API operations. **Restored navigation is not a claim of complete Java backend parity.** See [UI restoration and known differences](docs/UI_RESTORATION.md), [the FSD](docs/FSD.html), [developer guide](docs/DEVELOPER_GUIDE.html), [traceability](docs/REQUIREMENTS_TRACEABILITY.html) and [validation report](docs/VALIDATION.md) for delivered behavior and remaining release gates. Original Horizon UI and frontend notices are preserved under [docs/third-party](docs/third-party/README.md).
@@ -33,15 +39,17 @@ Start with the [functional consultant guide](docs/FUNCTIONAL_CONSULTANT_DEMO.htm
 
 For local development, build first and run `npm run demo:prepare` while the API is running at `http://127.0.0.1:4000`. Run one preparation at a time; repeatability applies to sequential reruns. You can also perform these steps manually: inspect and publish procedures as Reviewer; test, submit, independently approve and publish the models; then run the listed live assessments. The helper performs those same API actions only for the exact shipped fictional baseline. No model answers or document extractions are fabricated. It is disabled in production and only accepts a local demo origin.
 
-The Copilot panel offers **25 bilingual question choices across 11 page contexts**, with prerequisites and collapsed presenter notes. A suggested question cannot silently switch the member selected on the page. Forecast questions use the visible date, horizon and timing-shift settings. Copilot reads bounded saved evidence and reviewed policies; asking a question does not rerun REST assessments. Expected presenter notes are not sent as model evidence or shown as generated answers.
+The shared Copilot now offers **questions grounded in saved records across 13 contexts**, including workflows and integrations. Suggestions carry evidence references or explain a missing prerequisite; they do not call an AI model or provide a prepared answer. Use **Preview current Copilot evidence**, then **Ask Copilot** for provider-generated assistance. A suggested question cannot silently switch the page's selected member. Forecast questions use the visible date, horizon and timing-shift settings. Copilot reads bounded saved evidence and reviewed policies; asking a question does not rerun REST assessments. Earlier bilingual scripted questions and presenter notes remain in the baseline guides.
 
 Ten clearly marked fictional PDF originals are included in [demo-data](demo-data/README.md) and the development **Demo center**: eight member-linked upload samples and two general policy/forecast references. Download a sample, select the indicated member in **Case & documents**, and upload through the real worker/provider and independent verification flow. A certificate request does not satisfy a missing certificate; a policy PDF is not automatically added to the published text-policy library.
 
-Set a server-side OpenAI key/model for live answers. Without a configured provider, the application reports that limitation rather than replaying prepared answers. Run `npm run package -- --original-ui` to create the latest `Pension360_Node_Express_PostgreSQL18_6_Original_UI.zip` while preserving earlier packages. This is the complete current source package; take its entire `pension360-node` folder. Earlier ZIPs and the original Java archive are not needed to run the Node solution.
+Set a server-side OpenAI key/model for live answers. Without a configured provider, the application reports that limitation rather than replaying prepared answers. Run `npm run package -- --workflows` to create the current `Pension360_Node_Workflows_2026-10-06.zip`; it includes the guided update as well as the rule/BPMN work. Take the complete project folder in that ZIP. Earlier packages and the original Java archive are not needed to run this Node solution.
+
+The guided center accepts a manual form or CSV; matching JSON API examples are in `demo-data/guided-intake/`. Preview/commit creates new `DEMO_...` member IDs and retains an external reference without overwriting existing members. A declared pension/ERP source name is not a connected feed. After saving, prepare a matching English sample PDF for the new member and explicitly upload it through the existing worker/review flow. These PDFs copy the entered facts and are labelled as unverified, not independent evidence. Guided intake is development/test only; record-backed Copilot remains available through its authenticated production routes.
 
 ## Roles and navigation
 
-The restored sidebar keeps the original Dashboard, five business-module groups and shared tools. Earlier short guide names map to **Executive dashboard**, **Member directory**, **Document library**, **Case register**, **Policy library** and **Users & roles**. The [navigation bridge](docs/UI_RESTORATION.md#navigation-bridge-for-demonstrations) gives the corresponding entries. Added Node entries are **Demo center & sample PDFs**, **Roles & responsibilities**, **Background jobs**, **Source authority & conflicts** and **Data synchronization**. Related original routes use the supported shared workspace; original menu breadth does not introduce unimplemented Java-only actions.
+The restored sidebar keeps the original Dashboard, five business-module groups and shared tools. Earlier short guide names map to **Executive dashboard**, **Member directory**, **Document library**, **Case register**, **Policy library** and **Users & roles**. The [navigation bridge](docs/UI_RESTORATION.md#navigation-bridge-for-demonstrations) gives the corresponding entries. Added Node entries include **Guided demo & data entry**, **Runnable rule use cases**, the three workflow links, **Demo center & sample PDFs**, **Roles & responsibilities**, **Background jobs**, **Source authority & conflicts** and **Data synchronization**. Related original routes use the supported shared workspace; original menu breadth does not introduce unimplemented Java-only actions.
 
 Restored dashboards use real complete-workspace aggregates, readiness and retirement charts, and case-arrival/workload views. Expand **My role workspace** for personal action queues. Member directory searches English/Arabic names, member IDs and organizations. **Circular comparison** displays two saved policy texts side by side. **Capacity scenarios** compares the arithmetic mean of five completed calendar months of case arrivals with a user-entered capacity; it is a planning assumption, not machine learning or a staffing recommendation.
 
@@ -104,12 +112,14 @@ npm test
 # PowerShell: $env:TEST_DATABASE_URL = 'postgres://...'
 # POSIX shell: export TEST_DATABASE_URL='postgres://...'
 npm run test:integration
+npm run test:guided-demo
+npm run test:copilot:ui
 npm run test:smoke
 npm run test:demo
 npm audit --audit-level=moderate
 ```
 
-Without `TEST_DATABASE_URL`, ordinary unit testing clearly skips the database suites. `test:integration` refuses to run without a database and verifies PostgreSQL **18.6** before executing all API tests. Native ZEN tests are real engine executions. OpenAI response tests use explicit provider doubles; no live OpenAI success is claimed.
+Without `TEST_DATABASE_URL`, ordinary unit testing clearly skips the database suites. `test:integration` and the guided acceptance command require an explicitly configured disposable database and verify PostgreSQL **18.6**. Native ZEN tests are real engine executions. OpenAI response tests use explicit provider doubles; browser Copilot checks use mocked HTTP. Neither proves live OpenAI/OCR or production deployment acceptance. Supplemental PGlite evidence, where reported, is separate from native PostgreSQL verification.
 
 ## Production deployment
 

@@ -1,6 +1,17 @@
 import { describe,expect,it } from 'vitest';
 import { allowedScreen,legacyTarget,normalizeTarget,screenCopilot,studioTab } from './navigation';
 describe('Original navigation capability boundaries',()=>{
+  it('limits rule exercise simulations and exposes read-only workflow navigation by role',()=>{
+    for(const role of ['OFFICER','AUDITOR'] as const) expect(allowedScreen('rule-use-cases',role,'dev')).toBe(false);
+    for(const role of ['SUPER_ADMIN','ADMIN','DESIGNER','REVIEWER'] as const) expect(allowedScreen('rule-use-cases',role,'dev')).toBe(true);
+    expect(allowedScreen('rule-use-cases','DESIGNER','oidc')).toBe(false);
+    for(const role of ['OFFICER','AUDITOR','DESIGNER'] as const) expect(allowedScreen('workflow-runs',role,'oidc')).toBe(true);
+    expect(screenCopilot('workflow-runs')).toBe('workflows');
+    expect(screenCopilot('data-integrations')).toBe('integrations');
+    expect(screenCopilot('guided-demo')).toBe('members');
+    expect(allowedScreen('guided-demo','OFFICER','dev')).toBe(true);
+    expect(allowedScreen('guided-demo','OFFICER','oidc')).toBe(false);
+  });
   it('preserves actionable payment controls while hiding unauthorized review and administration',()=>{
     expect(allowedScreen('controls','OFFICER','dev')).toBe(true);
     expect(allowedScreen('approvals','OFFICER','dev')).toBe(false);

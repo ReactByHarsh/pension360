@@ -17,6 +17,7 @@ export const pageNames = {
   access: "User access",
   roles: "Roles & access",
   demo: "Demo center",
+  workflows: "Workflows",
 } as const;
 export type Page = keyof typeof pageNames;
 const allPages = Object.keys(pageNames) as Page[];
@@ -109,6 +110,7 @@ export const roleProfiles: Record<
       "governance",
       "roles",
       "demo",
+      "workflows",
     ],
     canDo: [
       "Create and clone visual rules, map REST fields and configure test scenarios",

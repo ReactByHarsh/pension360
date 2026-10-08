@@ -1,0 +1,80 @@
+.guided-demo { display: grid; gap: 20px; }
+.guided-demo .page-title { margin-bottom: 0; }
+.guided-demo section[id] { scroll-margin-top: 24px; }
+.guided-demo .panel { margin-bottom: 0; }
+.guided-demo .panel-body > p:first-child { margin-top: 0; }
+.guided-origin { display: flex; align-items: flex-start; gap: 14px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(110deg, var(--purple-bg), var(--card)); color: var(--text); }
+.guided-origin > svg { flex-shrink: 0; color: var(--purple); }
+.guided-origin > div { flex: 1; }
+.guided-origin p { margin: 5px 0 0; line-height: 1.65; font-size: 13px; }
+.guided-origin .pill { flex-shrink: 0; }
+.guided-origin.compact { margin: 18px 0; padding: 14px 18px; }
+.guided-module-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+.guided-module { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 11px 13px; text-align: start; border: 1px solid var(--line); border-radius: 12px; color: var(--text); background: var(--card); font-size: 13px; line-height: 1.4; }
+.guided-module.active { border-color: var(--purple); color: var(--purple); background: var(--purple-bg); font-weight: 700; }
+.guided-module:focus-visible, .guided-journey button:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
+.guided-module-guide { display: flex; gap: 22px; align-items: center; margin-top: 20px; padding: 20px; border-radius: 14px; background: var(--hover); }
+.guided-module-guide > div { flex: 1; }
+.guided-module-guide h3 { margin: 0 0 6px; font-size: 17px; }
+.guided-module-guide p { margin: 6px 0; font-size: 13px; line-height: 1.7; }
+.guided-module-guide ol { display: flex; flex-wrap: wrap; gap: 12px 24px; list-style-position: inside; padding: 0; margin: 10px 0 0; font-size: 12px; font-weight: 600; }
+.guided-module-guide > button { flex-shrink: 0; max-width: 240px; }
+.guided-input-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.guided-input-choices > div { padding: 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--table-head); min-width: 0; }
+.guided-input-choices h3 { margin: 0 0 14px; font-size: 15px; }
+.guided-input-choices .text-button { margin-top: 10px; margin-inline-end: 16px; }
+.guided-form-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.guided-form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.guided-form-grid > div:last-child > .primary { margin-top: 26px; }
+.guided-form-grid > .hint { grid-column: 1 / -1; margin: 0; }
+.guided-checkbox { display: flex; align-items: center; gap: 9px; padding-top: 30px; font-size: 13px; }
+.guided-demo input[type="checkbox"] { flex: 0 0 17px; width: 17px; height: 17px; accent-color: var(--purple); }
+.guided-row-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin: 24px 0 12px; }
+.guided-row-controls > .field { min-width: 230px; flex: 1; max-width: 360px; }
+.guided-row-controls > button, .guided-row-controls > span { margin-top: 16px; }
+.guided-fields-section { border: 1px solid var(--line); border-radius: 12px; margin: 12px 0; }
+.guided-fields-section > summary { padding: 14px 17px; cursor: pointer; font-size: 13px; font-weight: 700; }
+.guided-fields-section > .guided-form-grid { border-top: 1px solid var(--line); padding: 20px 17px 8px; }
+.guided-fields-section > p, .guided-fields-section > details, .guided-fields-section > button { margin: 12px 17px; }
+.guided-fields-section > .key-values { padding: 0 17px; }
+.guided-preview { margin-top: 20px; padding: 20px; background: var(--hover); border: 1px solid var(--line); border-radius: 14px; }
+.guided-preview h3 { margin-top: 0; }
+.guided-table-wrap { overflow-x: auto; margin: 18px 0; border: 1px solid var(--line); border-radius: 12px; }
+.guided-demo table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.guided-demo th, .guided-demo td { padding: 13px 15px; text-align: start; vertical-align: top; border-bottom: 1px solid var(--line); }
+.guided-demo th { background: var(--table-head); font-size: 12px; font-weight: 700; }
+.guided-demo tr:last-child td { border-bottom: 0; }
+.guided-demo td small { display: block; color: var(--muted); margin-top: 5px; }
+.guided-batch-stats { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+.guided-batch-stats > div { padding: 16px 13px; border: 1px solid var(--line); border-radius: 13px; background: var(--table-head); }
+.guided-batch-stats strong { display: block; color: var(--purple); font-size: 26px; margin-bottom: 5px; }
+.guided-batch-stats span { font-size: 11px; line-height: 1.4; color: var(--muted); }
+.guided-journey { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; margin: 16px 0; }
+.guided-journey > button { display: flex; align-items: center; gap: 8px; text-align: start; border: 1px solid var(--line); border-radius: 12px; background: var(--card); color: var(--text); padding: 14px 11px; }
+.guided-journey > button > svg { flex-shrink: 0; color: var(--purple); }
+.guided-journey > button > svg:last-child { margin-inline-start: auto; }
+.guided-journey span { font-size: 12px; font-weight: 700; }
+.guided-journey small { display: block; font-size: 10px; font-weight: 400; line-height: 1.5; margin-top: 4px; color: var(--muted); }
+.guided-rule-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0; }
+.guided-rule-option { display: flex; gap: 11px; align-items: flex-start; border: 1px solid var(--line); border-radius: 12px; padding: 15px; cursor: pointer; }
+.guided-rule-option input { margin-top: 2px; }
+.guided-rule-option strong { display: block; font-size: 13px; }
+.guided-rule-option small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; }
+.guided-rule-option.unavailable { opacity: .7; cursor: default; }
+.guided-evidence-list > div { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-top: 1px solid var(--line); }
+.guided-evidence-list > div > span:first-child { flex: 1; min-width: 0; }
+.guided-evidence-list strong { font-size: 13px; }
+.guided-evidence-list small { display: block; color: var(--muted); font-size: 11px; margin-top: 6px; overflow-wrap: anywhere; }
+.guided-demo pre { max-height: 360px; overflow: auto; padding: 14px; border-radius: 10px; background: var(--hover); font-size: 12px; }
+@media (max-width: 1150px) { .guided-module-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .guided-journey { grid-template-columns: repeat(3, minmax(0, 1fr)); } .guided-batch-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } .guided-module-guide { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 760px) { .guided-module-grid, .guided-input-choices, .guided-form-grid, .guided-rule-options { grid-template-columns: 1fr; } .guided-module-grid { grid-template-columns: 1fr 1fr; } .guided-journey { grid-template-columns: 1fr 1fr; } .guided-origin { flex-wrap: wrap; padding: 17px; } .guided-origin .pill { margin-inline-start: 36px; } .guided-batch-stats { gap: 8px; } .guided-batch-stats > div { padding: 12px 9px; } .guided-evidence-list > div { flex-wrap: wrap; } .guided-form-grid > div:last-child > .primary, .guided-checkbox { margin-top: 0; padding-top: 0; } .guided-row-controls > button, .guided-row-controls > span { margin-top: 0; } }
+.guided-sample-document { margin: 18px 0; padding: 16px; background: var(--hover); border: 1px solid var(--line); border-radius: 12px; }
+.guided-sample-document .secondary { margin-top: 27px; }
+.guided-file-selection { display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; padding: 10px 0; font-size: 12px; overflow-wrap: anywhere; }
+@media (max-width: 760px) { .guided-sample-document .secondary { margin-top: 0; } }
+/* Keep long source labels and table evidence inside their own responsive container. */
+.guided-demo { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.guided-demo > *, .guided-demo .field, .guided-demo .guided-form-grid > *, .guided-demo .guided-rule-options > * { min-width: 0; }
+.guided-demo select, .guided-demo input { min-width: 0; max-width: 100%; }
+.guided-module-guide > div, .guided-origin > div { min-width: 0; }
+@media (max-width: 760px) { .guided-origin > div { flex: 1 1 calc(100% - 36px); } .guided-origin.compact > div { flex-basis: 100%; } }

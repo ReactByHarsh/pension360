@@ -1,0 +1,2 @@
+externalReference,name,nameAr,organization,dateOfBirth,dateOfJoining,expectedRetirementDate,pensionJoiningDate,employerJoiningDate,serviceVerified,missingDocuments,proposedBaisa,approvedBaisa,adjustmentBaisa,toleranceBaisa,expectedBaisa,receivedBaisa,overlapMonths,unverifiedMonths
+FICTIONAL-PEN-1003,Salim Al Harthy,سالم الحارثي,Fictional Pension Demonstration Organization,1966-03-10,1991-06-01,2026-11-20,1991-06-01,1991-06-01,true,0,950000,650000,0,0,120000,120000,0,0

@@ -97,3 +97,32 @@ describe("Page Copilot context", () => {
     });
   });
 });
+
+describe("Questions grounded in imported records", () => {
+  it("recognizes arbitrary imported IDs and returns their canonical casing", () => {
+    expect(mentionedMemberId("Explain ERP-772/A.", ["ERP-772/A"])).toBe(
+      "ERP-772/A",
+    );
+    expect(mentionedMemberId("What changed for (erp.772)?", ["ERP.772"])).toBe(
+      "ERP.772",
+    );
+    expect(mentionedMemberId("Why is سجل-42 pending?", ["سجل-42"])).toBe(
+      "سجل-42",
+    );
+    expect(mentionedMemberId("Explain M004.", ["M004"])).toBe("M004");
+  });
+  it("does not use partial, multi-member or regular-expression matches", () => {
+    expect(
+      mentionedMemberId("Explain ERP-772/AB", ["ERP-772/A"]),
+    ).toBeUndefined();
+    expect(mentionedMemberId("Explain ERP.772X", ["ERP.772"])).toBeUndefined();
+    expect(mentionedMemberId("Explain ERPZ772", ["ERP.772"])).toBeUndefined();
+    expect(
+      mentionedMemberId("Compare ERP-772/A and NEW-91", [
+        "ERP-772/A",
+        "NEW-91",
+      ]),
+    ).toBeUndefined();
+    expect(mentionedMemberId("Explain ERP.772.9", ["ERP.772"])).toBeUndefined();
+  });
+});

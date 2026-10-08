@@ -1,0 +1,281 @@
+{
+  "source": {
+    "connectionId": "11111111-1111-4111-8111-111111111111",
+    "path": "/demo-source/v2/lookup",
+    "method": "POST",
+    "bindings": [
+      {
+        "location": "body",
+        "key": "memberId",
+        "valueFrom": "memberId"
+      }
+    ]
+  },
+  "effectiveFrom": "2026-01-01",
+  "effectiveTo": null,
+  "name": "POST lookup with a changed API envelope",
+  "module": "readiness",
+  "mappings": [
+    {
+      "id": "dateOfBirth",
+      "sourcePath": "/data/person/dateOfBirth",
+      "targetPath": "dateOfBirth",
+      "type": "date",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "ageYears",
+      "sourcePath": "/data/person/dateOfBirth",
+      "targetPath": "ageYears",
+      "type": "number",
+      "required": true,
+      "transform": "ageYears"
+    },
+    {
+      "id": "pensionJoiningDate",
+      "sourcePath": "/data/pension/joiningDate",
+      "targetPath": "pensionJoiningDate",
+      "type": "date",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "employerJoiningDate",
+      "sourcePath": "/data/employer/joiningDate",
+      "targetPath": "employerJoiningDate",
+      "type": "date",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "serviceVerified",
+      "sourcePath": "/data/pension/serviceVerified",
+      "targetPath": "serviceVerified",
+      "type": "boolean",
+      "required": true,
+      "transform": "identity"
+    },
+    {
+      "id": "missingDocuments",
+      "sourcePath": "/data/documents/missingCount",
+      "targetPath": "missingDocuments",
+      "type": "number",
+      "required": true,
+      "transform": "identity"
+    }
+  ],
+  "graph": {
+    "nodes": [
+      {
+        "id": "input",
+        "name": "Mapped REST facts",
+        "type": "inputNode",
+        "position": {
+          "x": 80,
+          "y": 220
+        }
+      },
+      {
+        "id": "compare",
+        "name": "Compare source joining dates",
+        "type": "expressionNode",
+        "position": {
+          "x": 350,
+          "y": 220
+        },
+        "content": {
+          "expressions": [
+            {
+              "id": "matching-dates",
+              "key": "datesMatch",
+              "value": "pensionJoiningDate == employerJoiningDate"
+            }
+          ],
+          "passThrough": true,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single"
+        }
+      },
+      {
+        "id": "decision",
+        "name": "Readiness decision table",
+        "type": "decisionTableNode",
+        "position": {
+          "x": 640,
+          "y": 220
+        },
+        "content": {
+          "hitPolicy": "first",
+          "passThrough": false,
+          "inputField": null,
+          "outputPath": null,
+          "executionMode": "single",
+          "inputs": [
+            {
+              "id": "verified",
+              "name": "Service verified",
+              "field": "serviceVerified",
+              "fieldType": {
+                "type": "boolean"
+              }
+            },
+            {
+              "id": "missing",
+              "name": "Missing mandatory documents",
+              "field": "missingDocuments",
+              "fieldType": {
+                "type": "number"
+              }
+            },
+            {
+              "id": "dates",
+              "name": "Joining dates match",
+              "field": "datesMatch",
+              "fieldType": {
+                "type": "boolean"
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "status",
+              "name": "Review outcome",
+              "field": "status",
+              "outputFieldType": {
+                "type": "string",
+                "enum": {
+                  "type": "inline",
+                  "values": [
+                    {
+                      "label": "Ready for review",
+                      "value": "READY_FOR_REVIEW"
+                    },
+                    {
+                      "label": "Needs verification",
+                      "value": "NEEDS_VERIFICATION"
+                    },
+                    {
+                      "label": "Unable to evaluate",
+                      "value": "UNABLE_TO_EVALUATE"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "reason",
+              "name": "Explanation for officer",
+              "field": "reason",
+              "outputFieldType": {
+                "type": "string"
+              }
+            }
+          ],
+          "rules": [
+            {
+              "_id": "dates-differ",
+              "verified": "",
+              "missing": "",
+              "dates": "false",
+              "status": "\"NEEDS_VERIFICATION\"",
+              "reason": "\"Joining dates differ between sources\""
+            },
+            {
+              "_id": "documents-missing",
+              "verified": "",
+              "missing": "> 0",
+              "dates": "",
+              "status": "\"NEEDS_VERIFICATION\"",
+              "reason": "\"Mandatory evidence is missing\""
+            },
+            {
+              "_id": "service-unverified",
+              "verified": "false",
+              "missing": "",
+              "dates": "",
+              "status": "\"NEEDS_VERIFICATION\"",
+              "reason": "\"Service needs verification\""
+            },
+            {
+              "_id": "ready",
+              "verified": "true",
+              "missing": "0",
+              "dates": "true",
+              "status": "\"READY_FOR_REVIEW\"",
+              "reason": "\"All configured checks passed\""
+            },
+            {
+              "_id": "otherwise",
+              "verified": "",
+              "missing": "",
+              "dates": "",
+              "status": "\"UNABLE_TO_EVALUATE\"",
+              "reason": "\"No approved readiness condition matched\""
+            }
+          ]
+        }
+      },
+      {
+        "id": "output",
+        "name": "Evidence-linked review outcome",
+        "type": "outputNode",
+        "position": {
+          "x": 970,
+          "y": 220
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "input-compare",
+        "sourceId": "input",
+        "targetId": "compare",
+        "type": "edge"
+      },
+      {
+        "id": "compare-table",
+        "sourceId": "compare",
+        "targetId": "decision",
+        "type": "edge"
+      },
+      {
+        "id": "table-output",
+        "sourceId": "decision",
+        "targetId": "output",
+        "type": "edge"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "ready",
+      "name": "Ahmed complete record",
+      "memberId": "M001",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "READY_FOR_REVIEW"
+    },
+    {
+      "id": "conflict",
+      "name": "Salim conflicting joining dates",
+      "memberId": "M002",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "NEEDS_VERIFICATION"
+    },
+    {
+      "id": "missing",
+      "name": "Maryam missing confirmation",
+      "memberId": "M003",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "NEEDS_VERIFICATION"
+    },
+    {
+      "id": "unavailable",
+      "name": "Khalid source unavailable",
+      "memberId": "M004",
+      "assessmentDate": "2026-10-06",
+      "expectedStatus": "UNABLE_TO_EVALUATE"
+    }
+  ]
+}
