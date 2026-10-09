@@ -29,8 +29,21 @@ if ! command -v docker >/dev/null 2>&1; then
   curl -fsSL https://get.docker.com | $SUDO sh
 fi
 $SUDO systemctl enable --now docker >/dev/null 2>&1 || true
-if ! docker compose version >/dev/null 2>&1 && ! $SUDO docker compose version >/dev/null 2>&1; then
-  echo "Docker Compose v2 is required (v2.24.4 or newer)." >&2
+compose_ok() {
+  local v
+  v=$( (docker compose version --short 2>/dev/null || $SUDO docker compose version --short 2>/dev/null) | head -1 | sed 's/^v//')
+  [ -n "$v" ] && [ "$(printf '%s
+2.24.4
+' "$v" | sort -V | head -1)" = "2.24.4" ]
+}
+if ! compose_ok; then
+  echo "Installing or updating the Docker Compose plugin..."
+  $SUDO apt-get update -y >/dev/null 2>&1 || true
+  $SUDO apt-get install -y docker-compose-plugin >/dev/null 2>&1 || true
+  if ! compose_ok; then curl -fsSL https://get.docker.com | $SUDO sh; fi
+fi
+if ! compose_ok; then
+  echo "Docker Compose v2.24.4 or newer is required. Install it, then run this script again." >&2
   exit 1
 fi
 DOCKER="docker"
