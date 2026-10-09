@@ -40,7 +40,14 @@ if ! compose_ok; then
   echo "Installing or updating the Docker Compose plugin..."
   $SUDO apt-get update -y >/dev/null 2>&1 || true
   $SUDO apt-get install -y docker-compose-plugin >/dev/null 2>&1 || true
-  if ! compose_ok; then curl -fsSL https://get.docker.com | $SUDO sh; fi
+  if ! compose_ok; then
+    # Distro Docker (docker.io) has no v2 plugin of a new enough version: install the binary.
+    ARCH=$(uname -m)
+    case "$ARCH" in x86_64) ARCH=x86_64 ;; aarch64|arm64) ARCH=aarch64 ;; esac
+    $SUDO mkdir -p /usr/local/lib/docker/cli-plugins
+    $SUDO curl -fSL "https://github.com/docker/compose/releases/download/v2.29.7/docker-compose-linux-$ARCH"       -o /usr/local/lib/docker/cli-plugins/docker-compose
+    $SUDO chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+  fi
 fi
 if ! compose_ok; then
   echo "Docker Compose v2.24.4 or newer is required. Install it, then run this script again." >&2
